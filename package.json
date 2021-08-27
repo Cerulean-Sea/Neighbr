@@ -1,0 +1,48 @@
+{
+  "name": "Neighbr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack --mode development -w & nodemon ./server/index.js",
+    "server-dev": "nodemon ./server/index.js",
+    "server-prod": "node ./server/index.js",
+    "build-dev": "webpack --mode development -w",
+    "build-prod": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cerulean-Sea/Neighbr.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cerulean-Sea/Neighbr/issues"
+  },
+  "homepage": "https://github.com/Cerulean-Sea/Neighbr#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "firebase": "^9.0.0",
+    "firebase-tools": "^9.16.6",
+    "mongoose": "^6.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.1",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "nodemon": "^2.0.12",
+    "redux-devtools-extension": "^2.13.9",
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0"
+  }
+}
