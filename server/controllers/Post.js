@@ -20,6 +20,16 @@ const getPostById = async (req, res) => {
   }
 };
 
+const getPostsByUserId = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const posts = await Post.find({userId}).populate(['commentId']);
+    res.status(200).send(posts);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
 const postPost = async (req, res) => {
   try {
     const post = await Post.create(req.body);
@@ -55,6 +65,7 @@ const deletePost = async (req, res) => {
 module.exports = {
   getPosts,
   getPostById,
+  getPostsByUserId,
   postPost,
   updatePost,
   deletePost
