@@ -16,7 +16,12 @@ const postSchema = new mongoose.Schema({
   },
   username: String,
   userId: String,
-  tags: [String]
+  tags: [String],
+  claimed: Boolean,
+  commentId: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment'
+  }]
 });
 
 const Post = mongoose.model('Post', postSchema);

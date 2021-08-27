@@ -1,5 +1,6 @@
 import React from 'react';
 import Post from './Posts/Post';
+import renderMap from '../helper-functions/renderMap';
 
 const App = () => {
 
