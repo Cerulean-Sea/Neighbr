@@ -16,7 +16,11 @@ const postSchema = new mongoose.Schema({
   },
   username: String,
   userId: String,
-  tags: [String]
+  tags: [String],
+  claimed: {
+    type: Boolean,
+    default: false
+  }
 });
 
 const Post = mongoose.model('Post', postSchema);
