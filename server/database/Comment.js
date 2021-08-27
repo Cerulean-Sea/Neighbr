@@ -4,10 +4,6 @@ const db = require('./index.js');
 mongoose.Promise = global.Promise;
 
 const commentSchema = new mongoose.Schema({
-  postId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Post'
-  },
   text: String,
   created: {
     type: Date,
@@ -18,7 +14,11 @@ const commentSchema = new mongoose.Schema({
     default: Date.now
   },
   username: String,
-  userId: String
+  userId: String,
+  postId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post'
+  }
 });
 
 const Comment = mongoose.model('Comment', commentSchema);
