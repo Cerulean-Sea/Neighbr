@@ -17,10 +17,11 @@ const postSchema = new mongoose.Schema({
   username: String,
   userId: String,
   tags: [String],
-  claimed: {
-    type: Boolean,
-    default: false
-  }
+  claimed: Boolean,
+  commentId: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment'
+  }]
 });
 
 const Post = mongoose.model('Post', postSchema);
