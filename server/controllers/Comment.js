@@ -35,8 +35,33 @@ const postComment = async (req, res) => {
   }
 };
 
+const updateComment = async (req, res) => {
+  const { commentId } = req.params;
+  const updatedComment = req.body;
+  try {
+    const comment = await Comment.findByIdAndUpdate(commentId, updatedComment, {new: true});
+    res.status(200).send(comment);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+}
+
+const deleteComment = async (req, res) => {
+  const { commentId } = req.params;
+  try {
+    const comment = await Comment.deleteOne({_id: commentId});
+    res.status(200).send(comment);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+}
+
 module.exports = {
   getComments,
   getCommentById,
-  postComment
+  postComment,
+  updateComment,
+  deleteComment
 };
