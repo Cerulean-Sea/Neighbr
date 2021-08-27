@@ -1,4 +1,5 @@
 import React from 'react';
+import renderMap from '../helper-functions/renderMap';
 
 const App = () => {
 
