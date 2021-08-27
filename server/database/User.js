@@ -4,7 +4,8 @@ const db = require('./index.js');
 mongoose.Promise = global.Promise;
 
 const userSchema = new mongoose.Schema({
-  username: String,
+  name: String,
+  email: String,
   userId: String,
   community: String
 });
