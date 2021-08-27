@@ -29,8 +29,33 @@ const postPost = async (req, res) => {
   }
 };
 
+const updatePost = async (req, res) => {
+  const { postId } = req.params;
+  const updatedPost = req.body;
+  try {
+    const post = await Post.findByIdAndUpdate(postId, updatedPost, {new: true});
+    res.status(200).send(post);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+}
+
+const deletePost = async (req, res) => {
+  const { postId } = req.params;
+  try {
+    const post = await Post.deleteOne({_id: postId});
+    res.status(200).send(post);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+}
+
 module.exports = {
   getPosts,
   getPostById,
-  postPost
+  postPost,
+  updatePost,
+  deletePost
 };
