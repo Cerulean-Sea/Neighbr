@@ -8,7 +8,7 @@ var ThumbnailList = (props) => {
     return (
         <div>
             {props.photos.map((photo, index) => 
-                <ThumbnailItem item={photo} key={index} />
+                <ThumbnailItem item={photo} key={index} removePhoto={props.removePhoto} />
             )}
         </div>
     )

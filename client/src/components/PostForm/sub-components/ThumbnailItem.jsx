@@ -3,7 +3,7 @@ import React from 'react';
 var ThumbnailItem = (props) => (
     <div>
         <p>{props.item}</p>
-        <button>Remove Image</button>
+        <button value={props.item} onClick={props.removePhoto}>Remove Image</button>
     </div>
 )
 

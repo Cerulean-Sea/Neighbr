@@ -24,6 +24,7 @@ class PostForm extends React.Component {
         this.selectTag = this.selectTag.bind(this);
         this.toggleAddImages = this.toggleAddImages.bind(this);
         this.handlePhotoSubmit = this.handlePhotoSubmit.bind(this);
+        this.removePhoto = this.removePhoto.bind(this);
     }
 
     handleInputChange(event) {
@@ -41,6 +42,7 @@ class PostForm extends React.Component {
             title: this.state.postTitle,
             body: this.state.postBody,
             tag: this.state.postTag,
+            photoArray: this.state.photoArray,
             claimed: false
         };
 
@@ -59,11 +61,11 @@ class PostForm extends React.Component {
         // create Axios POST request at '/create'
         axios.post('/create', inputObj)
         .then(() => {
-            this.setState({
-                postTitle: '',
-                postBody: '',
-                postTag: ''
-            })
+            // this.setState({
+            //     postTitle: '',
+            //     postBody: '',
+            //     postTag: ''
+            // })
 
             console.log('Received response from Axios POST request!');
         })
@@ -71,6 +73,12 @@ class PostForm extends React.Component {
             console.log('Error received from Axios POST request.');
         })
 
+        // comment out if Axios POST request works
+        this.setState({
+            postTitle: '',
+            postBody: '',
+            postTag: ''
+        })
     }
 
     selectTag(event) {
@@ -131,6 +139,9 @@ class PostForm extends React.Component {
         })
     }
 
+    removePhoto(event) {
+        console.log('deleted image: ', event.target.value);
+    }
 
 
     render() {
@@ -151,14 +162,16 @@ class PostForm extends React.Component {
                         <h4>[ Your Location Goes Here ]</h4>
                         <p></p>
                         <button>Submit Post</button>
+                        <p></p>
+                        <button>Delete Post</button>
                     </form>
                         <p></p>
                         <button onClick={this.toggleAddImages}>Add Images</button>
                         <p></p>
                         <h4>Thumbnail Preview</h4>
-                        <ThumbnailList photos={this.state.photoArray} />
-                        <p></p>
-                        <button>Delete Post</button>
+                        <ThumbnailList 
+                        photos={this.state.photoArray}
+                        removePhoto={this.removePhoto} />
                 </div>
             )
 
