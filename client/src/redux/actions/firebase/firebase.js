@@ -9,6 +9,7 @@ const auth = getAuth();
 export const emailSignIn = (email, password) => async (dispatch) => {
   try {
     const payload = await signInWithEmailAndPassword(auth, email, password);
+    dispatch({type: 'AUTH', payload});
     console.log('Logged in!');
   } catch (error) {
     console.log('Error logging in', error);
