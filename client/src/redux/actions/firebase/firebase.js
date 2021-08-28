@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, getIdToken } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, getIdToken, sendEmailVerification } from 'firebase/auth';
 import * as api from '../../../api';
 import firebaseConfig from './config';
 
@@ -9,17 +9,18 @@ const auth = getAuth();
 export const emailSignIn = (email, password) => async (dispatch) => {
   try {
     const payload = await signInWithEmailAndPassword(auth, email, password);
-    dispatch({type: 'AUTH', payload});
+    console.log('Logged in!');
   } catch (error) {
-    console.log(error);
+    console.log('Error logging in', error);
   }
 };
 
-export const emailSignUp = (email, password, community = 'Los Angeles') => async (dispatch) => {
+export const emailSignUp = (name, email, password, zip) => async (dispatch) => {
   try {
     const payload = await createUserWithEmailAndPassword(auth, email, password);
+    const verifictionEmail = await sendEmailVerification(auth.currentUser);
     dispatch({type: 'AUTH', payload});
-    const { data } = await api.signUp({name: email, email, userId: payload.user.uid, community});
+    const { data } = await api.signUp({name, email, userId: payload.user.uid, community: zip});
   } catch (error) {
     console.log(error);
   }

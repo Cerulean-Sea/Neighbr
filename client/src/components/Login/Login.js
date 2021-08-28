@@ -4,12 +4,12 @@ import {
   FormControlLabel, Checkbox, Link, Grid,
   Box, Typography,
   Container } from '@material-ui/core'
-  import { LockOutlined } from '@material-ui/icons'
-
+import { LockOutlined } from '@material-ui/icons'
+import axios from 'axios';
 import useStyles from './styleLogin';
+import SignUp from '../Signup/SignUp';
 import { useDispatch } from 'react-redux';
-import { emailSignIn, emailSignUp, googleSignIn } from '../../redux/actions/firebase/firebase';
-
+import { emailSignIn, googleSignIn } from '../../redux/actions/firebase/firebase';
 
 export default function Login() {
   const classes = useStyles();
@@ -21,11 +21,6 @@ export default function Login() {
   const signIn = (e) => {
     e.preventDefault();
     dispatch(emailSignIn(email, pass));
-  };
-
-  const signUp = (e) => {
-    e.preventDefault();
-    dispatch(emailSignUp(email, pass));
   };
 
   const google = (e) => {
@@ -43,7 +38,9 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form
+          className={classes.form}
+            >
           <TextField
             onChange={(e) => setEmail( e.target.value ) }
             value={email}
@@ -75,12 +72,12 @@ export default function Login() {
             label="Remember me"
           />
           <Button
-            type="submit"
+            type="input"
+            onClick={signIn}
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={(e) => signUp(e)}
           >
             Sign In
           </Button>
@@ -91,9 +88,7 @@ export default function Login() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+              <SignUp />
             </Grid>
           </Grid>
         </form>

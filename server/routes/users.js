@@ -5,6 +5,6 @@ const auth = require('../middleware/auth');
 
 router
   .post('/signin', User.signin)
-  .post('/signup', auth, User.signup)
+  .post('/signup', User.signup)
 
 module.exports = router;
