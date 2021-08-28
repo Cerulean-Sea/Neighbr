@@ -8,7 +8,7 @@ import {
 
 import useStyles from './styleLogin';
 import { useDispatch } from 'react-redux';
-import { emailSignIn, emailSignUp } from '../../redux/actions/firebase/firebase';
+import { emailSignIn, emailSignUp, googleSignIn } from '../../redux/actions/firebase/firebase';
 
 
 export default function Login() {
@@ -26,6 +26,11 @@ export default function Login() {
   const signUp = (e) => {
     e.preventDefault();
     dispatch(emailSignUp(email, pass));
+  };
+
+  const google = (e) => {
+    e.preventDefault();
+    dispatch(googleSignIn());
   };
 
   return (
@@ -75,7 +80,7 @@ export default function Login() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={(e) => signUp(e)}
+            onClick={(e) => google(e)}
           >
             Sign In
           </Button>

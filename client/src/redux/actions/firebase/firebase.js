@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, setPersistence, browserSessionPersistence, getIdToken } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, setPersistence, browserSessionPersistence, getIdToken } from 'firebase/auth';
 import * as api from '../../../api';
 import firebaseConfig from './config';
 
@@ -26,3 +26,13 @@ export const emailSignUp = (email, password, community = 'Los Angeles') => async
     console.log(error);
   }
 };
+
+export const googleSignIn = () => async (dispatch) => {
+  try {
+    const provider = new GoogleAuthProvider();
+    const payload = await signInWithPopup(auth, provider);
+    dispatch({type: 'AUTH', payload});
+  } catch (error) {
+    console.log(error);
+  }
+}
