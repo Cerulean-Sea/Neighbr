@@ -69,7 +69,7 @@ class PostForm extends React.Component {
     render() {
         return (
             <div>
-                <h2>Input Form</h2>
+                <h2>Create New Post</h2>
                 <form onSubmit={this.handleFormSubmit}>
                     <PostInput 
                     postTitle={this.state.postTitle}

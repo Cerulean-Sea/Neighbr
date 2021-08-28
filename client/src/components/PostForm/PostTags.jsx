@@ -2,6 +2,7 @@ import React from 'react';
 
 var PostTags = (props) => (
     <div>
+        <h4>Tags</h4>
         <input type="radio" name="tags" value="request" onClick={props.selectTag} />
         <label>Request</label>
         <input type="radio" name="tags" value="alert" onClick={props.selectTag} />
