@@ -3,6 +3,7 @@ import React from 'react';
 import PostTags from './PostTags.jsx';
 import PostInput from './PostInput.jsx';
 import AddPhotos from './AddPhotos.jsx';
+import ThumbnailList from './ThumbnailList.jsx';
 
 class PostForm extends React.Component {
 
@@ -91,13 +92,43 @@ class PostForm extends React.Component {
     handlePhotoSubmit(event) {
         event.preventDefault();
 
-        if (this.state.photoUrl.length === 0) {
-            alert('Must add photoUrl or upload photo from computer');
+        // alert for no photos selected
+        if (this.state.photoUrl.length === 0 && this.state.photoFilePath.length === 0) {
+            alert("Must add photoUrl or upload photo from computer");
             return;
+
+        // alert for both fields selected
+        } else if (this.state.photoUrl.length !== 0 && this.state.photoFilePath.length !== 0) {
+            alert("Can only choose one upload option at a time");
+            return;
+        
+        // if photoUrl is selected
+        } else if (this.state.photoUrl.length !== 0 && this.state.photoFilePath.length === 0) {
+
+            this.setState({
+                photoArray: [...this.state.photoArray, this.state.photoUrl]
+            }, () => {
+                console.log('photoArray: ', this.state.photoArray);
+            })
+
+        // if photo file path is selected
+        } else if (this.state.photoUrl.length === 0 && this.state.photoFilePath.length !== 0) {
+
+            this.setState({
+                photoArray: [...this.state.photoArray, this.state.photoFilePath]
+            }, () => {
+                console.log('photoArray: ', this.state.photoArray);
+            })
+
         }
 
-        console.log('photoUrl: ', this.state.photoUrl);
-        console.log('photoFilePath: ', this.state.photoFilePath);
+        // switches back to main form view
+        this.setState({
+           photoUrl: '',
+           photoFilePath: ''  
+        }, () => {
+            this.toggleAddImages();
+        })
     }
 
 
@@ -118,10 +149,16 @@ class PostForm extends React.Component {
                         <PostTags selectTag={this.selectTag} />
                         <p></p>
                         <h4>[ Your Location Goes Here ]</h4>
+                        <p></p>
                         <button>Submit Post</button>
-                        <button>Delete Post</button>
                     </form>
+                        <p></p>
                         <button onClick={this.toggleAddImages}>Add Images</button>
+                        <p></p>
+                        <h4>Thumbnail Preview</h4>
+                        <ThumbnailList photos={this.state.photoArray} />
+                        <p></p>
+                        <button>Delete Post</button>
                 </div>
             )
 
