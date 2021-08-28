@@ -71,7 +71,10 @@ class PostForm extends React.Component {
             <div>
                 <h2>Input Form</h2>
                 <form onSubmit={this.handleFormSubmit}>
-                    <PostInput postTitle={this.state.postTitle} postBody={this.state.postBody} handleInputChange={this.handleInputChange} />
+                    <PostInput 
+                    postTitle={this.state.postTitle}
+                    postBody={this.state.postBody}
+                    handleInputChange={this.handleInputChange} />
                     <p></p>
                     <PostTags selectTag={this.selectTag} />
                     <p></p>
