@@ -1,6 +1,9 @@
 const firebase = require('firebase-admin');
 const firebaseConfig = require('./config');
+const serviceAccount = require('./neighbr-55334-firebase-adminsdk-nmr3j-8bacccde1f.json');
 
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp({
+  credential: firebase.credential.cert(serviceAccount)
+});
 
 module.exports = firebase;

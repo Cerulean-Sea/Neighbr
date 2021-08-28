@@ -7,11 +7,26 @@ import {
   import { LockOutlined } from '@material-ui/icons'
 
 import useStyles from './styleLogin';
+import { useDispatch } from 'react-redux';
+import { emailSignIn, emailSignUp } from '../../redux/actions/firebase/firebase';
+
 
 export default function Login() {
   const classes = useStyles();
   const [ email, setEmail ] = useState('');
   const [ pass, setPass ] = useState('');
+
+  const dispatch = useDispatch();
+
+  const signIn = (e) => {
+    e.preventDefault();
+    dispatch(emailSignIn(email, pass));
+  };
+
+  const signUp = (e) => {
+    e.preventDefault();
+    dispatch(emailSignUp(email, pass));
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -60,6 +75,7 @@ export default function Login() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={(e) => signUp(e)}
           >
             Sign In
           </Button>

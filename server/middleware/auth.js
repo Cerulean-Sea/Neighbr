@@ -19,14 +19,15 @@ const auth = async (req, res, next) => {
 
     const user = await admin.auth().getUser(uid);
 
-    if (!user.verified) {
-      return res.status(401).json({message: 'Email not verified'});
-    }
+    // if (!user.email_verified) {
+    //   return res.status(401).json({message: 'Email not verified'});
+    // }
 
     req.currentUser = decodedToken;
     next();
 
   } catch (error) {
+    console.log(error);
     res.status(403).json({message: 'Unauthorized'});
   }
 
