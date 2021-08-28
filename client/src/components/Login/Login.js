@@ -80,7 +80,7 @@ export default function Login() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={(e) => google(e)}
+            onClick={(e) => signUp(e)}
           >
             Sign In
           </Button>
