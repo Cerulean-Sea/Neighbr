@@ -1,11 +1,12 @@
 import React from 'react';
 import renderMap from '../helper-functions/renderMap';
+import PostForm from './PostForm/PostForm.jsx';
 
 const App = () => {
 
   return (
     <div className="app">
-      App
+      <PostForm />
     </div>
   )
 }
