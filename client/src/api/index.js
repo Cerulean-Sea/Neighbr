@@ -27,3 +27,4 @@ export const deleteComment = (commentId) => API.delete(`/comments/${commentId}`)
 
 // Users
 export const signUp = (formData) => API.post(`/users/signup`, formData);
+export const googleSignIn = (data) => API.post(`/users/signin/google`, data);

@@ -81,6 +81,16 @@ export default function Login() {
           >
             Sign In
           </Button>
+          <Button
+            type="input"
+            onClick={google}
+            fullWidth
+            variant="contained"
+            color="secondary"
+            className={classes.submit}
+          >
+            Sign In With Google
+          </Button>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
