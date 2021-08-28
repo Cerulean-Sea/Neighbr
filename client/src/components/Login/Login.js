@@ -4,14 +4,20 @@ import {
   FormControlLabel, Checkbox, Link, Grid,
   Box, Typography,
   Container } from '@material-ui/core'
-  import { LockOutlined } from '@material-ui/icons'
-
+import { LockOutlined } from '@material-ui/icons'
+import axios from 'axios';
 import useStyles from './styleLogin';
 
 export default function Login() {
   const classes = useStyles();
   const [ email, setEmail ] = useState('');
   const [ pass, setPass ] = useState('');
+
+  const handleSignIn = (email, pass) => {
+    axios.post('/api/users/signin',{ email, pass })
+    .then(res => res)
+    .catch(err => console.error(err))
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -23,7 +29,12 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form
+          className={classes.form}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSignIn(email, pass)}}
+            >
           <TextField
             onChange={(e) => setEmail( e.target.value ) }
             value={email}
