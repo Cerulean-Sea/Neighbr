@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import PostTags from './PostTags.jsx';
+import PostInput from './PostInput.jsx';
 
 class PostForm extends React.Component {
 
@@ -70,12 +71,9 @@ class PostForm extends React.Component {
             <div>
                 <h2>Input Form</h2>
                 <form onSubmit={this.handleFormSubmit}>
-                    <h4>Post Title</h4>
-                    <input name="postTitle" value={this.state.postTitle} onChange={this.handleInputChange} />
-                    <h4>Post Body</h4>
-                    <input name="postBody" value={this.state.postBody} onChange={this.handleInputChange} />
-                    <h4>Choose a tag</h4>
-                    <PostTags selectTag={this.selectTag}/>
+                    <PostInput postTitle={this.state.postTitle} postBody={this.state.postBody} handleInputChange={this.handleInputChange} />
+                    <p></p>
+                    <PostTags selectTag={this.selectTag} />
                     <p></p>
                     <button>Add Post</button>
                 </form>
@@ -99,3 +97,10 @@ export default PostForm;
 // Username
 // UserId
 // Tags
+
+
+{/* <h4>Post Title</h4>
+<input name="postTitle" value={this.state.postTitle} onChange={this.handleInputChange} />
+<h4>Post Body</h4>
+<input name="postBody" value={this.state.postBody} onChange={this.handleInputChange} />
+<h4>Choose a tag</h4> */}
