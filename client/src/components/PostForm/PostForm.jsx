@@ -21,6 +21,7 @@ class PostForm extends React.Component {
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.selectTag = this.selectTag.bind(this);
         this.toggleAddImages = this.toggleAddImages.bind(this);
+        this.handlePhotoSubmit = this.handlePhotoSubmit.bind(this);
     }
 
     handleInputChange(event) {
@@ -86,6 +87,12 @@ class PostForm extends React.Component {
         }))
     }
 
+    handlePhotoSubmit(event) {
+        event.preventDefault();
+
+        console.log('photoUrl: ', this.state.photoUrl);
+    }
+
 
 
     render() {
@@ -103,7 +110,7 @@ class PostForm extends React.Component {
                         <p></p>
                         <PostTags selectTag={this.selectTag} />
                         <p></p>
-                        <h4>Your Location Goes Here</h4>
+                        <h4>[ Your Location Goes Here ]</h4>
                         <button>Submit Post</button>
                         <button>Delete Post</button>
                     </form>
@@ -119,7 +126,8 @@ class PostForm extends React.Component {
                     <AddPhotos 
                     toggleAddImages={this. toggleAddImages}
                     handleInputChange={this.handleInputChange}
-                    photoUrl={this.state.photoUrl} />
+                    photoUrl={this.state.photoUrl}
+                    handlePhotoSubmit={this.handlePhotoSubmit} />
                 </div>
 
             )
