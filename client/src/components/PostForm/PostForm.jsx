@@ -14,6 +14,7 @@ class PostForm extends React.Component {
             postTag: '',
             wasAddImagesClicked: false,
             photoUrl: '',
+            photoFilePath: '',
             photoArray: []
         }
 
@@ -90,7 +91,13 @@ class PostForm extends React.Component {
     handlePhotoSubmit(event) {
         event.preventDefault();
 
+        if (this.state.photoUrl.length === 0) {
+            alert('Must add photoUrl or upload photo from computer');
+            return;
+        }
+
         console.log('photoUrl: ', this.state.photoUrl);
+        console.log('photoFilePath: ', this.state.photoFilePath);
     }
 
 
@@ -127,6 +134,8 @@ class PostForm extends React.Component {
                     toggleAddImages={this. toggleAddImages}
                     handleInputChange={this.handleInputChange}
                     photoUrl={this.state.photoUrl}
+                    photoFilePath={this.state.photoFilePath}
+                    handleInputChange={this.handleInputChange}
                     handlePhotoSubmit={this.handlePhotoSubmit} />
                 </div>
 

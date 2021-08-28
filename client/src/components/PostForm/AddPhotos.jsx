@@ -10,7 +10,7 @@ var AddPhotos = (props) => {
                 <p>or</p>
                 <button>From Your Computer</button>
                 <p></p>
-                <input />
+                <input name="photoFilePath" value={props.photoFilePath} onChange={props.handleInputChange} placeholder="Filepath goes here" />
                 <p></p>
                 <button>Add Photo</button>
                 <p></p>
