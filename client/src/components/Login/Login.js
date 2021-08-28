@@ -7,13 +7,14 @@ import {
 import { LockOutlined } from '@material-ui/icons'
 import axios from 'axios';
 import useStyles from './styleLogin';
+import SignUp from '../Signup/SignUp';
 
 export default function Login() {
   const classes = useStyles();
   const [ email, setEmail ] = useState('');
   const [ pass, setPass ] = useState('');
 
-  const handleSignIn = (email, pass) => {
+  const handleSignIn = () => {
     axios.post('/api/users/signin',{ email, pass })
     .then(res => res)
     .catch(err => console.error(err))
@@ -31,9 +32,6 @@ export default function Login() {
         </Typography>
         <form
           className={classes.form}
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSignIn(email, pass)}}
             >
           <TextField
             onChange={(e) => setEmail( e.target.value ) }
@@ -66,7 +64,8 @@ export default function Login() {
             label="Remember me"
           />
           <Button
-            type="submit"
+            type="input"
+            onClick={handleSignIn}
             fullWidth
             variant="contained"
             color="primary"
@@ -81,9 +80,7 @@ export default function Login() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+              <SignUp />
             </Grid>
           </Grid>
         </form>
