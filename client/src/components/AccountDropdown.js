@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {Select, MenuItem, FormControl, InputLabel, makeStyles} from '@material-ui/core';
 
 const AccountDropdown = () => {
-const sampleMessage = [{ userId: 1, username: 'Sally234', text:'Hi, I am interested in purchasing the chair. Would you take an offer of $20?'}, { userId: 2, username: 'James777', text:'Hi, we are open from 10am to 5pm'}, { userId: 3, username: 'Gabby11', text:'Yes, of course. Come by anytime to pick it up.'}]
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -17,9 +16,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const classes = useStyles();
-let [messageId, setMessageId] = useState(1);
+let [menuItem, setMenuItem] = useState('name');
 
-const handleChange = e => setMessageId(e.target.value)
+const handleChange = e => setMenuItem(e.target.value)
 
   return (
     <div>
@@ -27,14 +26,33 @@ const handleChange = e => setMessageId(e.target.value)
         <InputLabel>Account</InputLabel>
 
           <Select
-          value={messageId}
+          value={menuItem}
           MenuProps={{className: classes.menu}}
           onChange={handleChange}
           >
-            <MenuItem>Name</MenuItem>
-            <MenuItem>Location</MenuItem>
+            {/* takes you to individual posts */}
+            <MenuItem
+            value="name"
+            className={classes.listItem}
+            >Name</MenuItem>
 
-            {sampleMessage.map(message =>
+            {/* allows you to change location settings */}
+            <MenuItem
+            value="location"
+            className={classes.listItem}
+            >Location</MenuItem>
+
+            <MenuItem
+            value="notifications"
+            className={classes.listItem}
+            >Notifications</MenuItem>
+
+            <MenuItem
+            value="settings"
+            className={classes.listItem}
+            >Settings</MenuItem>
+
+            {/* {sampleMessage.map(message =>
             <MenuItem
             key={message.userId}
             value={message.userId}
@@ -43,12 +61,12 @@ const handleChange = e => setMessageId(e.target.value)
             {message.username}<br></br>
             {message.text}
             </MenuItem>
-            )}
+            )} */}
 
           </Select>
 
       </FormControl>
-      {messageId}
+      {menuItem}
     </div>
   )
 }
