@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../controllers/Post');
+const auth = require('../middleware/auth');
 
 router
   .get('/', Post.getPosts)
   .get('/:postId', Post.getPostById)
   .get('/users/:userId', Post.getPostsByUserId)
-  .post('/create', Post.postPost)
-  .patch('/:postId', Post.updatePost)
-  .delete('/:postId', Post.deletePost)
+  .post('/create', auth, Post.postPost)
+  .patch('/:postId', auth, Post.updatePost)
+  .delete('/:postId', auth, Post.deletePost)
 
 module.exports = router;
