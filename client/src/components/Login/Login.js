@@ -8,17 +8,25 @@ import { LockOutlined } from '@material-ui/icons'
 import axios from 'axios';
 import useStyles from './styleLogin';
 import SignUp from '../Signup/SignUp';
+import { useDispatch } from 'react-redux';
+import { emailSignIn, googleSignIn } from '../../redux/actions/firebase/firebase';
 
 export default function Login() {
   const classes = useStyles();
   const [ email, setEmail ] = useState('');
   const [ pass, setPass ] = useState('');
 
-  const handleSignIn = () => {
-    axios.post('/api/users/signin',{ email, pass })
-    .then(res => res)
-    .catch(err => console.error(err))
-  }
+  const dispatch = useDispatch();
+
+  const signIn = (e) => {
+    e.preventDefault();
+    dispatch(emailSignIn(email, pass));
+  };
+
+  const google = (e) => {
+    e.preventDefault();
+    dispatch(googleSignIn());
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -65,13 +73,23 @@ export default function Login() {
           />
           <Button
             type="input"
-            onClick={handleSignIn}
+            onClick={signIn}
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
           >
             Sign In
+          </Button>
+          <Button
+            type="input"
+            onClick={google}
+            fullWidth
+            variant="contained"
+            color="secondary"
+            className={classes.submit}
+          >
+            Sign In With Google
           </Button>
           <Grid container>
             <Grid item xs>

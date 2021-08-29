@@ -3,9 +3,15 @@ import { Modal, Link, TextField, Button, Slide } from '@material-ui/core';
 import useStyles from './styleSignUp';
 import axios from 'axios';
 
+import { emailSignUp } from '../../redux/actions/firebase/firebase';
+import { useDispatch } from 'react-redux';
+
+
 export default function SimpleModal() {
 
   const classes = useStyles();
+  const dispatch = useDispatch();
+
 
   // Define Local State and handlers
   const [open, setOpen] = useState(false);
@@ -15,11 +21,13 @@ export default function SimpleModal() {
   const [pass, setPass] = useState('')
   const [zip, setZip] = useState('')
 
-  const handleSignUp = () => {
-    axios.post('/api/users/signup', {first, last, email, pass, zip})
-    .then(res => res)
-    .catch(error => error)
-  }
+  const signUp = (e) => {
+    e.preventDefault();
+    dispatch(emailSignUp(`${first} ${last}`, email, pass, zip));
+    handleClose();
+  };
+
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -101,9 +109,7 @@ export default function SimpleModal() {
           />
           <Button
             type="input"
-            onClick={(e)=>{
-              e.preventDefault()
-              handleSignUp()}}
+            onClick={signUp}
             fullWidth
             variant="contained"
             color="primary"
