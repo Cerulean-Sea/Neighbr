@@ -1,12 +1,10 @@
 import React from 'react';
-import renderMap from '../helper-functions/renderMap';
+import Login from './Login/Login.js';
 
 const App = () => {
 
   return (
-    <div className="app">
-      App
-    </div>
+    <Login />
   )
 }
 

@@ -16,8 +16,8 @@ const renderMap = (options) => {
   const height = options.height || '250';
   const lat = options.lat;
   const lng = options.lng;
-  const zoom = options.zoom || '8';
-  const src = `https://www.google.com/maps/embed/v1/view?key=${googleMapsApiKey}&center=${lat},${lng}&zoom=${zoom}`;
+  const zoom = options.zoom || '12';
+  const src = `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${lat},${lng}&zoom=${zoom}`
 
   return (
     <iframe
