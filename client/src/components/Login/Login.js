@@ -4,14 +4,29 @@ import {
   FormControlLabel, Checkbox, Link, Grid,
   Box, Typography,
   Container } from '@material-ui/core'
-  import { LockOutlined } from '@material-ui/icons'
-
+import { LockOutlined } from '@material-ui/icons'
+import axios from 'axios';
 import useStyles from './styleLogin';
+import SignUp from '../Signup/SignUp';
+import { useDispatch } from 'react-redux';
+import { emailSignIn, googleSignIn } from '../../redux/actions/firebase/firebase';
 
 export default function Login() {
   const classes = useStyles();
   const [ email, setEmail ] = useState('');
   const [ pass, setPass ] = useState('');
+
+  const dispatch = useDispatch();
+
+  const signIn = (e) => {
+    e.preventDefault();
+    dispatch(emailSignIn(email, pass));
+  };
+
+  const google = (e) => {
+    e.preventDefault();
+    dispatch(googleSignIn());
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -23,7 +38,9 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form
+          className={classes.form}
+            >
           <TextField
             onChange={(e) => setEmail( e.target.value ) }
             value={email}
@@ -55,13 +72,24 @@ export default function Login() {
             label="Remember me"
           />
           <Button
-            type="submit"
+            type="input"
+            onClick={signIn}
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
           >
             Sign In
+          </Button>
+          <Button
+            type="input"
+            onClick={google}
+            fullWidth
+            variant="contained"
+            color="secondary"
+            className={classes.submit}
+          >
+            Sign In With Google
           </Button>
           <Grid container>
             <Grid item xs>
@@ -70,9 +98,7 @@ export default function Login() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+              <SignUp />
             </Grid>
           </Grid>
         </form>
