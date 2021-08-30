@@ -1,31 +1,51 @@
 import React from 'react';
-import { Typography, Avatar, Fab } from '@material-ui/core';
+import { Typography, Avatar, Fab, Container, Card, CssBaseline } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import moment from 'moment';
 
+import useStyles from './stylesPost';
+
+import sampleData from './sampleData';
 
 export default (props) => {
-  return (
-    <div>
-      Post
-      <div>
-        <Avatar alt="Neighbor" src="/neighbor.png"/>
-        <Typography component="h6">
-          Hi-di-ho, neighbor!
-        </Typography>
-        <Fab aria-label="close">
-          <CloseIcon />
-        </Fab>
+  const classes = useStyles();
 
-      </div>
-      <div>
-      <Typography component="body1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctu.
+  return (
+    <Container className={classes.container}>
+      <CssBaseline />
+      <Card className={classes.card}>
+
+        <div className={classes.header}>
+          <Avatar
+            className={classes.avatar}
+            alt="Neighbor"
+            src="/neighbor.png"
+          />
+
+          <div>
+            <Typography variant="h5">
+              Hi-di-ho, neighbor!
+            </Typography>
+            {sampleData.tags.map((tag) => <span className={classes.tag}>{tag}</span>)}
+          </div>
+
+          <Fab className={classes.fab} aria-label="close" size="small">
+            <CloseIcon />
+          </Fab>
+        </div>
+
+        <Typography variant="body1" paragraph="true">
+          {sampleData.text.slice(0, 250) + ' . . .'}
         </Typography>
-      </div>
-      <div>
-        ---- DATE TIMESTAMP ----
-        <span> Pill Badges ----</span>
-      </div>
-    </div>
+
+        <div className={classes.footer}>
+
+          <Typography variant="body2">
+            {moment(sampleData.created).fromNow()}
+          </Typography>
+        </div>
+
+      </Card>
+    </Container>
   )
 }
