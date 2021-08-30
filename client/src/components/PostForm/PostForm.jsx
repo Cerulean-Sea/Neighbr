@@ -25,6 +25,7 @@ class PostForm extends React.Component {
         this.toggleAddImages = this.toggleAddImages.bind(this);
         this.handlePhotoSubmit = this.handlePhotoSubmit.bind(this);
         this.removePhoto = this.removePhoto.bind(this);
+        this.readImage = this.readImage.bind(this);
     }
 
     handleInputChange(event) {
@@ -122,6 +123,9 @@ class PostForm extends React.Component {
         // if photo file path is selected
         } else if (this.state.photoUrl.length === 0 && this.state.photoFilePath.length !== 0) {
 
+            // invoke readImage?
+            // this.readImage(this.state.photoFilePath);
+
             this.setState({
                 photoArray: [...this.state.photoArray, this.state.photoFilePath]
             }, () => {
@@ -148,6 +152,21 @@ class PostForm extends React.Component {
                 }
             )
         })
+    }
+
+    readImage(file) {
+        // Check if the file is an image.
+        if (file.type && !file.type.startsWith('image/')) {
+            console.log('File is not an image.', file.type, file);
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.addEventListener('load', (event) => {
+            img.src = event.target.result;
+        });
+        // reader.readAsDataURL(file);
+        reader.readAsDataURL(file.target.files[0]);
     }
 
 
@@ -193,7 +212,8 @@ class PostForm extends React.Component {
                     photoUrl={this.state.photoUrl}
                     photoFilePath={this.state.photoFilePath}
                     handleInputChange={this.handleInputChange}
-                    handlePhotoSubmit={this.handlePhotoSubmit} />
+                    handlePhotoSubmit={this.handlePhotoSubmit}
+                    readImage={this.readImage} />
                 </div>
 
             )
