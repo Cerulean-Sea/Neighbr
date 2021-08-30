@@ -1,0 +1,6 @@
+// Comments
+export const FETCH_COMMENTS = 'FETCH_COMMENTS';
+export const CREATE_COMMENT = 'CREATE_COMMENT';
+export const LIKE_COMMENT = 'LIKE_COMMENT';
+export const REPORT_COMMENT = 'REPORT_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
