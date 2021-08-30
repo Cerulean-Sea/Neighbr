@@ -15,7 +15,8 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-end',
   },
   appbar: {
-    backgroundColor: "#F4A261"
+    backgroundColor: "#F4A261",
+    justifyContent: 'flex-start'
   },
   dropdown: {
     backgroundColor: "#F4A261",

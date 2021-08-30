@@ -50,11 +50,8 @@
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
     "babel-loader": "^8.2.2",
-<<<<<<< HEAD
     "css-loader": "^6.2.0",
-=======
     "faker": "^5.5.3",
->>>>>>> main
     "nodemon": "^2.0.12",
     "redux-devtools-extension": "^2.13.9",
     "style-loader": "^3.2.1",
