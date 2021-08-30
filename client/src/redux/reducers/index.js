@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
-
+import firebaseReducer from './firebase/firebase';
 import comments from './comments';
 
 const rootReducer = combineReducers({
-  comments;
+  firebase: firebaseReducer,
+  comments
 });
 
 

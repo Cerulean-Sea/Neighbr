@@ -110,3 +110,4 @@ bundle.*
 .DS_Store
 *.env
 config.js
+*.json
