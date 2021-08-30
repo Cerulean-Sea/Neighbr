@@ -1,3 +1,6 @@
+# Local Dev temp files
+sampleData.json
+
 # Logs
 logs
 *.log
@@ -107,3 +110,4 @@ bundle.*
 .DS_Store
 *.env
 config.js
+*.json
