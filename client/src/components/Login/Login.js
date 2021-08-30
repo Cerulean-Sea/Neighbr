@@ -4,28 +4,45 @@ import {
   FormControlLabel, Checkbox, Link, Grid,
   Box, Typography,
   Container } from '@material-ui/core'
-import { LockOutlined } from '@material-ui/icons'
+import { LockOutlined } from '@material-ui/icons';
+import { useDispatch } from 'react-redux';
+import { emailSignIn, googleSignIn, emailSignUp } from '../../redux/actions/firebase/firebase'
 import axios from 'axios';
 import useStyles from './styleLogin';
-import SignUp from '../Signup/SignUp';
-import { useDispatch } from 'react-redux';
-import { emailSignIn, googleSignIn } from '../../redux/actions/firebase/firebase';
 
 export default function Login() {
-  const classes = useStyles();
-  const [ email, setEmail ] = useState('');
-  const [ pass, setPass ] = useState('');
-
   const dispatch = useDispatch();
+  const classes = useStyles();
+  const initialState = {
+    firstName : '',
+    lastName : '',
+    email : '',
+    password : '',
+    passwordConfirm : '',
+    zipcode : '',
+  }
+  const [ formData, setFormData ] = useState(initialState);
+  const [ isSignUp, setIsSignUp ] = useState(false);
 
-  const signIn = (e) => {
-    e.preventDefault();
-    dispatch(emailSignIn(email, pass));
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
-  const google = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(googleSignIn());
+    const { firstName, lastName, email, password, passwordConfirm, zipcode } = formData;
+    if (isSignUp) {
+      if (password === passwordConfirm) {
+        dispatch(emailSignUp(`${firstName} ${lastName}`, email, password, zipcode));
+      } else {
+        console.log('Those passwords didn\’t match. Try again.');
+      }
+    } else {
+      dispatch(emailSignIn(email, password));
+    }
   };
 
   return (
@@ -38,12 +55,39 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form
-          className={classes.form}
-            >
+        <form className={classes.form} onSubmit={handleSubmit}>
+          {isSignUp &&
+          <Grid container spacing={2}>
+            <TextField
+            onChange={(e) => { handleChange(e) }}
+            value={formData.firstName}
+            variant="standard"
+            margin="normal"
+            required
+            fullWidth
+            id="firstName"
+            label="First Name"
+            name="firstName"
+            autoComplete="given-name"
+            autoFocus
+          />
           <TextField
-            onChange={(e) => setEmail( e.target.value ) }
-            value={email}
+            onChange={(e) => { handleChange(e) }}
+            value={formData.lastName}
+            variant="standard"
+            margin="normal"
+            required
+            fullWidth
+            id="lastName"
+            label="Last Name"
+            name="lastName"
+            autoComplete="family-name"
+            autoFocus
+          />
+          </Grid>}
+          <TextField
+            onChange={(e) => { handleChange(e) }}
+            value={formData.email}
             variant="standard"
             margin="normal"
             required
@@ -55,53 +99,76 @@ export default function Login() {
             autoFocus
           />
           <TextField
-            onChange={(e) => setPass( e.target.value ) }
-            value={pass}
+            onChange={(e) => { handleChange(e) }}
+            value={formData.password}
             variant="standard"
             margin="normal"
             required
             fullWidth
-            name="password"
-            label="Password"
-            type="password"
             id="password"
-            autoComplete="current-password"
+            label="Password"
+            name="password"
+            autoComplete="password"
+            autoFocus
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+          {isSignUp &&
+          <>
+          <TextField
+            onChange={(e) => { handleChange(e) }}
+            value={formData.passwordConfirm}
+            variant="standard"
+            margin="normal"
+            required
+            fullWidth
+            id="passwordConfirm"
+            label="Confirm Password"
+            name="passwordConfirm"
+            autoComplete="password"
+            autoFocus
           />
+
+          <TextField
+            onChange={(e) => { handleChange(e) }}
+            value={formData.zip}
+            variant="standard"
+            margin="normal"
+            required
+            fullWidth
+            id="zipcode"
+            label="Zip Code"
+            name="zipcode"
+            autoComplete="postal-code"
+            autoFocus
+          />
+          </>
+          }
           <Button
-            type="input"
-            onClick={signIn}
+            type="submit"
+            onClick={handleSubmit}
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
           >
-            Sign In
-          </Button>
-          <Button
-            type="input"
-            onClick={google}
-            fullWidth
-            variant="contained"
-            color="secondary"
-            className={classes.submit}
-          >
-            Sign In With Google
+            {isSignUp ? "Sign Up!" : "Sign In"}
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
             <Grid item>
-              <SignUp />
+              <Button onClick={()=>{setIsSignUp(!isSignUp)}}>
+                No Account? Sign Up!
+              </Button>
             </Grid>
           </Grid>
         </form>
+        <Button
+          type="input"
+          onClick={() => { dispatch(googleSignIn()) }}
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}>
+            Google Login
+          </Button>
       </div>
     </Container>
   );
