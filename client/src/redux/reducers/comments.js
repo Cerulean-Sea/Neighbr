@@ -4,10 +4,10 @@ const reducer = (comments = [], action) => {
   switch (action.type) {
     case FETCH_COMMENTS:
       return action.payload;
-    case FETCH_COMMENT:
-      return action.payload;
-    case FETCH_COMMENT_BY_USER:
-      return action.payload;
+    // case FETCH_COMMENT:
+    //   return action.payload;
+    // case FETCH_COMMENT_BY_USER:
+    //   return action.payload;
     case CREATE_COMMENT:
       return [...comments, action.payload];
     case LIKE_COMMENT:
