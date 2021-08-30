@@ -6,7 +6,7 @@ import {
   Container } from '@material-ui/core'
 import { LockOutlined } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
-import { googleSignIn } from '../../redux/actions/firebase/firebase'
+import { emailSignIn, googleSignIn, emailSignUp } from '../../redux/actions/firebase/firebase'
 import axios from 'axios';
 import useStyles from './styleLogin';
 
@@ -33,11 +33,17 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const endpoint = isSignUp ? 'signup' : 'signin';
-    axios.post(`/api/users/${endpoint}`, formData)
-    .then(res => res)
-    .catch(err => err)
+    const { firstName, lastName, email, password, passwordConfirm, zipcode } = formData;
+    if (isSignUp) {
+      if (password === passwordConfirm) {
+        dispatch(emailSignUp(`${firstName} ${lastName}`, email, password, zipcode));
+      } else {
+        console.log('Those passwords didn\’t match. Try again.');
+      }
+    } else {
+      dispatch(emailSignIn(email, password));
     }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
