@@ -39,3 +39,12 @@ export const googleSignIn = () => async (dispatch) => {
     console.log(error);
   }
 }
+
+export const photoUpload = (files) => async (dispatch) => {
+  try {
+    const storage = getStorage(app);
+
+  } catch (error) {
+    console.log(error);
+  }
+}
