@@ -141,6 +141,13 @@ class PostForm extends React.Component {
 
     removePhoto(event) {
         console.log('deleted image: ', event.target.value);
+
+        this.setState({
+            photoArray: this.state.photoArray.filter((photo) => {
+                    return photo !== event.target.value
+                }
+            )
+        })
     }
 
 
