@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import {Select, MenuItem, FormControl, InputLabel, makeStyles} from '@material-ui/core';
+import {MenuItem, makeStyles, Menu, AppBar, Toolbar, AlarmIcon} from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import IndividualPosts from './IndividualPosts';
+import Profile from './Profile';
 import ChangeLocation from './ChangeLocation';
 import Chat from './Chat';
 import Settings from './Settings';
@@ -9,26 +11,82 @@ import Settings from './Settings';
 const AccountDropdown = () => {
 
 const useStyles = makeStyles(theme => ({
-  formControl: {
-    minWidth: 100,
+  root: {
+    flexGrow: 1,
   },
-  menu: {
-    width: 400,
-  },
-  listItem: {
-    whiteSpace: 'normal'
-  }
 }));
 
 const classes = useStyles();
-let [menuItem, setMenuItem] = useState('name');
+const [anchorEl, setAnchorEl] = React.useState(null);
+const open = Boolean(anchorEl);
 
-const handleChange = e => setMenuItem(e.target.value)
+const userId = '612ac35bc4ee0611f70b7aa3';
+
+const handleMenu = (event) => {
+  setAnchorEl(event.currentTarget);
+};
+
+const handleClose = () => {
+  setAnchorEl(null);
+};
 
   return (
     <Router>
-    <div>
-      <FormControl className={classes.formControl}>
+    <div className={classes.root}>
+    <AppBar position="static"
+    elevation={0}>
+        <Toolbar>
+
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          onClick={handleMenu}
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+
+        <Menu
+          id="menu-appbar"
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={open}
+          onClose={handleClose}
+        >
+          <Link to='/profile'>
+          <MenuItem
+          >Name</MenuItem>
+          </Link>
+
+          <Link to='/location'>
+          <MenuItem
+          >Location</MenuItem>
+          </Link>
+
+          <Link to='/chat'>
+          <MenuItem
+          >Notifications</MenuItem>
+          </Link>
+
+          <Link to='/settings'>
+          <MenuItem
+          >Settings</MenuItem>
+          </Link>
+
+        </Menu>
+      </Toolbar>
+    </AppBar>
+
+      {/* <FormControl className={classes.formControl}>
         <InputLabel>Account</InputLabel>
 
           <Select
@@ -36,53 +94,43 @@ const handleChange = e => setMenuItem(e.target.value)
           MenuProps={{className: classes.menu}}
           onChange={handleChange}
           >
-            {/* should take users to individual posts */}
+            <Link to='/profile' exact>
             <MenuItem
             value="name"
             className={classes.listItem}
             >Name</MenuItem>
+            </Link>
 
-            {/* should allow suers to change location settings */}
+            <Link to='/location' exact>
             <MenuItem
             value="location"
             className={classes.listItem}
             >Location</MenuItem>
+            </Link>
 
+            <Link to='/chat' exact>
             <MenuItem
             value="notifications"
             className={classes.listItem}
             >Notifications</MenuItem>
+            </Link>
 
+            <Link to='/settings' exact>
             <MenuItem
             value="settings"
             className={classes.listItem}
             >Settings</MenuItem>
-
-            {/* {sampleMessage.map(message =>
-            <MenuItem
-            key={message.userId}
-            value={message.userId}
-            className={classes.listItem}
-            >
-            {message.username}<br></br>
-            {message.text}
-            </MenuItem>
-            )} */}
+            </Link>
 
           </Select>
+      </FormControl> */}
 
-
-      </FormControl>
-        <Route path="/api/posts/users/" exact component={IndividualPosts} />
-        {/* <Route path='/settings' component={Settings} />
+        <Switch>
+        <Route path="/profile" component={Profile} />
+        <Route path='/settings' component={Settings} />
         <Route path='/chat' component={Chat} />
-        <Route path='/location' component={ChangeLocation} /> */}
-
-          {/* <Settings /> */}
-          <Chat />
-          {/* <ChangeLocation />
-          <IndividualPosts /> */}
-      {menuItem}
+        <Route path='/location' component={ChangeLocation} />
+        </Switch>
     </div>
     </Router>
   )
