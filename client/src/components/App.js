@@ -1,5 +1,5 @@
 import React from 'react';
-import Post from './Posts/Post';
+import PostList from './Posts/PostList';
 import renderMap from '../helper-functions/renderMap';
 import Login from './Login/Login';
 
