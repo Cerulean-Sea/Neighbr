@@ -1,10 +1,11 @@
 import axios from 'axios';
+import api from '../../api/index';
 
 export default = (dispatch) => {
-  axios.get('/api/posts/',)
+  api.getPosts()
     .then((res) => dispatch({
       type: 'SET_POSTS',
-      payload; res.data,
+      payload: res.data,
     }))
     .catch((err) => console.error(err));
 };
