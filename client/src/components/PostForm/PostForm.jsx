@@ -94,7 +94,9 @@ class PostForm extends React.Component {
 
     toggleAddImages() {
         this.setState(prevState => ({
-            wasAddImagesClicked: !prevState.wasAddImagesClicked
+            wasAddImagesClicked: !prevState.wasAddImagesClicked,
+            photoUrl: '',
+            photoFilePath: ''
         }))
     }
 
@@ -125,7 +127,7 @@ class PostForm extends React.Component {
 
             // invoke readImage?
             // console.log('photoFilePath: ', this.state.photoFilePath)
-            console.log(this.readImage(this.state.photoFilePath));
+            // this.readImage(this.state.photoFilePath);
 
             this.setState({
                 photoArray: [...this.state.photoArray, this.state.photoFilePath]
@@ -166,8 +168,13 @@ class PostForm extends React.Component {
         reader.addEventListener('load', (event) => {
             img.src = event.target.result;
         });
+
+        this.setState({
+            photoFilePath: reader.readAsDataURL(file.files[0])
+        })
         // reader.readAsDataURL(file);
-        reader.readAsDataURL(file.target.files[0]);
+
+        // URL.createObjectURL(file.files[0]);
     }
 
 
