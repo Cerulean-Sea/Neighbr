@@ -65,4 +65,4 @@ const seedData = async (n) => {
   mongoose.connection.close();
 };
 
-seedData(1);
+seedData(10);
