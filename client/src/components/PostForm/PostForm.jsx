@@ -5,6 +5,9 @@ import PostInput from './PostInput.jsx';
 import AddPhotos from './AddPhotos.jsx';
 import ThumbnailList from './ThumbnailList.jsx';
 
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+
 class PostForm extends React.Component {
 
     constructor(props) {
