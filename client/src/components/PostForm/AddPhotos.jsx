@@ -26,6 +26,8 @@ var AddPhotos = (props) => {
 
 export default AddPhotos;
 
+// test
+
 
 
 {/* <form onSubmit={props.handlePhotoSubmit}>
