@@ -181,7 +181,7 @@ class PostForm extends React.Component {
 
     render() {
 
-        if (!this.state.wasAddImagesClicked) {
+        // if (!this.state.wasAddImagesClicked) {
     
             return (
                 <div>
@@ -200,34 +200,44 @@ class PostForm extends React.Component {
                         <p></p>
                         <button>Delete Post</button>
                     </form>
-                        <p></p>
-                        <button onClick={this.toggleAddImages}>Add Images</button>
+                        {/* <p></p> */}
+                        {/* <button onClick={this.toggleAddImages}>Add Images</button> */}
                         <p></p>
                         <h4>Thumbnail Preview</h4>
+                        <div>
+                            <AddPhotos 
+                            toggleAddImages={this. toggleAddImages}
+                            handleInputChange={this.handleInputChange}
+                            photoUrl={this.state.photoUrl}
+                            photoFilePath={this.state.photoFilePath}
+                            handleInputChange={this.handleInputChange}
+                            handlePhotoSubmit={this.handlePhotoSubmit}
+                            readImage={this.readImage} />
+                        </div>
                         <ThumbnailList 
                         photos={this.state.photoArray}
                         removePhoto={this.removePhoto} />
                 </div>
             )
 
-        } else {
+        // } else {
 
-            return (
+        //     return (
 
-                <div>
-                    <AddPhotos 
-                    toggleAddImages={this. toggleAddImages}
-                    handleInputChange={this.handleInputChange}
-                    photoUrl={this.state.photoUrl}
-                    photoFilePath={this.state.photoFilePath}
-                    handleInputChange={this.handleInputChange}
-                    handlePhotoSubmit={this.handlePhotoSubmit}
-                    readImage={this.readImage} />
-                </div>
+        //         <div>
+        //             <AddPhotos 
+        //             toggleAddImages={this. toggleAddImages}
+        //             handleInputChange={this.handleInputChange}
+        //             photoUrl={this.state.photoUrl}
+        //             photoFilePath={this.state.photoFilePath}
+        //             handleInputChange={this.handleInputChange}
+        //             handlePhotoSubmit={this.handlePhotoSubmit}
+        //             readImage={this.readImage} />
+        //         </div>
 
-            )
+        //     )
 
-        }
+        // }
 
     }
 
