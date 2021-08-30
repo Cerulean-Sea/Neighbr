@@ -4,15 +4,10 @@ import {
   FormControlLabel, Checkbox, Link, Grid,
   Box, Typography,
   Container } from '@material-ui/core'
-import { LockOutlined } from '@material-ui/icons'
+import { LockOutlined } from '@material-ui/icons';
+import { googleSignIn } from '../../redux/actions/firebase/firebase'
 import axios from 'axios';
 import useStyles from './styleLogin';
-<<<<<<< HEAD
-=======
-import SignUp from '../Signup/SignUp';
-import { useDispatch } from 'react-redux';
-import { emailSignIn, googleSignIn } from '../../redux/actions/firebase/firebase';
->>>>>>> a725f70ff61f02df688318ba5411fd7e2aa141da
 
 export default function Login() {
   const classes = useStyles();
@@ -30,12 +25,10 @@ export default function Login() {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      // need to match to textfield names
       [e.target.name]: e.target.value
     });
   };
 
-<<<<<<< HEAD
   const handleSubmit = (e) => {
     e.preventDefault();
     const endpoint = isSignUp ? 'signup' : 'signin';
@@ -43,19 +36,6 @@ export default function Login() {
     .then(res => res)
     .catch(err => err)
     }
-=======
-  const dispatch = useDispatch();
-
-  const signIn = (e) => {
-    e.preventDefault();
-    dispatch(emailSignIn(email, pass));
-  };
-
-  const google = (e) => {
-    e.preventDefault();
-    dispatch(googleSignIn());
-  };
->>>>>>> a725f70ff61f02df688318ba5411fd7e2aa141da
 
   return (
     <Container component="main" maxWidth="xs">
@@ -155,29 +135,14 @@ export default function Login() {
           </>
           }
           <Button
-<<<<<<< HEAD
             type="submit"
             onClick={handleSubmit}
-=======
-            type="input"
-            onClick={signIn}
->>>>>>> a725f70ff61f02df688318ba5411fd7e2aa141da
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
           >
             {isSignUp ? "Sign Up!" : "Sign In"}
-          </Button>
-          <Button
-            type="input"
-            onClick={google}
-            fullWidth
-            variant="contained"
-            color="secondary"
-            className={classes.submit}
-          >
-            Sign In With Google
           </Button>
           <Grid container>
             <Grid item>
@@ -187,6 +152,15 @@ export default function Login() {
             </Grid>
           </Grid>
         </form>
+        <Button
+          type="input"
+          onClick={googleSignIn}
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}>
+            Google Login
+          </Button>
       </div>
     </Container>
   );
