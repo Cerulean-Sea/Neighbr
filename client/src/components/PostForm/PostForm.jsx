@@ -175,6 +175,7 @@ class PostForm extends React.Component {
         // reader.readAsDataURL(file);
 
         // URL.createObjectURL(file.files[0]);
+        // test
     }
 
 
