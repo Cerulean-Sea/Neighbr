@@ -21,6 +21,7 @@ export const deletePost = (postId) => API.delete(`/posts/${postId}`);
 export const getComments = () => API.get(`/comments`);
 export const getCommentById = (commentId) => API.get(`/comments/${commentId}`);
 export const getCommentsByUserId = (userId) => API.get(`/comments/users/${userId}`);
+export const getCommentsByPostId = (postId) => API.get(`/comments/posts/${postId}`);
 export const postComment = (comment) => API.post(`/comments/create`, comment);
 export const updateComment = (commentId, comment) => API.patch(`/comments/${commentId}`, comment);
 export const deleteComment = (commentId) => API.delete(`/comments/${commentId}`);
