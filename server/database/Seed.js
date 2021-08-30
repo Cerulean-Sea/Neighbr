@@ -1,4 +1,6 @@
 const faker = require('faker');
+const mongoose = require('mongoose');
+
 const User = require('./User');
 const Post = require('./Post');
 const Comment = require('./Comment');
@@ -54,12 +56,13 @@ const createComments = async (posts) => {
     }
   }
   console.log('Created comments:', comments);
-}
+};
 
 const seedData = async (n) => {
   await createUsers(n);
   await createPosts(users);
   await createComments(posts);
-}
+  mongoose.connection.close();
+};
 
-seedData(10);
+seedData(1);
