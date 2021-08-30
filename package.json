@@ -47,6 +47,7 @@
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
     "babel-loader": "^8.2.2",
+    "faker": "^5.5.3",
     "nodemon": "^2.0.12",
     "redux-devtools-extension": "^2.13.9",
     "webpack": "^5.51.1",
