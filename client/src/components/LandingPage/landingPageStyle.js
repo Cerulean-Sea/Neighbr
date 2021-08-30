@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     textAlign: 'center',
     backgroundImage: 'url("./assets/landing-page-4.jpg")',
     backgroundSize: 'cover',
-    height: '60vh',
+    height: '55vh',
     color: 'white',
     textShadow: '-1px 0 3px black, 0 1px 2px black, 1px 0 2px black, 0 -1px 7px black',
     paddingTop: '15vh'
@@ -41,6 +41,28 @@ const useStyles = makeStyles({
     '&:hover': {
       backgroundColor: '#2A9D8F'
     }
+  },
+  iconContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    margin: '25px'
+  },
+  icon: {
+    fontSize: '10em',
+    color: '#2A9D8F'
+  },
+  iconText: {
+    fontSize: '2rem',
+    fontWeight: 'bold'
+  },
+  bottomHeader: {
+    fontSize: '3rem',
+    paddingLeft: '10%'
+  },
+  aboutText: {
+    width: '35%',
+    fontSize: '1.2em'
   }
 });
 
