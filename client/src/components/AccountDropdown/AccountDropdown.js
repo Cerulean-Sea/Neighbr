@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import {Select, MenuItem, FormControl, InputLabel, makeStyles} from '@material-ui/core';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import IndividualPosts from './IndividualPosts';
+import ChangeLocation from './ChangeLocation';
+import Chat from './Chat';
+import Settings from './Settings';
 
 const AccountDropdown = () => {
 
@@ -21,6 +26,7 @@ let [menuItem, setMenuItem] = useState('name');
 const handleChange = e => setMenuItem(e.target.value)
 
   return (
+    <Router>
     <div>
       <FormControl className={classes.formControl}>
         <InputLabel>Account</InputLabel>
@@ -30,13 +36,13 @@ const handleChange = e => setMenuItem(e.target.value)
           MenuProps={{className: classes.menu}}
           onChange={handleChange}
           >
-            {/* takes you to individual posts */}
+            {/* should take users to individual posts */}
             <MenuItem
             value="name"
             className={classes.listItem}
             >Name</MenuItem>
 
-            {/* allows you to change location settings */}
+            {/* should allow suers to change location settings */}
             <MenuItem
             value="location"
             className={classes.listItem}
@@ -65,9 +71,20 @@ const handleChange = e => setMenuItem(e.target.value)
 
           </Select>
 
+
       </FormControl>
+        <Route path="/api/posts/users/" exact component={IndividualPosts} />
+        {/* <Route path='/settings' component={Settings} />
+        <Route path='/chat' component={Chat} />
+        <Route path='/location' component={ChangeLocation} /> */}
+
+          {/* <Settings /> */}
+          <Chat />
+          {/* <ChangeLocation />
+          <IndividualPosts /> */}
       {menuItem}
     </div>
+    </Router>
   )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import renderMap from '../helper-functions/renderMap';
-import AccountDropdown from './AccountDropdown.js';
+import AccountDropdown from './AccountDropdown/AccountDropdown.js';
 
 const App = () => {
 
