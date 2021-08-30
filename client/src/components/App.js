@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import renderMap from '../helper-functions/renderMap';
+import PostForm from './PostForm/PostForm.jsx';
 import Login from './Login/Login';
 import { useSelector } from 'react-redux';
 
@@ -21,6 +22,7 @@ const AUTH = useSelector(state => state.firebase);
             {!AUTH && <Login />}
           </Route>
         </Switch>
+        <PostForm />
       </div>
     </Router>
   )
