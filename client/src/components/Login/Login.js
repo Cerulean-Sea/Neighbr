@@ -5,11 +5,13 @@ import {
   Box, Typography,
   Container } from '@material-ui/core'
 import { LockOutlined } from '@material-ui/icons';
+import { useDispatch } from 'react-redux';
 import { googleSignIn } from '../../redux/actions/firebase/firebase'
 import axios from 'axios';
 import useStyles from './styleLogin';
 
 export default function Login() {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const initialState = {
     firstName : '',
@@ -154,7 +156,7 @@ export default function Login() {
         </form>
         <Button
           type="input"
-          onClick={googleSignIn}
+          onClick={() => { dispatch(googleSignIn()) }}
           fullWidth
           variant="contained"
           color="primary"
