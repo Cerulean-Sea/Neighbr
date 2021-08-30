@@ -11,9 +11,19 @@ import Settings from './Settings';
 const AccountDropdown = () => {
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
+  accountButton: {
+    justifyContent: 'flex-end',
   },
+  appbar: {
+    backgroundColor: "#F4A261"
+  },
+  dropdown: {
+    backgroundColor: "#F4A261",
+    color: 'white',
+  },
+  link: {
+    textDecoration: 'none'
+  }
 }));
 
 const classes = useStyles();
@@ -32,22 +42,25 @@ const handleClose = () => {
 
   return (
     <Router>
-    <div className={classes.root}>
+    <div>
     <AppBar position="static"
-    elevation={0}>
-        <Toolbar>
+    className={classes.appbar}
+    >
+        <Toolbar className={classes.accountButton}>
 
         <IconButton
+          className={classes.menu}
           aria-label="account of current user"
           aria-controls="menu-appbar"
           aria-haspopup="true"
           onClick={handleMenu}
           color="inherit"
         >
-          <AccountCircle />
+          <AccountCircle/>
         </IconButton>
 
         <Menu
+
           id="menu-appbar"
           anchorEl={anchorEl}
           anchorOrigin={{
@@ -60,70 +73,43 @@ const handleClose = () => {
             horizontal: 'right',
           }}
           open={open}
-          onClose={handleClose}
+          onClick={handleClose}
         >
-          <Link to='/profile'>
+          <Link to='/profile'
+          className={classes.link}
+          >
           <MenuItem
+          className={classes.dropdown}
           >Name</MenuItem>
           </Link>
 
-          <Link to='/location'>
+          <Link to='/location'
+          className={classes.link}
+          >
           <MenuItem
+          className={classes.dropdown}
           >Location</MenuItem>
           </Link>
 
-          <Link to='/chat'>
+          <Link to='/chat'
+          className={classes.link}
+          >
           <MenuItem
+          className={classes.dropdown}
           >Notifications</MenuItem>
           </Link>
 
-          <Link to='/settings'>
+          <Link to='/settings'
+          className={classes.link}
+          >
           <MenuItem
+          className={classes.dropdown}
           >Settings</MenuItem>
           </Link>
 
         </Menu>
       </Toolbar>
     </AppBar>
-
-      {/* <FormControl className={classes.formControl}>
-        <InputLabel>Account</InputLabel>
-
-          <Select
-          value={menuItem}
-          MenuProps={{className: classes.menu}}
-          onChange={handleChange}
-          >
-            <Link to='/profile' exact>
-            <MenuItem
-            value="name"
-            className={classes.listItem}
-            >Name</MenuItem>
-            </Link>
-
-            <Link to='/location' exact>
-            <MenuItem
-            value="location"
-            className={classes.listItem}
-            >Location</MenuItem>
-            </Link>
-
-            <Link to='/chat' exact>
-            <MenuItem
-            value="notifications"
-            className={classes.listItem}
-            >Notifications</MenuItem>
-            </Link>
-
-            <Link to='/settings' exact>
-            <MenuItem
-            value="settings"
-            className={classes.listItem}
-            >Settings</MenuItem>
-            </Link>
-
-          </Select>
-      </FormControl> */}
 
         <Switch>
         <Route path="/profile" component={Profile} />
