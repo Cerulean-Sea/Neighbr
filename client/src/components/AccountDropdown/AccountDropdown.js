@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import {MenuItem, makeStyles, Menu, AppBar, Toolbar, AlarmIcon} from '@material-ui/core';
+import {MenuItem, makeStyles, Menu, AppBar, Toolbar } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const AccountDropdown = () => {
 
