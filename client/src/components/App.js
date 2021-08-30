@@ -1,14 +1,10 @@
 import React from 'react';
-<<<<<<< HEAD
-import PostList from './Posts/PostList';
-=======
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
->>>>>>> main
 import renderMap from '../helper-functions/renderMap';
 import PostForm from './PostForm/PostForm.jsx';
 import Login from './Login/Login';
