@@ -1,5 +1,5 @@
 import { FETCH_COMMENTS, CREATE_COMMENT, LIKE_COMMENT, REPORT_COMMENT, DELETE_COMMENT } from './actionTypes';
-import * as http from '../../httpHandlers/comments';
+import * as http from '../../api/';
 
 export const getComments = () => async (dispatch) => {
   try {
