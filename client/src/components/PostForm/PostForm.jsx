@@ -124,7 +124,8 @@ class PostForm extends React.Component {
         } else if (this.state.photoUrl.length === 0 && this.state.photoFilePath.length !== 0) {
 
             // invoke readImage?
-            // this.readImage(this.state.photoFilePath);
+            // console.log('photoFilePath: ', this.state.photoFilePath)
+            console.log(this.readImage(this.state.photoFilePath));
 
             this.setState({
                 photoArray: [...this.state.photoArray, this.state.photoFilePath]
@@ -144,7 +145,7 @@ class PostForm extends React.Component {
     }
 
     removePhoto(event) {
-        console.log('deleted image: ', event.target.value);
+        // console.log('deleted image: ', event.target.value);
 
         this.setState({
             photoArray: this.state.photoArray.filter((photo) => {
@@ -245,3 +246,11 @@ export default PostForm;
 <h4>Post Body</h4>
 <input name="postBody" value={this.state.postBody} onChange={this.handleInputChange} />
 <h4>Choose a tag</h4> */}
+
+
+// HOW TO PULL CHANGES FROM MAIN
+
+// git checkout main  to go to the main branch
+// git pull  to pull all the new files from the main branch
+// git checkout <your branch name> to go to your branch
+// git merge main  to add files from main to your branch
