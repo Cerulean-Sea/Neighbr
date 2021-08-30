@@ -18,7 +18,8 @@ const commentSchema = new mongoose.Schema({
   postId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Post'
-  }
+  },
+  photos: [String]
 });
 
 const Comment = mongoose.model('Comment', commentSchema);
