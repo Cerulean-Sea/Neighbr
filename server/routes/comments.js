@@ -7,6 +7,7 @@ router
   .get('/', Comment.getComments)
   .get('/:commentId', Comment.getCommentById)
   .get('/users/:userId', Comment.getCommentsByUserId)
+  .get('/posts/:postId', Comment.getCommentsByPostId)
   .post('/create', auth, Comment.postComment)
   .patch('/:commentId', auth, Comment.updateComment)
   .delete('/:commentId', auth, Comment.deleteComment)
