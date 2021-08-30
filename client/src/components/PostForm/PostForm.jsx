@@ -94,7 +94,9 @@ class PostForm extends React.Component {
 
     toggleAddImages() {
         this.setState(prevState => ({
-            wasAddImagesClicked: !prevState.wasAddImagesClicked
+            wasAddImagesClicked: !prevState.wasAddImagesClicked,
+            photoUrl: '',
+            photoFilePath: ''
         }))
     }
 
@@ -124,6 +126,7 @@ class PostForm extends React.Component {
         } else if (this.state.photoUrl.length === 0 && this.state.photoFilePath.length !== 0) {
 
             // invoke readImage?
+            // console.log('photoFilePath: ', this.state.photoFilePath)
             // this.readImage(this.state.photoFilePath);
 
             this.setState({
@@ -144,7 +147,7 @@ class PostForm extends React.Component {
     }
 
     removePhoto(event) {
-        console.log('deleted image: ', event.target.value);
+        // console.log('deleted image: ', event.target.value);
 
         this.setState({
             photoArray: this.state.photoArray.filter((photo) => {
@@ -165,14 +168,20 @@ class PostForm extends React.Component {
         reader.addEventListener('load', (event) => {
             img.src = event.target.result;
         });
+
+        this.setState({
+            photoFilePath: reader.readAsDataURL(file.files[0])
+        })
         // reader.readAsDataURL(file);
-        reader.readAsDataURL(file.target.files[0]);
+
+        // URL.createObjectURL(file.files[0]);
+        // test
     }
 
 
     render() {
 
-        if (!this.state.wasAddImagesClicked) {
+        // if (!this.state.wasAddImagesClicked) {
     
             return (
                 <div>
@@ -191,34 +200,44 @@ class PostForm extends React.Component {
                         <p></p>
                         <button>Delete Post</button>
                     </form>
-                        <p></p>
-                        <button onClick={this.toggleAddImages}>Add Images</button>
+                        {/* <p></p> */}
+                        {/* <button onClick={this.toggleAddImages}>Add Images</button> */}
                         <p></p>
                         <h4>Thumbnail Preview</h4>
+                        <div>
+                            <AddPhotos 
+                            toggleAddImages={this. toggleAddImages}
+                            handleInputChange={this.handleInputChange}
+                            photoUrl={this.state.photoUrl}
+                            photoFilePath={this.state.photoFilePath}
+                            handleInputChange={this.handleInputChange}
+                            handlePhotoSubmit={this.handlePhotoSubmit}
+                            readImage={this.readImage} />
+                        </div>
                         <ThumbnailList 
                         photos={this.state.photoArray}
                         removePhoto={this.removePhoto} />
                 </div>
             )
 
-        } else {
+        // } else {
 
-            return (
+        //     return (
 
-                <div>
-                    <AddPhotos 
-                    toggleAddImages={this. toggleAddImages}
-                    handleInputChange={this.handleInputChange}
-                    photoUrl={this.state.photoUrl}
-                    photoFilePath={this.state.photoFilePath}
-                    handleInputChange={this.handleInputChange}
-                    handlePhotoSubmit={this.handlePhotoSubmit}
-                    readImage={this.readImage} />
-                </div>
+        //         <div>
+        //             <AddPhotos 
+        //             toggleAddImages={this. toggleAddImages}
+        //             handleInputChange={this.handleInputChange}
+        //             photoUrl={this.state.photoUrl}
+        //             photoFilePath={this.state.photoFilePath}
+        //             handleInputChange={this.handleInputChange}
+        //             handlePhotoSubmit={this.handlePhotoSubmit}
+        //             readImage={this.readImage} />
+        //         </div>
 
-            )
+        //     )
 
-        }
+        // }
 
     }
 
@@ -245,3 +264,11 @@ export default PostForm;
 <h4>Post Body</h4>
 <input name="postBody" value={this.state.postBody} onChange={this.handleInputChange} />
 <h4>Choose a tag</h4> */}
+
+
+// HOW TO PULL CHANGES FROM MAIN
+
+// git checkout main  to go to the main branch
+// git pull  to pull all the new files from the main branch
+// git checkout <your branch name> to go to your branch
+// git merge main  to add files from main to your branch
