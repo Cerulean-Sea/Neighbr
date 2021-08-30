@@ -20,11 +20,20 @@ const getCommentById = async (req, res) => {
   }
 };
 
-
 const getCommentsByUserId = async (req, res) => {
   const { userId } = req.params;
   try {
     const comments = await Comment.find({userId});
+    res.status(200).send(comments);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
+const getCommentsByPostId = async (req, res) => {
+  const { postId } = req.params;
+  try {
+    const comments = await Comment.find({postId});
     res.status(200).send(comments);
   } catch (error) {
     res.status(400).send(error);
@@ -73,6 +82,7 @@ module.exports = {
   getComments,
   getCommentById,
   getCommentsByUserId,
+  getCommentsByPostId,
   postComment,
   updateComment,
   deleteComment

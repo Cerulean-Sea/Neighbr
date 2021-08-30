@@ -4,6 +4,7 @@ const db = require('./index.js');
 mongoose.Promise = global.Promise;
 
 const postSchema = new mongoose.Schema({
+  title: String,
   text: String,
   location: Object,
   created: {
@@ -21,7 +22,8 @@ const postSchema = new mongoose.Schema({
   commentId: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Comment'
-  }]
+  }],
+  photos: []
 });
 
 const Post = mongoose.model('Post', postSchema);
