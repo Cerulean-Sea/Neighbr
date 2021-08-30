@@ -4,13 +4,6 @@ var AddPhotos = (props) => {
 
     return (
         <div>
-            {/* <form onSubmit={props.handlePhotoSubmit}>
-                <h3>URL</h3>
-                <input name="photoUrl" value={props.photoUrl} onChange={props.handleInputChange} placeholder="Paste URL here" />
-                <p></p>
-                <button>Add Photo</button>
-                <p>or</p>
-            </form> */}
             <form onSubmit={props.handlePhotoSubmit}>
                 <h3>From Your Computer</h3>
                 <p></p>
@@ -19,7 +12,6 @@ var AddPhotos = (props) => {
                 <button>Add Photo</button>
                 <p></p>
             </form>
-            {/* <button onClick={props.toggleAddImages}>Cancel</button> */}
         </div>
     )
 }

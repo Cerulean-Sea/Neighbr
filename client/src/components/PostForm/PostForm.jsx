@@ -173,71 +173,46 @@ class PostForm extends React.Component {
             photoFilePath: reader.readAsDataURL(file.files[0])
         })
         // reader.readAsDataURL(file);
-
         // URL.createObjectURL(file.files[0]);
-        // test
     }
 
 
     render() {
-
-        // if (!this.state.wasAddImagesClicked) {
     
-            return (
-                <div>
-                    <h2>Create New Post</h2>
-                    <form onSubmit={this.handleFormSubmit}>
-                        <PostInput 
-                        postTitle={this.state.postTitle}
-                        postBody={this.state.postBody}
-                        handleInputChange={this.handleInputChange} />
-                        <p></p>
-                        <PostTags selectTag={this.selectTag} />
-                        <p></p>
-                        <h4>[ Your Location Goes Here ]</h4>
-                        <p></p>
-                        <button>Submit Post</button>
-                        <p></p>
-                        <button>Delete Post</button>
-                    </form>
-                        {/* <p></p> */}
-                        {/* <button onClick={this.toggleAddImages}>Add Images</button> */}
-                        <p></p>
-                        <h4>Thumbnail Preview</h4>
-                        <div>
-                            <AddPhotos 
-                            toggleAddImages={this. toggleAddImages}
-                            handleInputChange={this.handleInputChange}
-                            photoUrl={this.state.photoUrl}
-                            photoFilePath={this.state.photoFilePath}
-                            handleInputChange={this.handleInputChange}
-                            handlePhotoSubmit={this.handlePhotoSubmit}
-                            readImage={this.readImage} />
-                        </div>
-                        <ThumbnailList 
-                        photos={this.state.photoArray}
-                        removePhoto={this.removePhoto} />
-                </div>
-            )
-
-        // } else {
-
-        //     return (
-
-        //         <div>
-        //             <AddPhotos 
-        //             toggleAddImages={this. toggleAddImages}
-        //             handleInputChange={this.handleInputChange}
-        //             photoUrl={this.state.photoUrl}
-        //             photoFilePath={this.state.photoFilePath}
-        //             handleInputChange={this.handleInputChange}
-        //             handlePhotoSubmit={this.handlePhotoSubmit}
-        //             readImage={this.readImage} />
-        //         </div>
-
-        //     )
-
-        // }
+        return (
+            <div>
+                <h2>Create New Post</h2>
+                <form onSubmit={this.handleFormSubmit}>
+                    <PostInput 
+                    postTitle={this.state.postTitle}
+                    postBody={this.state.postBody}
+                    handleInputChange={this.handleInputChange} />
+                    <p></p>
+                    <PostTags selectTag={this.selectTag} />
+                    <p></p>
+                    <h4>[ Your Location Goes Here ]</h4>
+                    <p></p>
+                    <button>Submit Post</button>
+                    <p></p>
+                    <button>Delete Post</button>
+                </form>
+                    <p></p>
+                    <h4>Thumbnail Preview</h4>
+                    <div>
+                        <AddPhotos 
+                        toggleAddImages={this.toggleAddImages}
+                        handleInputChange={this.handleInputChange}
+                        photoUrl={this.state.photoUrl}
+                        photoFilePath={this.state.photoFilePath}
+                        handleInputChange={this.handleInputChange}
+                        handlePhotoSubmit={this.handlePhotoSubmit}
+                        readImage={this.readImage} />
+                    </div>
+                    <ThumbnailList 
+                    photos={this.state.photoArray}
+                    removePhoto={this.removePhoto} />
+            </div>
+        )
 
     }
 
