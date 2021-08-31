@@ -108,7 +108,7 @@ class PostForm extends React.Component {
 
         // alert for no photos selected
         if (this.state.photoUrl.length === 0 && this.state.photoFilePath.length === 0) {
-            alert("Must add photoUrl or upload photo from computer");
+            alert("Must select file from computer");
             return;
 
         // alert for both fields selected
@@ -185,7 +185,7 @@ class PostForm extends React.Component {
         return (
             <div>
                 <h2>Create New Post</h2>
-                <form onSubmit={this.handleFormSubmit}>
+                <form>
                     <PostInput 
                     postTitle={this.state.postTitle}
                     postBody={this.state.postBody}
@@ -195,11 +195,26 @@ class PostForm extends React.Component {
                     <p></p>
                     <h4>[ Your Location Goes Here ]</h4>
                     <p></p>
-                    <button>Submit Post</button>
+                    <div>
+                        <AddPhotos 
+                        toggleAddImages={this.toggleAddImages}
+                        handleInputChange={this.handleInputChange}
+                        photoUrl={this.state.photoUrl}
+                        photoFilePath={this.state.photoFilePath}
+                        handleInputChange={this.handleInputChange}
+                        handlePhotoSubmit={this.handlePhotoSubmit}
+                        readImage={this.readImage} />
+                    </div>
+                    <h4>Thumbnail Preview</h4>
+                    <ThumbnailList 
+                    photos={this.state.photoArray}
+                    removePhoto={this.removePhoto} />
                     <p></p>
-                    <button>Delete Post</button>
+                    <Button type="submit" onClick={this.handleFormSubmit}>Submit Post</Button>
+                    <p></p>
+                    <Button>Delete Post</Button>
                 </form>
-                    <p></p>
+                    {/* <p></p>
                     <h4>Thumbnail Preview</h4>
                     <div>
                         <AddPhotos 
@@ -213,7 +228,7 @@ class PostForm extends React.Component {
                     </div>
                     <ThumbnailList 
                     photos={this.state.photoArray}
-                    removePhoto={this.removePhoto} />
+                    removePhoto={this.removePhoto} /> */}
             </div>
         )
 
