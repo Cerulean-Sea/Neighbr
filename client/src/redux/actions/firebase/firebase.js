@@ -1,10 +1,13 @@
 import { initializeApp } from 'firebase/app';
+import { getStorage } from 'firebase/storage';
+
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, getIdToken, sendEmailVerification, updateProfile } from 'firebase/auth';
 import * as api from '../../../api';
 import firebaseConfig from './config';
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth();
+export const app = initializeApp(firebaseConfig);
+export const auth = getAuth();
+export const storage = getStorage(app);
 
 export const emailSignIn = (email, password) => async (dispatch) => {
   try {
