@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux';
 import LandingPage from './LandingPage';
 import AccountDropdown from './AccountDropdown/AccountDropdown.js';
 import Profile from '../components/AccountDropdown/Profile';
-import Chat from '../components/AccountDropdown/Chat';
+import Chat from '../components/Chat/Chat';
 import Settings from '../components/AccountDropdown/Settings';
 
 const App = () => {
@@ -27,19 +27,22 @@ const AUTH = useSelector(state => state.firebase);
       <div className="app">
         <Switch>
           <Route exact path="/">
-            {AUTH ? <div> This is the homepage component </div> : <LandingPage />}
+            {AUTH ? <div> <AccountDropdown /> This is the homepage component  </div> : <LandingPage />}
           </Route>
           <Route path="/login">
            <Login />
           </Route>
           <Route exact path="/profile">
+            {AUTH && <AccountDropdown />}
             {AUTH && <Profile />}
           </Route>
           <Route exact path="/settings">
-            {!AUTH && <Settings />}
+            {AUTH && <AccountDropdown />}
+            {AUTH && <Settings />}
           </Route>
           <Route exact path="/chat">
-            {!AUTH && <Chat />}
+            {AUTH && <AccountDropdown />}
+            {AUTH && <Chat />}
           </Route>
         </Switch>
       </div>
