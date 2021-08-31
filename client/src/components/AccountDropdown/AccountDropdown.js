@@ -9,10 +9,10 @@ const AccountDropdown = () => {
 const useStyles = makeStyles(theme => ({
   accountButton: {
     justifyContent: 'flex-end',
-    color: '#264653'
+    color: theme.palette.info.main,
   },
   appbar: {
-    backgroundColor: "#F4A261",
+    backgroundColor: theme.palette.primary.main,
     justifyContent: 'flex-start'
   },
   dropdown: {
@@ -42,7 +42,9 @@ const handleClose = () => {
     <AppBar position="static"
     className={classes.appbar}
     >
-        <Toolbar className={classes.accountButton}>
+        <Toolbar
+        className={classes.accountButton}
+        >
 
         <IconButton
           className={classes.menu}
