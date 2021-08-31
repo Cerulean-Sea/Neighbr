@@ -10,6 +10,7 @@ import PostForm from './PostForm/PostForm.jsx';
 import Login from './Login/Login';
 import { useSelector } from 'react-redux';
 import LandingPage from './LandingPage';
+import AccountDropdown from './AccountDropdown/AccountDropdown.js';
 
 const App = () => {
 

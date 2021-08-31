@@ -37,6 +37,7 @@ const useStyles = makeStyles({
   },
   btn: {
     marginRight: '1em',
+    textDecoration: 'none',
     backgroundColor: '#264653',
     '&:hover': {
       backgroundColor: '#2A9D8F'

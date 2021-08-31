@@ -5,11 +5,13 @@ import {
   Box, Typography,
   Container } from '@material-ui/core'
 import { LockOutlined } from '@material-ui/icons';
-import { googleSignIn } from '../../redux/actions/firebase/firebase'
+import { useDispatch } from 'react-redux';
+import { emailSignIn, googleSignIn, emailSignUp } from '../../redux/actions/firebase/firebase'
 import axios from 'axios';
 import useStyles from './styleLogin';
 
 export default function Login() {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const initialState = {
     firstName : '',
@@ -31,11 +33,17 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const endpoint = isSignUp ? 'signup' : 'signin';
-    axios.post(`/api/users/${endpoint}`, formData)
-    .then(res => res)
-    .catch(err => err)
+    const { firstName, lastName, email, password, passwordConfirm, zipcode } = formData;
+    if (isSignUp) {
+      if (password === passwordConfirm) {
+        dispatch(emailSignUp(`${firstName} ${lastName}`, email, password, zipcode));
+      } else {
+        console.log('Those passwords didn\’t match. Try again.');
+      }
+    } else {
+      dispatch(emailSignIn(email, password));
     }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -154,7 +162,7 @@ export default function Login() {
         </form>
         <Button
           type="input"
-          onClick={googleSignIn}
+          onClick={() => { dispatch(googleSignIn()) }}
           fullWidth
           variant="contained"
           color="primary"

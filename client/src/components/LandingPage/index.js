@@ -24,7 +24,7 @@ const classes = useStyles();
         alignItems="center"
       >
         <Avatar className={classes.avatar} src='./assets/logo.png' />
-        <Link to="/login">
+        <Link to="/login" style={{ textDecoration: 'none' }}>
           <Button className={classes.btn} variant="contained" color="primary">Log in / Sign up</Button>
         </Link>
       </Grid>
