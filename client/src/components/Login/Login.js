@@ -7,12 +7,14 @@ import {
 import { LockOutlined } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 import { emailSignIn, googleSignIn, emailSignUp } from '../../redux/actions/firebase/firebase'
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import useStyles from './styleLogin';
 
 export default function Login() {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const history = useHistory();
   const initialState = {
     firstName : '',
     lastName : '',
@@ -36,12 +38,12 @@ export default function Login() {
     const { firstName, lastName, email, password, passwordConfirm, zipcode } = formData;
     if (isSignUp) {
       if (password === passwordConfirm) {
-        dispatch(emailSignUp(`${firstName} ${lastName}`, email, password, zipcode));
+        dispatch(emailSignUp(`${firstName} ${lastName}`, email, password, zipcode, history));
       } else {
         console.log('Those passwords didn\’t match. Try again.');
       }
     } else {
-      dispatch(emailSignIn(email, password));
+      dispatch(emailSignIn(email, password, history));
     }
   };
 
@@ -108,6 +110,7 @@ export default function Login() {
             id="password"
             label="Password"
             name="password"
+            type="password"
             autoComplete="password"
             autoFocus
           />
@@ -124,6 +127,7 @@ export default function Login() {
             label="Confirm Password"
             name="passwordConfirm"
             autoComplete="password"
+            type="password"
             autoFocus
           />
 
@@ -162,7 +166,7 @@ export default function Login() {
         </form>
         <Button
           type="input"
-          onClick={() => { dispatch(googleSignIn()) }}
+          onClick={() => { dispatch(googleSignIn(history)) }}
           fullWidth
           variant="contained"
           color="primary"
