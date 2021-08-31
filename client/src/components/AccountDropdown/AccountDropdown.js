@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
-import {MenuItem, makeStyles, Menu, AppBar, Toolbar, AlarmIcon} from '@material-ui/core';
+import {MenuItem, makeStyles, Menu, AppBar, Toolbar } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Profile from './Profile';
-import ChangeLocation from './ChangeLocation';
-import Chat from './Chat';
-import Settings from './Settings';
+import { Link } from 'react-router-dom';
 
 const AccountDropdown = () => {
 
 const useStyles = makeStyles(theme => ({
   accountButton: {
     justifyContent: 'flex-end',
+    color: '#264653'
   },
   appbar: {
     backgroundColor: "#F4A261",
@@ -20,7 +17,8 @@ const useStyles = makeStyles(theme => ({
   },
   dropdown: {
     backgroundColor: "#F4A261",
-    color: 'white',
+    color: '#264653',
+    textDecoration: 'bold',
   },
   link: {
     textDecoration: 'none'
@@ -42,7 +40,6 @@ const handleClose = () => {
 };
 
   return (
-    <Router>
     <div>
     <AppBar position="static"
     className={classes.appbar}
@@ -84,14 +81,6 @@ const handleClose = () => {
           >Name</MenuItem>
           </Link>
 
-          <Link to='/location'
-          className={classes.link}
-          >
-          <MenuItem
-          className={classes.dropdown}
-          >Location</MenuItem>
-          </Link>
-
           <Link to='/chat'
           className={classes.link}
           >
@@ -111,15 +100,7 @@ const handleClose = () => {
         </Menu>
       </Toolbar>
     </AppBar>
-
-        <Switch>
-        <Route path="/profile" component={Profile} />
-        <Route path='/settings' component={Settings} />
-        <Route path='/chat' component={Chat} />
-        <Route path='/location' component={ChangeLocation} />
-        </Switch>
     </div>
-    </Router>
   )
 }
 
