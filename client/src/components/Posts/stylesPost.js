@@ -30,26 +30,25 @@ export default makeStyles((theme) => ({
     marginRight: '1rem',
     borderRadius: '1rem',
     padding: '0.2rem',
-    textTransform: 'capitalize',
     justifySelf: 'center',
     alignSelf: 'center',
   },
   typography: {
     // flexBasis: '1',
   },
-  happenings: {
+  Happenings: {
     border: '3px solid #2A9D8F',
   },
-  swaps: {
+  Swaps: {
     border: '3px solid #E9C46A',
   },
-  safety: {
+  Safety: {
     border: '3px solid #E76F51',
   },
-  favors: {
+  Favors: {
     border: '3px solid #F4A261',
   },
-  "chit-chat": {
+  "Chit Chat": {
     border: '3px solid #264653',
   }
 }));

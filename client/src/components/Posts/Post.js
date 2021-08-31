@@ -7,7 +7,8 @@ import {
   Card,
   CssBaseline,
   Menu,
-  MenuItem
+  MenuItem,
+  Grid
 } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import moment from 'moment';
@@ -19,7 +20,7 @@ export default ({ post }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  const options = ['Mark as Read', 'Hide Post', 'Report Post']
+  const options = ['Mark as Read', 'Hide Post', 'Report Post'];
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -30,25 +31,28 @@ export default ({ post }) => {
       <CssBaseline />
       <Card className={classes.card}>
 
-        <div className={classes.header}>
+        <Grid className={classes.header}>
           <Avatar
             className={classes.avatar}
             alt="Neighbor"
             src="/neighbor.png"
             onClick={() => alert('VIEW MODAL WITH USER INFO')}
           />
-          <div>
+          <Grid>
             <Typography className={classes.typography} variant="h6">
               {post.title}
             </Typography>
             {post.tags.map((tag) => <span key={tag} className={`${classes.tag} ${classes[tag]}`}>{`${tag}!`}</span>)}
-          </div>
+          </Grid>
 
           <IconButton
             aria-label="options"
             aria-controls="short-menu"
             aria-haspopup="true"
-            onClick={(e) => setAnchorEl(e.currentTarget)}
+            onClick={(e) => {
+              setAnchorEl(e.currentTarget);
+              e.stopPropagation();
+            }}
             className={classes.fab}
           >
             <MoreVertIcon />
@@ -63,22 +67,23 @@ export default ({ post }) => {
             {options.map((o) => (
               <MenuItem
                 key={o}
-                onClick={() => {
+                onClick={(e) => {
                   handleClose();
                   alert(o);
+                  e.stopPropagation();
                 }}
               >
                 {o}
               </MenuItem>
             ))}
           </Menu>
-        </div>
+        </Grid>
 
         <Typography variant="body1" paragraph={true}>
-          {post.text.slice(0, 250) + ' . . .'}
+          {post.text}
         </Typography>
 
-        <div className={classes.footer}>
+        <Grid className={classes.footer}>
           <Typography variant="body2">
             {`${post.commentId.length} comments`}
           </Typography>
@@ -86,10 +91,9 @@ export default ({ post }) => {
           <Typography variant="body2">
             {moment(post.created).fromNow()}
           </Typography>
-        </div>
+        </Grid>
 
       </Card>
     </Container>
   );
 };
-

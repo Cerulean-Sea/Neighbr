@@ -1,4 +1,4 @@
-import posts from './Posts';
+import posts from './posts';
 
 const actions = {
   posts,
