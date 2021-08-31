@@ -17,6 +17,7 @@ import AccountDropdown from './AccountDropdown/AccountDropdown.js';
 import Profile from '../components/AccountDropdown/Profile';
 import Chat from '../components/Chat/Chat';
 import Settings from '../components/AccountDropdown/Settings';
+import Homepage from './Homepage';
 
 const App = () => {
 
@@ -27,7 +28,7 @@ const AUTH = useSelector(state => state.firebase);
       <div className="app">
         <Switch>
           <Route exact path="/">
-            {AUTH ? <div> <AccountDropdown /> This is the homepage component  </div> : <LandingPage />}
+            {AUTH ? <div> <AccountDropdown /> <Homepage />  </div> : <LandingPage />}
           </Route>
           <Route path="/login">
            <Login />
