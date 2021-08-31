@@ -13,7 +13,7 @@ import * as api from '../../api';
 export const createPost = (post) => async (dispatch) => {
   try {
     const { data } = await api.postPost(post);
-    console.log(data);
+    console.log('Created post!');
     dispatch({type: 'CREATE_POST', payload: data});
   } catch (error) {
     console.log(error);

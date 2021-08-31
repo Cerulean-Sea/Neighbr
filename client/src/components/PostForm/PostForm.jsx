@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ThumbnailList from './ThumbnailList.jsx';
-import { createPost } from '../../redux/actions/Posts';
+import { initializeApp } from 'firebase/app';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -11,7 +11,14 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
+import ThumbnailList from './ThumbnailList.jsx';
+import { createPost } from '../../redux/actions/Posts';
+import firebaseConfig from '../../redux/actions/firebase/config';
+
 const PostForm = () => {
+
+    const firebaseApp = initializeApp(firebaseConfig);
+    const storage = getStorage(firebaseApp);
 
     const AUTH = useSelector(state => state.firebase);
     const userId = AUTH?.user.uid;
@@ -23,10 +30,9 @@ const PostForm = () => {
         tag: '',
         wasAddImagesClicked: false,
         photoUrl: '',
-        photoFilePath: '',
-        photoArray: []
+        filepath: '',
+        photos: []
     };
-
 
     const dispatch = useDispatch();
     const [form, setForm] = useState(initialState);
@@ -41,7 +47,7 @@ const PostForm = () => {
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
-        const { title, body, tag, photoArray } = form;
+        const { title, body, tag, photos } = form;
 
         if (!title.length) {
             alert('Must input a title');
@@ -58,8 +64,10 @@ const PostForm = () => {
             title,
             body,
             tags: [tag],
-            photos: photoArray
+            photos
         }));
+
+        setForm(initialState);
     };
 
     const selectTag = (e) => {
@@ -78,40 +86,29 @@ const PostForm = () => {
           }));
     };
 
-    const handlePhotoSubmit = (e) => {
-        e.preventDefault();
-        if (!form.photoFilePath.length) {
-            alert("Must select file from computer");
-            return;
-        }
-
-        // upload photo here;
-    };
-
     const removePhoto = (e) => {
-        let photoArray = form.photoArray.filter(photo => photo !== e.target.value);
+        let photos = form.photos.filter(photo => photo !== e.target.value);
         setForm(prevState => ({
             ...prevState,
-            photoArray
+            photos
         }));
     };
 
-    const readImage = (file) => {
-        if (file.type && !file.type.startsWith('image/')) {
-            console.log('File is not an image.', file.type, file);
-            return;
+    const handleFileChange = async (e) => {
+        e.preventDefault();
+        try {
+            let fileList = e.target.files;
+            let storageRef = ref(storage, fileList[0].name);
+            let snapshot = await uploadBytes(storageRef, fileList[0]);
+            let url = await getDownloadURL(snapshot.ref);
+            setForm(prevState => ({
+                ...prevState,
+                photos: [...prevState.photos, url]
+            }));
+        } catch (error) {
+            console.log(error);
         }
-
-        const reader = new FileReader();
-        reader.addEventListener('load', (e) => {
-            img.src = e.target.result;
-        });
-
-        setForm(prevState => ({
-            ...prevState,
-            photoFilePath: reader.readAsDataURL(file.files[0])
-        }));
-    };
+    }
 
     return (
         <div>
@@ -135,14 +132,11 @@ const PostForm = () => {
                 <h4>[ Your Location Goes Here ]</h4>
                 <p></p>
                 <div className="photo-upload">
-                    <h3>From Your Computer</h3>
-                    <input type="file" name="photoFilePath" value={form.photoFilePath} onChange={handleInputChange} placeholder="Filepath goes here" />
-                    <p></p>
-                    <Button type="submit" onClick={handlePhotoSubmit}>Add Photo</Button>
-                    <p></p>
+                    <h3>Upload Photo</h3>
+                    <input type="file" name="filepath" value={form.filepath} onChange={handleFileChange}/>
                 </div>
                 <h4>Thumbnail Preview</h4>
-                <ThumbnailList photos={form.photoArray} removePhoto={removePhoto} />
+                <ThumbnailList photos={form.photos} removePhoto={removePhoto} />
                 <p></p>
                 <Button type="submit" onClick={handleFormSubmit} color="primary">Submit Post</Button>
                 <p></p>
