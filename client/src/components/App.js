@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,7 +11,7 @@ import {
 import renderMap from '../helper-functions/renderMap';
 import PostForm from './PostForm/PostForm.jsx';
 import Login from './Login/Login';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import LandingPage from './LandingPage';
 import AccountDropdown from './AccountDropdown/AccountDropdown.js';
 import Profile from '../components/AccountDropdown/Profile';
@@ -20,7 +20,25 @@ import Settings from '../components/AccountDropdown/Settings';
 
 const App = () => {
 
-const AUTH = useSelector(state => state.firebase);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const [AUTH, setAUTH] = useState(JSON.parse(localStorage.getItem('profile')));
+
+  const logout = () => {
+    dispatch({type: 'LOGOUT'});
+    history.push('/');
+    setAUTH(null);
+  };
+
+  useEffect(() => {
+    const expirationTime = AUTH?.user?.stsTokenManager?.expirationTime;
+    if (expirationTime < new Date().getTime()) {
+      logout();
+    }
+    setAUTH(JSON.parse(localStorage.getItem('profile')));
+  }, []);
+
 
   return (
     <Router>
