@@ -1,247 +1,161 @@
-import axios from 'axios';
-import React from 'react';
-import PostTags from './PostTags.jsx';
-import PostInput from './PostInput.jsx';
-import AddPhotos from './AddPhotos.jsx';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { initializeApp } from 'firebase/app';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
 import ThumbnailList from './ThumbnailList.jsx';
+import { createPost } from '../../redux/actions/Posts';
+import firebaseConfig from '../../redux/actions/firebase/config';
 
-class PostForm extends React.Component {
+const PostForm = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            postTitle: '',
-            postBody: '',
-            postTag: '',
-            wasAddImagesClicked: false,
-            photoUrl: '',
-            photoFilePath: '',
-            photoArray: []
-        }
+    const firebaseApp = initializeApp(firebaseConfig);
+    const storage = getStorage(firebaseApp);
 
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleFormSubmit = this.handleFormSubmit.bind(this);
-        this.selectTag = this.selectTag.bind(this);
-        this.toggleAddImages = this.toggleAddImages.bind(this);
-        this.handlePhotoSubmit = this.handlePhotoSubmit.bind(this);
-        this.removePhoto = this.removePhoto.bind(this);
-        this.readImage = this.readImage.bind(this);
-    }
+    const AUTH = JSON.parse(localStorage.getItem('profile'));
+    const userId = AUTH?.user.uid;
+    const displayName = AUTH?.user.displayName;
 
-    handleInputChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        }, () => {
-            // console.log('photoUrl: ', this.state.photoUrl);
-        })
-    }
+    const initialState = {
+        title: '',
+        body: '',
+        tag: '',
+        wasAddImagesClicked: false,
+        photoUrl: '',
+        filepath: '',
+        photos: []
+    };
 
-    handleFormSubmit(event) {
-        event.preventDefault();
+    const dispatch = useDispatch();
+    const [form, setForm] = useState(initialState);
 
-        var inputObj = {
-            title: this.state.postTitle,
-            body: this.state.postBody,
-            tag: this.state.postTag,
-            photoArray: this.state.photoArray,
-            claimed: false
-        };
+    const handleInputChange = (e) => {
+        setForm(prevState => ({
+            ...prevState,
+            [e.target.name]: e.target.value
+          }));
+    };
 
-        if (inputObj.title.length === 0) {
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+
+        const { title, body, tag, photos } = form;
+
+        if (!title.length) {
             alert('Must input a title');
             return;
         }
-
-        if (inputObj.body.length === 0) {
+        if (!body.length) {
             alert('Need to input a post in body')
             return;
         }
 
-        console.log('inputObj: ', inputObj);
+        dispatch(createPost({
+            userId,
+            username: displayName,
+            title,
+            body,
+            tags: [tag],
+            photos
+        }));
 
-        // create Axios POST request at '/create'
-        axios.post('/create', inputObj)
-        .then(() => {
-            // this.setState({
-            //     postTitle: '',
-            //     postBody: '',
-            //     postTag: ''
-            // })
+        setForm(initialState);
+    };
 
-            console.log('Received response from Axios POST request!');
-        })
-        .catch((err) => {
-            console.log('Error received from Axios POST request.');
-        })
+    const selectTag = (e) => {
+        setForm(prevState => ({
+            ...prevState,
+            tag: e.target.value
+          }));
+    };
 
-        // comment out if Axios POST request works
-        this.setState({
-            postTitle: '',
-            postBody: '',
-            postTag: ''
-        })
-    }
+    const toggleAddImages = () => {
+        setForm(prevState => ({
+            ...prevState,
+            wasAddImagesClicked: !prevState.wasAddImagesClicked,
+            photoUrl: '',
+            photoFilePath: ''
+          }));
+    };
 
-    selectTag(event) {
+    const removePhoto = (e) => {
+        let photos = form.photos.filter(photo => photo !== e.target.value);
+        setForm(prevState => ({
+            ...prevState,
+            photos
+        }));
+    };
 
-        this.setState({
-            postTag: event.target.value
-        }, () => {
-            // console.log('this.state.postTag: ', this.state.postTag);
-        })
-
-    }
-
-    toggleAddImages() {
-        this.setState(prevState => ({
-            wasAddImagesClicked: !prevState.wasAddImagesClicked
-        }))
-    }
-
-    handlePhotoSubmit(event) {
-        event.preventDefault();
-
-        // alert for no photos selected
-        if (this.state.photoUrl.length === 0 && this.state.photoFilePath.length === 0) {
-            alert("Must add photoUrl or upload photo from computer");
-            return;
-
-        // alert for both fields selected
-        } else if (this.state.photoUrl.length !== 0 && this.state.photoFilePath.length !== 0) {
-            alert("Can only choose one upload option at a time");
-            return;
-        
-        // if photoUrl is selected
-        } else if (this.state.photoUrl.length !== 0 && this.state.photoFilePath.length === 0) {
-
-            this.setState({
-                photoArray: [...this.state.photoArray, this.state.photoUrl]
-            }, () => {
-                console.log('photoArray: ', this.state.photoArray);
-            })
-
-        // if photo file path is selected
-        } else if (this.state.photoUrl.length === 0 && this.state.photoFilePath.length !== 0) {
-
-            // invoke readImage?
-            // this.readImage(this.state.photoFilePath);
-
-            this.setState({
-                photoArray: [...this.state.photoArray, this.state.photoFilePath]
-            }, () => {
-                console.log('photoArray: ', this.state.photoArray);
-            })
-
+    const handleFileChange = async (e) => {
+        e.preventDefault();
+        try {
+            let fileList = e.target.files;
+            let storageRef = ref(storage, fileList[0].name);
+            let snapshot = await uploadBytes(storageRef, fileList[0]);
+            let url = await getDownloadURL(snapshot.ref);
+            setForm(prevState => ({
+                ...prevState,
+                photos: [...prevState.photos, url]
+            }));
+        } catch (error) {
+            console.log(error);
         }
-
-        // switches back to main form view
-        this.setState({
-           photoUrl: '',
-           photoFilePath: ''  
-        }, () => {
-            this.toggleAddImages();
-        })
     }
 
-    removePhoto(event) {
-        console.log('deleted image: ', event.target.value);
-
-        this.setState({
-            photoArray: this.state.photoArray.filter((photo) => {
-                    return photo !== event.target.value
-                }
-            )
-        })
+    if (!userId) {
+        return (
+            <Paper style={{paddingBottom: "20px"}}>
+                <Typography variant="h6" align="center">
+                Please sign in to make your first post!
+                </Typography>
+            </Paper>
+        )
     }
 
-    readImage(file) {
-        // Check if the file is an image.
-        if (file.type && !file.type.startsWith('image/')) {
-            console.log('File is not an image.', file.type, file);
-            return;
-        }
-
-        const reader = new FileReader();
-        reader.addEventListener('load', (event) => {
-            img.src = event.target.result;
-        });
-        // reader.readAsDataURL(file);
-        reader.readAsDataURL(file.target.files[0]);
-    }
-
-
-    render() {
-
-        if (!this.state.wasAddImagesClicked) {
-    
-            return (
-                <div>
-                    <h2>Create New Post</h2>
-                    <form onSubmit={this.handleFormSubmit}>
-                        <PostInput 
-                        postTitle={this.state.postTitle}
-                        postBody={this.state.postBody}
-                        handleInputChange={this.handleInputChange} />
-                        <p></p>
-                        <PostTags selectTag={this.selectTag} />
-                        <p></p>
-                        <h4>[ Your Location Goes Here ]</h4>
-                        <p></p>
-                        <button>Submit Post</button>
-                        <p></p>
-                        <button>Delete Post</button>
-                    </form>
-                        <p></p>
-                        <button onClick={this.toggleAddImages}>Add Images</button>
-                        <p></p>
-                        <h4>Thumbnail Preview</h4>
-                        <ThumbnailList 
-                        photos={this.state.photoArray}
-                        removePhoto={this.removePhoto} />
+    return (
+        <div>
+            <h2>Create New Post</h2>
+            <form>
+                <TextField id="title" name="title" label="Title" value={form.title} onChange={handleInputChange} placeholder="Type title here"  />
+                <p></p>
+                <TextField id="body" name="body" label="Body" value={form.body} onChange={handleInputChange} placeholder="Type post here"  />
+                <p></p>
+                <FormControl component="fieldset">
+                    <FormLabel component="legend">Tags</FormLabel>
+                    <RadioGroup>
+                        <FormControlLabel value="Happenings" control={<Radio />} label="Happenings" onClick={selectTag}  />
+                        <FormControlLabel value="Swaps" control={<Radio />} label="Swaps" onClick={selectTag}  />
+                        <FormControlLabel value="Safety" control={<Radio />} label="Safety" onClick={selectTag}  />
+                        <FormControlLabel value="Favors" control={<Radio />} label="Favors" onClick={selectTag}  />
+                        <FormControlLabel value="Chit Chat" control={<Radio />} label="Chit Chat" onClick={selectTag}  />
+                    </RadioGroup>
+                </FormControl>
+                <p></p>
+                <h4>[ Your Location Goes Here ]</h4>
+                <p></p>
+                <div className="photo-upload">
+                    <h3>Upload Photo</h3>
+                    <input type="file" name="filepath" value={form.filepath} onChange={handleFileChange}/>
                 </div>
-            )
-
-        } else {
-
-            return (
-
-                <div>
-                    <AddPhotos 
-                    toggleAddImages={this. toggleAddImages}
-                    handleInputChange={this.handleInputChange}
-                    photoUrl={this.state.photoUrl}
-                    photoFilePath={this.state.photoFilePath}
-                    handleInputChange={this.handleInputChange}
-                    handlePhotoSubmit={this.handlePhotoSubmit}
-                    readImage={this.readImage} />
-                </div>
-
-            )
-
-        }
-
-    }
-
+                <h4>Thumbnail Preview</h4>
+                <ThumbnailList photos={form.photos} removePhoto={removePhoto} />
+                <p></p>
+                <Button type="submit" onClick={handleFormSubmit} color="primary">Submit Post</Button>
+                <p></p>
+                <Button color="secondary">Delete Post</Button>
+            </form>
+        </div>
+    )
 }
 
 export default PostForm;
-
-
-// String
-// Location
-// Created
-  // Type
-  // Default
-// Updated
-  // Type
-  // Default
-// Username
-// UserId
-// Tags
-
-
-{/* <h4>Post Title</h4>
-<input name="postTitle" value={this.state.postTitle} onChange={this.handleInputChange} />
-<h4>Post Body</h4>
-<input name="postBody" value={this.state.postBody} onChange={this.handleInputChange} />
-<h4>Choose a tag</h4> */}

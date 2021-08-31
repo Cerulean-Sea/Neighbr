@@ -1,0 +1,21 @@
+.MuiList-padding {
+  background-color: #F4A261;
+}
+
+@media all and (max-width: 730px) {
+  #landing-page-about-txt {
+    width: 70vw;
+  }
+  #landing-page-about-header {
+    padding-left: 0;
+  }
+}
+
+@media all and (max-height: 560px) {
+  #landing-page-h1 {
+    font-size: 10vh;
+  }
+  #landing-page-h2 {
+    font-size: 6vh;
+  }
+}
