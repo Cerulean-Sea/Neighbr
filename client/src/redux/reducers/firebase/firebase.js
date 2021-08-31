@@ -3,6 +3,9 @@ const firebaseReducer = (state = null, action) => {
     case 'AUTH':
       localStorage.setItem('profile', JSON.stringify({...action?.payload}));
       return action.payload;
+    case 'UPDATE_COMMUNITY':
+      localStorage.setItem('profile', {...state, community: action.payload});
+      return {...state, community: action.payload};
     case 'LOGOUT':
       localStorage.clear();
       return null;
