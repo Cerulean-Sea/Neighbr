@@ -14,7 +14,7 @@ const classes = useStyles();
 
 
   return (
-    <div>
+    <div className={classes.container}>
       <CssBaseline />
       <Grid
         className={classes.topbar}
@@ -23,10 +23,14 @@ const classes = useStyles();
         justifyContent="space-between"
         alignItems="center"
       >
-        <Avatar className={classes.avatar} src='./assets/logo.png' />
-        <Link to="/login" style={{ textDecoration: 'none' }}>
-          <Button className={classes.btn} variant="contained" color="primary">Log in / Sign up</Button>
-        </Link>
+        <Grid item>
+          <Avatar className={classes.avatar} src='./assets/logo.png' />
+        </Grid>
+        <Grid item>
+          <Link to="/login" style={{ textDecoration: 'none' }}>
+            <Button className={classes.btn} variant="contained" color="primary">Log in / Sign up</Button>
+          </Link>
+        </Grid>
       </Grid>
       <div className={classes.center}>
         <h1 className={classes.header}>Neighbr™</h1>
@@ -45,8 +49,8 @@ const classes = useStyles();
           alignItems="center"
           style={{paddingTop: '20px', paddingBottom: '20px'}}
         >
-          <h2 className={classes.bottomHeader}>What is Neighbr?</h2>
-          <div className={classes.aboutText}>
+          <h2 className={classes.bottomHeader} id="landing-page-about-header">What is Neighbr?</h2>
+          <div className={classes.aboutText} id="landing-page-about-txt">
             <p>Neighbr is a community forum driven by the community itself. Have you ever found yourself in a situation where you are almost done mixing the batter for your world-famous Chocolate-Glazed Boston Cream Whoopie Pies but—<b>OH NO!</b>—you're missing that last cup of flour? Or your pet chinchilla "Randy" has run away in the middle of the night and you need help finding him? Or even simply wanted to get rid of your old rubber band ball you've had in your desk drawer since 1957?</p>
             <p><em>Neighbr seeks to help solve these problems.</em> With Neighbr, you can connect with your fellow community members to post alerts on happenings around town, sell used items, ask for help when needed, or simply to chat with those closest around you in an open, welcoming forum.</p>
           </div>

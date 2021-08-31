@@ -3,12 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   header: {
-    fontSize: '7rem',
+    fontSize: 'min(10vw, 120px)',
     fontWeight: 'bold',
     marginTop: '0'
   },
   subheader: {
-    fontSize: '2rem',
+    fontSize: 'min(4vw, 34px)',
     fontWeight: 'bold'
   },
   center: {
@@ -24,7 +24,9 @@ const useStyles = makeStyles({
   },
   topbar: {
     height: '4vh',
-    backgroundColor: '#2A9D8F'
+    backgroundColor: '#2A9D8F',
+    height: 'min-content',
+    padding: '.5em'
   },
   avatar: {
     backgroundColor: '#264653',
@@ -58,12 +60,15 @@ const useStyles = makeStyles({
     fontWeight: 'bold'
   },
   bottomHeader: {
-    fontSize: '3rem',
+    fontSize: 'min(3rem, 10vw)',
     paddingLeft: '10%'
   },
   aboutText: {
     width: '35%',
     fontSize: '1.2em'
+  },
+  container: {
+    width: 'fit-content'
   }
 });
 
