@@ -18,6 +18,9 @@ import Profile from '../components/AccountDropdown/Profile';
 import Chat from '../components/Chat/Chat';
 import Settings from '../components/AccountDropdown/Settings';
 
+import mainTheme from './ThemeApp';
+import { ThemeProvider } from '@material-ui/core';
+
 const App = () => {
 
   const dispatch = useDispatch();
@@ -41,6 +44,7 @@ const App = () => {
 
 
   return (
+      <ThemeProvider theme={mainTheme}>
     <Router>
       <div className="app">
         <Switch>
@@ -65,6 +69,7 @@ const App = () => {
         </Switch>
       </div>
     </Router>
+    </ThemeProvider>
   )
 }
 
