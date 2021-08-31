@@ -5,6 +5,9 @@ import PostInput from './PostInput.jsx';
 import AddPhotos from './AddPhotos.jsx';
 import ThumbnailList from './ThumbnailList.jsx';
 
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+
 class PostForm extends React.Component {
 
     constructor(props) {
@@ -105,7 +108,7 @@ class PostForm extends React.Component {
 
         // alert for no photos selected
         if (this.state.photoUrl.length === 0 && this.state.photoFilePath.length === 0) {
-            alert("Must add photoUrl or upload photo from computer");
+            alert("Must select file from computer");
             return;
 
         // alert for both fields selected
@@ -173,71 +176,61 @@ class PostForm extends React.Component {
             photoFilePath: reader.readAsDataURL(file.files[0])
         })
         // reader.readAsDataURL(file);
-
         // URL.createObjectURL(file.files[0]);
-        // test
     }
 
 
     render() {
-
-        // if (!this.state.wasAddImagesClicked) {
     
-            return (
-                <div>
-                    <h2>Create New Post</h2>
-                    <form onSubmit={this.handleFormSubmit}>
-                        <PostInput 
-                        postTitle={this.state.postTitle}
-                        postBody={this.state.postBody}
-                        handleInputChange={this.handleInputChange} />
-                        <p></p>
-                        <PostTags selectTag={this.selectTag} />
-                        <p></p>
-                        <h4>[ Your Location Goes Here ]</h4>
-                        <p></p>
-                        <button>Submit Post</button>
-                        <p></p>
-                        <button>Delete Post</button>
-                    </form>
-                        {/* <p></p> */}
-                        {/* <button onClick={this.toggleAddImages}>Add Images</button> */}
-                        <p></p>
-                        <h4>Thumbnail Preview</h4>
-                        <div>
-                            <AddPhotos 
-                            toggleAddImages={this. toggleAddImages}
-                            handleInputChange={this.handleInputChange}
-                            photoUrl={this.state.photoUrl}
-                            photoFilePath={this.state.photoFilePath}
-                            handleInputChange={this.handleInputChange}
-                            handlePhotoSubmit={this.handlePhotoSubmit}
-                            readImage={this.readImage} />
-                        </div>
-                        <ThumbnailList 
-                        photos={this.state.photoArray}
-                        removePhoto={this.removePhoto} />
-                </div>
-            )
-
-        // } else {
-
-        //     return (
-
-        //         <div>
-        //             <AddPhotos 
-        //             toggleAddImages={this. toggleAddImages}
-        //             handleInputChange={this.handleInputChange}
-        //             photoUrl={this.state.photoUrl}
-        //             photoFilePath={this.state.photoFilePath}
-        //             handleInputChange={this.handleInputChange}
-        //             handlePhotoSubmit={this.handlePhotoSubmit}
-        //             readImage={this.readImage} />
-        //         </div>
-
-        //     )
-
-        // }
+        return (
+            <div>
+                <h2>Create New Post</h2>
+                <form>
+                    <PostInput 
+                    postTitle={this.state.postTitle}
+                    postBody={this.state.postBody}
+                    handleInputChange={this.handleInputChange} />
+                    <p></p>
+                    <PostTags selectTag={this.selectTag} />
+                    <p></p>
+                    <h4>[ Your Location Goes Here ]</h4>
+                    <p></p>
+                    <div>
+                        <AddPhotos 
+                        toggleAddImages={this.toggleAddImages}
+                        handleInputChange={this.handleInputChange}
+                        photoUrl={this.state.photoUrl}
+                        photoFilePath={this.state.photoFilePath}
+                        handleInputChange={this.handleInputChange}
+                        handlePhotoSubmit={this.handlePhotoSubmit}
+                        readImage={this.readImage} />
+                    </div>
+                    <h4>Thumbnail Preview</h4>
+                    <ThumbnailList 
+                    photos={this.state.photoArray}
+                    removePhoto={this.removePhoto} />
+                    <p></p>
+                    <Button type="submit" onClick={this.handleFormSubmit}>Submit Post</Button>
+                    <p></p>
+                    <Button>Delete Post</Button>
+                </form>
+                    {/* <p></p>
+                    <h4>Thumbnail Preview</h4>
+                    <div>
+                        <AddPhotos 
+                        toggleAddImages={this.toggleAddImages}
+                        handleInputChange={this.handleInputChange}
+                        photoUrl={this.state.photoUrl}
+                        photoFilePath={this.state.photoFilePath}
+                        handleInputChange={this.handleInputChange}
+                        handlePhotoSubmit={this.handlePhotoSubmit}
+                        readImage={this.readImage} />
+                    </div>
+                    <ThumbnailList 
+                    photos={this.state.photoArray}
+                    removePhoto={this.removePhoto} /> */}
+            </div>
+        )
 
     }
 
