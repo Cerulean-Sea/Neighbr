@@ -22,7 +22,7 @@ const PostForm = () => {
     const firebaseApp = initializeApp(firebaseConfig);
     const storage = getStorage(firebaseApp);
 
-    const AUTH = useSelector(state => state.firebase);
+    const AUTH = JSON.parse(localStorage.getItem('profile'));
     const userId = AUTH?.user.uid;
     const displayName = AUTH?.user.displayName;
 
