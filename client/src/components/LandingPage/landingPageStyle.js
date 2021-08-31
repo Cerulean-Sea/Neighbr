@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    backgroundImage: 'url("./assets/landing-page-4.jpg")',
+    backgroundImage: 'url("./assets/landing-page.jpg")',
     backgroundSize: 'cover',
     height: '55vh',
     color: 'white',
