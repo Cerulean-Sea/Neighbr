@@ -11,6 +11,3 @@ var PostInput = (props) => (
 )
 
 export default PostInput;
-
-
-{/* <input name="postBody" value={props.postBody} onChange={props.handleInputChange} placeholder="Type post here" />        */}

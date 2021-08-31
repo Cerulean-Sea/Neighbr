@@ -4,16 +4,15 @@ var PostTags = (props) => (
     <div>
         <h4>Tags</h4>
         <input type="radio" name="tags" value="Happenings" onClick={props.selectTag} />
-        <label>Happenings</label>
+            <label>Happenings</label>
         <input type="radio" name="tags" value="Swaps" onClick={props.selectTag} />
-        <label>Swaps</label>
+            <label>Swaps</label>
         <input type="radio" name="tags" value="Safety" onClick={props.selectTag} />
-        <label>Safety</label>
+            <label>Safety</label>
         <input type="radio" name="tags" value="Favors" onClick={props.selectTag} />
-        <label>Favors</label>
+            <label>Favors</label>
         <input type="radio" name="tags" value="Chit Chat" onClick={props.selectTag} />
-        <label>Chit Chat</label>
-
+            <label>Chit Chat</label>
     </div>
 )
 
