@@ -39,7 +39,7 @@ const AUTH = useSelector(state => state.firebase);
             {!AUTH && <Chat />}
           </Route>
         </Switch>
-        {/* <PostForm /> */}
+        <PostForm />
       </div>
     </Router>
   )
