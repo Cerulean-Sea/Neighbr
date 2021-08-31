@@ -3,7 +3,10 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect,
+  useHistory,
+  useLocation
 } from "react-router-dom";
 import renderMap from '../helper-functions/renderMap';
 import PostForm from './PostForm/PostForm.jsx';
@@ -24,11 +27,11 @@ const AUTH = useSelector(state => state.firebase);
       <div className="app">
         <Switch>
           <Route exact path="/">
-            <LandingPage />
+            {AUTH ? <div> This is the homepage component </div> : <LandingPage />}
           </Route>
           <Route path="/login">
-            {!AUTH && <Login />}
-            {AUTH && <AccountDropdown />}
+           <Login />
+
           </Route>
           <Route exact path="/profile">
             {AUTH && <Profile />}
