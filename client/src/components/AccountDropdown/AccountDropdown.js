@@ -29,8 +29,6 @@ const classes = useStyles();
 const [anchorEl, setAnchorEl] = React.useState(null);
 const open = Boolean(anchorEl);
 
-const userId = '612ac35bc4ee0611f70b7aa3';
-
 const handleMenu = (event) => {
   setAnchorEl(event.currentTarget);
 };

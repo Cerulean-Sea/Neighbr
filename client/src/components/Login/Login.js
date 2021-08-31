@@ -11,7 +11,6 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import useStyles from './styleLogin';
 import key from '../Chat/config';
-import chat from '../Chat/Chat';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -42,7 +41,7 @@ export default function Login() {
       "username": email,
       "first_name": firstName,
       "last_name": lastName,
-      "secret": password,
+      "secret": 'password',
   }
     const config = {
       method: 'post',
@@ -67,7 +66,6 @@ export default function Login() {
       }
     } else {
       dispatch(emailSignIn(email, password, history));
-      chat(email, password);
     }
   };
 
