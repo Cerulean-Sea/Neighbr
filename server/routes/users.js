@@ -7,5 +7,7 @@ router
   .post('/signin', User.signin)
   .post('/signin/google', User.googleSignIn)
   .post('/signup', User.signup)
+  .get('/community/:userId', User.getCommunityByUserId)
+  .patch('/community/:userId', User.updateCommunityByUserId)
 
 module.exports = router;

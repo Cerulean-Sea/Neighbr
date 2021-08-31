@@ -1,4 +1,4 @@
-import { googleMapsApiKey } from '../../../config.js';
+import { googleMapsApiKey } from './config.js';
 import React from 'react';
 
 // HOW TO USE:

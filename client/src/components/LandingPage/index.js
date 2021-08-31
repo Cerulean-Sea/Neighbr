@@ -33,8 +33,8 @@ const classes = useStyles();
         </Grid>
       </Grid>
       <div className={classes.center}>
-        <h1 className={classes.header}>Neighbr™</h1>
-        <h2 className={classes.subheader}>A Platform For Community, Driven By Community</h2>
+        <h1 className={classes.header} id="landing-page-h1">Neighbr™</h1>
+        <h2 className={classes.subheader} id="landing-page-h2">A Platform For Community, Driven By Community</h2>
       </div>
       <Grid
         container
