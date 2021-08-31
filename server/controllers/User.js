@@ -32,8 +32,22 @@ const googleSignIn = async (req, res) => {
   }
 };
 
+const community = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const user = await User.find({userId});
+    if (!user.length) {
+      return res.status(404).send({message: 'No user found.'});
+    }
+    return res.send(user[0]?.community);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
 module.exports = {
   signin,
   signup,
-  googleSignIn
+  googleSignIn,
+  community
 };

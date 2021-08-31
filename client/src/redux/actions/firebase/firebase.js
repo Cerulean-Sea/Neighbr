@@ -12,7 +12,8 @@ export const storage = getStorage(app);
 export const emailSignIn = (email, password, history) => async (dispatch) => {
   try {
     const payload = await signInWithEmailAndPassword(auth, email, password);
-    dispatch({type: 'AUTH', payload});
+    const { data } = await api.community(payload.user.uid);
+    dispatch({type: 'AUTH', payload: {...payload, community: data}});
     console.log('Logged in!');
     history.push('/');
   } catch (error) {
@@ -25,7 +26,7 @@ export const emailSignUp = (name, email, password, zip, history) => async (dispa
     const payload = await createUserWithEmailAndPassword(auth, email, password);
     const setDisplayName = await updateProfile(auth.currentUser, {displayName: name});
     const verifictionEmail = await sendEmailVerification(auth.currentUser);
-    dispatch({type: 'AUTH', payload});
+    dispatch({type: 'AUTH', payload: {...payload, community: zip}});
     const { data } = await api.signUp({name, email, userId: payload.user.uid, community: zip});
     history.push('/');
   } catch (error) {
@@ -37,9 +38,10 @@ export const googleSignIn = (history) => async (dispatch) => {
   try {
     const provider = new GoogleAuthProvider();
     const payload = await signInWithPopup(auth, provider);
-    dispatch({type: 'AUTH', payload});
+    const google = await api.googleSignIn(payload.user);
+    const { data } = await api.community(payload.user.uid);
+    dispatch({type: 'AUTH', payload: {...payload, community: data}});
     console.log('Logged in!');
-    const { data } = await api.googleSignIn(payload.user);
     history.push('/');
   } catch (error) {
     console.log(error);
