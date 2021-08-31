@@ -22,7 +22,7 @@ const AUTH = useSelector(state => state.firebase);
   return (
     <Router>
       <div className="app">
-        {/* <Switch>
+        <Switch>
           <Route exact path="/">
             <LandingPage />
           </Route>
@@ -38,7 +38,7 @@ const AUTH = useSelector(state => state.firebase);
           <Route exact path="/chat">
             {!AUTH && <Chat />}
           </Route>
-        </Switch> */}
+        </Switch>
         <PostForm />
       </div>
     </Router>

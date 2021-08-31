@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ThumbnailList from './ThumbnailList.jsx';
+import { createPost } from '../../redux/actions/Posts';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -13,6 +14,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 const PostForm = () => {
 
     const AUTH = useSelector(state => state.firebase);
+    const userId = AUTH?.user.uid;
+    const displayName = AUTH?.user.displayName;
 
     const initialState = {
         title: '',
@@ -49,7 +52,14 @@ const PostForm = () => {
             return;
         }
 
-        // dispatch(postPost({title, body, tags: [tag], photos: photoArray}));
+        dispatch(createPost({
+            userId,
+            username: displayName,
+            title,
+            body,
+            tags: [tag],
+            photos: photoArray
+        }));
     };
 
     const selectTag = (e) => {
@@ -124,18 +134,15 @@ const PostForm = () => {
                 <p></p>
                 <h4>[ Your Location Goes Here ]</h4>
                 <p></p>
-                <div>
+                <div className="photo-upload">
                     <h3>From Your Computer</h3>
-                    <p></p>
                     <input type="file" name="photoFilePath" value={form.photoFilePath} onChange={handleInputChange} placeholder="Filepath goes here" />
                     <p></p>
                     <Button type="submit" onClick={handlePhotoSubmit}>Add Photo</Button>
                     <p></p>
                 </div>
                 <h4>Thumbnail Preview</h4>
-                <ThumbnailList
-                photos={form.photoArray}
-                removePhoto={removePhoto} />
+                <ThumbnailList photos={form.photoArray} removePhoto={removePhoto} />
                 <p></p>
                 <Button type="submit" onClick={handleFormSubmit} color="primary">Submit Post</Button>
                 <p></p>
