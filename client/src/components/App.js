@@ -20,32 +20,22 @@ import Settings from '../components/AccountDropdown/Settings';
 
 const App = () => {
 
+  const AUTH = useSelector(state => state.firebase);
   const dispatch = useDispatch();
-  const history = useHistory();
-
-  const [AUTH, setAUTH] = useState(JSON.parse(localStorage.getItem('profile')));
-
-  const logout = () => {
-    dispatch({type: 'LOGOUT'});
-    history.push('/');
-    setAUTH(null);
-  };
 
   useEffect(() => {
-    const expirationTime = AUTH?.user?.stsTokenManager?.expirationTime;
-    if (expirationTime < new Date().getTime()) {
-      logout();
+    if (localStorage.getItem('profile') && !AUTH) {
+      dispatch({type: 'AUTH', payload: JSON.parse(localStorage.getItem('profile'))});
     }
-    setAUTH(JSON.parse(localStorage.getItem('profile')));
-  }, []);
-
+  },[]);
 
   return (
     <Router>
       <div className="app">
+        <AccountDropdown />
         <Switch>
           <Route exact path="/">
-            {AUTH ? <div> <AccountDropdown /> This is the homepage component  </div> : <LandingPage />}
+            {AUTH ? <div>  This is the homepage component  </div> : <LandingPage />}
           </Route>
           <Route path="/login">
            <Login />
