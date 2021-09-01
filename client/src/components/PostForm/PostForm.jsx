@@ -22,9 +22,10 @@ const PostForm = () => {
     const firebaseApp = initializeApp(firebaseConfig);
     const storage = getStorage(firebaseApp);
 
-    const AUTH = JSON.parse(localStorage.getItem('profile'));
+    const AUTH = useSelector((state) => state.firebase);
     const userId = AUTH?.user.uid;
     const displayName = AUTH?.user.displayName;
+    const community = AUTH?.community;
 
     const initialState = {
         title: '',
@@ -66,7 +67,8 @@ const PostForm = () => {
             title,
             body,
             tags: [tag],
-            photos
+            photos,
+            community
         }));
 
         setForm(initialState);
