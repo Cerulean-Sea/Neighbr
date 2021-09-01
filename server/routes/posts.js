@@ -5,7 +5,7 @@ const auth = require('../middleware/auth');
 
 router
   .get('/', Post.getPosts)
-  .get('/:postId', Post.getPostById)
+  .get('/id/:postId', Post.getPostById)
   .get('/users/:userId', Post.getPostsByUserId)
   .get('/community/:community', Post.getPostsByCommunity)
   .post('/create', auth, Post.postPost)
