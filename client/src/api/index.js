@@ -10,7 +10,7 @@ API.interceptors.request.use((req) => {
 });
 
 // Posts
-export const getPosts = () => API.get(`/posts`);
+export const getPosts = (params) => API.get(`/posts`, { params });
 export const getPostById = (postId) => API.get(`/posts/${postId}`);
 export const getPostsByUserId = (userId) => API.get(`/posts/users/${userId}`);
 export const getPostsByCommunity = (community) => API.get(`/posts/community/${community}`);
