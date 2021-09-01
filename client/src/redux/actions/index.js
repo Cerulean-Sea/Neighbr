@@ -1,8 +1,9 @@
-import { posts, getPostsByUserId } from './Posts';
+import { posts, getPostsByUserId, getPostWithTagFilterByUserId } from './Posts';
 
 const actions = {
   posts,
-  getPostsByUserId
+  getPostsByUserId,
+  getPostWithTagFilterByUserId
 }
 
 export default actions;

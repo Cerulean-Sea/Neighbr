@@ -109,9 +109,10 @@ export default ({ post }) => {
           <Avatar
             className={classes.avatar}
             alt="Neighbor"
-            src="/neighbor.png"
+            src={post?.userInfo?.picture || 'https://firebasestorage.googleapis.com/v0/b/neighbr-55334.appspot.com/o/no-photo.png?alt=media&token=b0bd075e-2bd2-48c8-9cff-c448930ab8ba'}
           />
           <Grid>
+            <Typography variant="body1">{post?.userInfo?.name}</Typography>
             <Typography className={classes.typography} variant="h6">
               {post.title}
             </Typography>

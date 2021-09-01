@@ -14,6 +14,8 @@ export const getPosts = () => API.get(`/posts`);
 export const getPostById = (postId) => API.get(`/posts/${postId}`);
 export const getPostsByUserId = (userId) => API.get(`/posts/users/${userId}`);
 export const getPostsByCommunity = (community) => API.get(`/posts/community/${community}`);
+export const getPostWithTagFilter = (filters) => API.get(`/posts/filter/${filters}`);
+export const getPostWithTagFilterByUserId = (userId, filters) => API.get(`/posts/users/${userId}/filter/${filters}`);
 export const postPost = (post) => API.post(`/posts/create`, post);
 export const updatePost = (postId, post) => API.patch(`/posts/${postId}`, post);
 export const deletePost = (postId) => API.delete(`/posts/${postId}`);
@@ -31,4 +33,4 @@ export const deleteComment = (commentId) => API.delete(`/comments/${commentId}`)
 export const signUp = (formData) => API.post(`/users/signup`, formData);
 export const googleSignIn = (data) => API.post(`/users/signin/google`, data);
 export const getCommunity = (userId) => API.get(`/users/community/${userId}`);
-export const updateCommunity = (userId, community) => API.patch(`/users/community/${userId}`);
+export const updateCommunity = (userId, community) => API.patch(`/users/community/${userId}`, {community});
