@@ -30,6 +30,16 @@ const getPostsByUserId = async (req, res) => {
   }
 };
 
+const getPostsByCommunity = async (req, res) => {
+  const { community } = req.params;
+  try {
+    const posts = await Post.find({community}).populate(['commentId']);
+    res.status(200).send(posts);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
 const postPost = async (req, res) => {
   try {
     const post = await Post.create(req.body);
@@ -66,6 +76,7 @@ module.exports = {
   getPosts,
   getPostById,
   getPostsByUserId,
+  getPostsByCommunity,
   postPost,
   updatePost,
   deletePost

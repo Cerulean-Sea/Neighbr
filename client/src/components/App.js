@@ -18,6 +18,9 @@ import Profile from '../components/AccountDropdown/Profile';
 import Chat from '../components/Chat/Chat';
 import Settings from '../components/AccountDropdown/Settings';
 
+import mainTheme from './ThemeApp';
+import { ThemeProvider } from '@material-ui/core';
+
 const App = () => {
 
   const AUTH = useSelector(state => state.firebase);
@@ -30,6 +33,7 @@ const App = () => {
   },[]);
 
   return (
+      <ThemeProvider theme={mainTheme}>
     <Router>
       <div className="app">
         <AccountDropdown />
@@ -52,6 +56,7 @@ const App = () => {
         </Switch>
       </div>
     </Router>
+    </ThemeProvider>
   )
 }
 
