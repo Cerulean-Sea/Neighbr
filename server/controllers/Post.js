@@ -75,6 +75,7 @@ const deletePost = async (req, res) => {
   }
 }
 
+
 const aggregates = (page, limit, match = {}) => {
   return [
     {$match: match},
@@ -111,6 +112,18 @@ const aggregates = (page, limit, match = {}) => {
       userInfo: '$userInfo',
     }}
   ]
+
+const getPostWithTagFilter = async (req, res) => {
+  const { page = 1, limit = 10 } = req.query;
+  const { filters } = req.params;
+  let filterArray = filters.split(',');
+  const filterParams = filterArray.map(tag => ({tags: tag}));
+  try {
+    const posts = await Post.find({ $or: filterParams }).limit(limit * 1).skip((page - 1) * limit).populate(['commentId']).sort({ created: 'desc' });
+    res.status(200).send(posts);
+  } catch (error) {
+    res.status(400).send(error);
+  }
 }
 
 module.exports = {
@@ -120,5 +133,6 @@ module.exports = {
   getPostsByCommunity,
   postPost,
   updatePost,
-  deletePost
+  deletePost,
+  getPostWithTagFilter
 };

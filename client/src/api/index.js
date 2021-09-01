@@ -14,6 +14,7 @@ export const getPosts = () => API.get(`/posts`);
 export const getPostById = (postId) => API.get(`/posts/${postId}`);
 export const getPostsByUserId = (userId) => API.get(`/posts/users/${userId}`);
 export const getPostsByCommunity = (community) => API.get(`/posts/community/${community}`);
+export const getPostWithTagFilter = (filters) => API.get(`/posts/filter/${filters}`);
 export const postPost = (post) => API.post(`/posts/create`, post);
 export const updatePost = (postId, post) => API.patch(`/posts/${postId}`, post);
 export const deletePost = (postId) => API.delete(`/posts/${postId}`);
