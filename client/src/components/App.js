@@ -27,12 +27,6 @@ const App = () => {
   const AUTH = useSelector(state => state.firebase);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (localStorage.getItem('profile') && !AUTH) {
-      dispatch({type: 'AUTH', payload: JSON.parse(localStorage.getItem('profile'))});
-    }
-  },[]);
-
   return (
       <ThemeProvider theme={mainTheme}>
     <Router>
@@ -41,8 +35,8 @@ const App = () => {
         <Switch>
           <Route exact path="/">
             {AUTH ? <div>
-              <PostList />
               <PostForm />
+              <PostList />
             </div> : <LandingPage />}
           </Route>
           <Route path="/login">

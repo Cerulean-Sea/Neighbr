@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import {MenuItem, makeStyles, Menu, AppBar, Toolbar, Avatar, Box, Button } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -10,6 +10,7 @@ const AccountDropdown = () => {
   const AUTH = useSelector(state => state.firebase);
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
 
   const useStyles = makeStyles(theme => ({
     accountButton: {
@@ -49,6 +50,18 @@ const AccountDropdown = () => {
     dispatch({type: 'LOGOUT'});
     history.push('/');
   };
+
+  useEffect(() => {
+    if (AUTH) {
+      const expirationTime = AUTH.user.stsTokenManager.expirationTime;
+      if (expirationTime < new Date().getTime()) {
+        logout();
+      }
+    }
+    if (localStorage.getItem('profile')) {
+      dispatch({type: 'AUTH', payload: JSON.parse(localStorage.getItem('profile'))});
+    }
+  }, [location]);
 
   return (
     <div>
