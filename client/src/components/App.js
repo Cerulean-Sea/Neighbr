@@ -40,7 +40,7 @@ const App = () => {
         <AccountDropdown />
         <Switch>
           <Route exact path="/">
-            {AUTH ? <div>  This is the homepage component  </div> : <LandingPage />}
+            {AUTH ? <Homepage /> : <LandingPage />}
           </Route>
           <Route path="/login">
            <Login />
