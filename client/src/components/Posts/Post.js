@@ -112,6 +112,7 @@ export default ({ post }) => {
             src="/neighbor.png"
           />
           <Grid>
+            <Typography variant="body1">{post.username}</Typography>
             <Typography className={classes.typography} variant="h6">
               {post.title}
             </Typography>
