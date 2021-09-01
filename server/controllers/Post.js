@@ -76,7 +76,7 @@ const deletePost = async (req, res) => {
 }
 
 
-const aggregates = (page, limit, match = {}) => {
+const aggregates = (page, limit, match = {}, or = []) => {
   return [
     {$match: match},
     {$lookup: {
@@ -85,19 +85,13 @@ const aggregates = (page, limit, match = {}) => {
       foreignField: '_id',
       as: 'comments'
     }},
-    {
-      $limit: (limit * 1)
-    },
-    {
-      $skip: (page - 1) * limit
-    },
     {$lookup: {
       from: 'users',
       localField: 'userId',
       foreignField: 'userId',
       as: 'userInfo'
     }},
-    {$unwind: '$userInfo'},
+    {$unwind: {path: '$userInfo', preserveNullAndEmptyArrays: true}},
     {$project: {
       _id: '$_id',
       title: '$title',
@@ -110,7 +104,14 @@ const aggregates = (page, limit, match = {}) => {
       community: '$community',
       commentId: '$comments',
       userInfo: '$userInfo',
-    }}
+    }},
+    {$sort: { created: -1 }},
+    {
+      $limit: (limit * 1)
+    },
+    {
+      $skip: (page - 1) * limit
+    }
   ]
 }
 
@@ -120,7 +121,7 @@ const getPostWithTagFilter = async (req, res) => {
   let filterArray = filters.split(',');
   const filterParams = filterArray.map(tag => ({tags: tag}));
   try {
-    const posts = await Post.find({ $or: filterParams }).limit(limit * 1).skip((page - 1) * limit).populate(['commentId']).sort({ created: 'desc' });
+    const posts = await Post.aggregate(aggregates(page, limit, {$or: filterParams}));
     res.status(200).send(posts);
   } catch (error) {
     res.status(400).send(error);
