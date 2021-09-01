@@ -143,15 +143,14 @@ const PostForm = () => {
                     </RadioGroup>
                 </FormControl>
                 <p></p>
-                <h4>[ Your Location Goes Here ]</h4>
-                <p></p>
                 <div className="photo-upload">
                     <h3 className="photo-upload-h3">Upload Photo</h3>
                     <input type="file" name="filepath" value={form.filepath} onChange={handleFileChange}/>
                 </div>
-                <h4 className="thumbnail-preview">Thumbnail Preview</h4>
+                {/* <h4 className="thumbnail-preview">Thumbnail Preview</h4> */}
                 <ThumbnailList photos={form.photos} removePhoto={removePhoto} />
                 <p></p>
+                <h4>[ Your Location Goes Here ]</h4>
                 <Button type="submit" onClick={handleFormSubmit} color="primary">Submit Post</Button>
                 <p></p>
                 <Button color="secondary">Delete Post</Button>

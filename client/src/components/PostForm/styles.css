@@ -17,9 +17,17 @@
     /* height: 100px; */
 }
 
+.tagList {
+    display: inline-block;
+}
+
+.tagItem {
+    font-size: 14px;
+}
+
 .photo-upload-h3 {
     font-family: Verdana, sans-serif;
-    font-weight: normal;
+    font-weight: 100;
     padding: 10px;    
 }
 
