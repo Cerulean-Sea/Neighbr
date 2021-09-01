@@ -60,8 +60,6 @@ const AccountDropdown = () => {
     }
   }, [location]);
 
-const AUTH = JSON.parse(localStorage.getItem('profile'))
-
   return (
     <div>
     <AppBar position="static"
