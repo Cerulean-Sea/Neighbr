@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import PostList from '../Posts/PostList';
 import useStyles from './homePageStyles';
 import {
@@ -14,11 +15,15 @@ import {
 } from '@material-ui/core';
 import PostForm from '../PostForm/PostForm.jsx';
 import { getPostWithTagFilter, getPosts } from '../../api';
+import actions from '../../redux/actions/index';
 
 const Homepage = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
+  const AUTH = useSelector(state => state.firebase);
+  const location = useLocation();
+  const userId = AUTH?.user?.uid;
   const [showPost, setShowPost] = useState(false);
   const [state, setState] = React.useState({
     Happenings: false,
@@ -30,10 +35,6 @@ const Homepage = (props) => {
   const tags = ["Happenings", "Swaps", "Safety", "Favors", "Chit Chat"]
 
   const handleChange = async (event) => {
-    // event.target.checked = !event.target.checked;
-    // let tempState = state;
-    // tempState[event.target.name] = !state[event.target.name];
-    // setState(tempState);
 
     setState({ ...state, [event.target.name]: event.target.checked})
   };
@@ -46,12 +47,20 @@ const Homepage = (props) => {
       }
     }
     let newPosts;
-    if (filters.length) {
-      newPosts = await getPostWithTagFilter(filters);
-    } else {
-      newPosts = await getPosts();
+    if (location.pathname === '/') {
+      if (filters.length) {
+        newPosts = await getPostWithTagFilter(filters);
+      } else {
+        newPosts = await getPosts();
+      }
+      dispatch({ type: 'SET_POSTS', payload: newPosts.data });
+    } else if (location.pathname === '/profile') {
+      if (filters.length) {
+        dispatch(actions.getPostWithTagFilterByUserId(userId, filters));
+      } else {
+        dispatch(actions.getPostsByUserId(userId));
+      }
     }
-    dispatch({ type: 'SET_POSTS', payload: newPosts.data });
   }, [state]);
 
   if (showPost) {

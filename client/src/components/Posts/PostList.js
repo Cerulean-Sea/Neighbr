@@ -9,19 +9,7 @@ import Post from './Post';
 
 
 export default (props) => {
-  const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
-  const location = useLocation();
-  const AUTH = useSelector(state => state.firebase);
-  const userId = AUTH?.user?.uid;
-
-  useEffect(() => {
-    if (location.pathname === '/') {
-      actions.posts(dispatch);
-    } else if (location.pathname === '/profile') {
-      dispatch(actions.getPostsByUserId(userId));
-    }
-  }, []);
 
   return (
     <>

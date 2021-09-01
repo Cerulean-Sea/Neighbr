@@ -6,6 +6,7 @@ const auth = require('../middleware/auth');
 router
   .get('/', Post.getPosts)
   .get('/filter/:filters', Post.getPostWithTagFilter)
+  .get('/users/:userId/filter/:filters', Post.getPostWithTagFilterByUserId)
   .get('/id/:postId', Post.getPostById)
   .get('/users/:userId', Post.getPostsByUserId)
   .get('/community/:community', Post.getPostsByCommunity)
