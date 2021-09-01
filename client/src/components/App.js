@@ -41,7 +41,6 @@ const App = () => {
         <Switch>
           <Route exact path="/">
             {AUTH ? <div>
-              <AccountDropdown />
               <PostList />
               <PostForm />
             </div> : <LandingPage />}
