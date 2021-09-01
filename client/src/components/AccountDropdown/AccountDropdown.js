@@ -37,6 +37,8 @@ const handleClose = () => {
   setAnchorEl(null);
 };
 
+const AUTH = JSON.parse(localStorage.getItem('profile'))
+
   return (
     <div>
     <AppBar position="static"
@@ -76,7 +78,7 @@ const handleClose = () => {
           >
           <MenuItem
           className={classes.dropdown}
-          >Name</MenuItem>
+          >{AUTH.user.displayName}</MenuItem>
           </Link>
 
           <Link to='/chat'
