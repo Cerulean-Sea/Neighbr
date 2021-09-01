@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Redirect } from 'react-router-dom';
 import PostList from '../Posts/PostList';
 import useStyles from './homePageStyles';
 import {
@@ -62,6 +62,13 @@ const Homepage = (props) => {
       }
     }
   }, [state]);
+
+  const community = AUTH?.community;
+  if (community === '') {
+    return (
+      <Redirect to="/community" />
+    )
+  }
 
   if (showPost) {
     return (

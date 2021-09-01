@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { FormControl, TextField, Button, makeStyles, Grid } from '@material-ui/core';
+import { FormControl, TextField, Button, makeStyles, Grid, Typography } from '@material-ui/core';
 import { updateCommunity } from '../../redux/actions/firebase/firebase';
 
 const useStyles = makeStyles((theme) => ({
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Location = () => {
+const Community = () => {
   const classes = useStyles();
 
   const [community, setCommunity] = useState('');
@@ -40,6 +40,11 @@ const Location = () => {
 
   return (
     <Grid container alignItems="center" justifyContent="center" style={{padding: "150px"}}>
+      {user?.community === '' ? (
+        <Grid item xs={12}>
+          <Typography variant="h6" align="center">Please enter your zip code.</Typography>
+        </Grid>
+      ) : ''}
       <form className={classes.root} onSubmit={handleSubmit}>
         <TextField className={classes.formField} name="community" type="text" variant="outlined" label="Zip Code" onChange={handleChange} value={community || ''} required/>
         <Button type="submit" className={classes.formField} variant="outlined" color="primary">Submit</Button>
@@ -48,4 +53,4 @@ const Location = () => {
   )
 }
 
-export default Location;
+export default Community;
