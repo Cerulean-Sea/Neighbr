@@ -48,7 +48,7 @@ export const googleSignIn = (history) => async (dispatch) => {
   }
 }
 
-export const updateCommunity = (userId, community) => async (dispatch) => {
+export const updateCommunity = (history, userId, community) => async (dispatch) => {
   try {
     const { data } = await api.updateCommunity(userId, community);
     dispatch({type: 'UPDATE_COMMUNITY', payload: data});

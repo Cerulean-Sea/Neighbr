@@ -127,6 +127,13 @@ const AccountDropdown = () => {
                 className={classes.dropdown}
                 >Settings</MenuItem>
                 </Link>
+                <Link to='/community'
+                className={classes.link}
+                >
+                <MenuItem
+                className={classes.dropdown}
+                >Change Community</MenuItem>
+                </Link>
                 <MenuItem
                 className={classes.dropdown}
                 onClick={logout}
