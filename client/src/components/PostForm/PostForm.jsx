@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
-import { Button, TextField, RadioGroup, Radio, FormControl, FormLabel, FormControlLabel, Paper, Typography, Card, Box } from '@material-ui/core';
+import { Button, TextField, RadioGroup, Radio, FormControl, FormLabel, FormControlLabel, Paper, Typography, Card, Box, Tooltip } from '@material-ui/core';
+import PinDropIcon from '@material-ui/icons/PinDrop';
 
 import ThumbnailList from './ThumbnailList.jsx';
 import { createPost } from '../../redux/actions/Posts';
 import firebaseConfig from '../../redux/actions/firebase/config';
+import getCurrentLocation from '../../helper-functions/getCurrentLocation';
 
 import './styles.css';
 import { spacing } from '@material-ui/system';
@@ -32,7 +34,8 @@ const PostForm = () => {
         wasAddImagesClicked: false,
         photoUrl: '',
         filepath: '',
-        photos: []
+        photos: [],
+        location: {}
     };
 
     const dispatch = useDispatch();
@@ -48,7 +51,7 @@ const PostForm = () => {
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
-        const { title, body, tag, photos } = form;
+        const { title, body, tag, photos, location } = form;
 
         dispatch(createPost({
             userId,
@@ -57,7 +60,8 @@ const PostForm = () => {
             body,
             tags: [tag],
             photos,
-            community
+            community,
+            location
         }));
 
         setForm(initialState);
@@ -103,6 +107,14 @@ const PostForm = () => {
         }
     }
 
+    const getLocation = async () => {
+        const {latitude, longitude} = await getCurrentLocation();
+        setForm(prevState => ({
+            ...prevState,
+            location: {latitude, longitude}
+        }));
+    }
+
     if (!userId) {
         return (
             <Paper style={{paddingBottom: "20px"}}>
@@ -134,6 +146,14 @@ const PostForm = () => {
                     </RadioGroup>
                 </FormControl>
                 <p></p>
+                <Tooltip title="Pin Location">
+                    <Button color="primary" onClick={getLocation}>
+                        <PinDropIcon />
+                    </Button>
+                </Tooltip>
+                <p></p>
+                <Typography variant="body1">{form.location.latitude && (`Latitude: ${form.location.latitude}, Longitude: ${form.location.longitude}`)}</Typography>
+                <p></p>
                 <div className="photo-upload">
                     <Box p={2}>
                         <Typography>Upload Photo</Typography>
@@ -144,7 +164,6 @@ const PostForm = () => {
                 </div>
                 <ThumbnailList photos={form.photos} removePhoto={removePhoto} />
                 <p></p>
-                <h4>[ Your Location Goes Here ]</h4>
                 <Button type="submit" color="primary" variant="outlined">Submit Post</Button>
             </form>
         </Card>
