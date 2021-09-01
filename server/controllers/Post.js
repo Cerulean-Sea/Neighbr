@@ -128,6 +128,19 @@ const getPostWithTagFilter = async (req, res) => {
   }
 }
 
+const getPostWithTagFilterByUserId = async (req, res) => {
+  const { page = 1, limit = 10 } = req.query;
+  const { userId, filters } = req.params;
+  let filterArray = filters.split(',');
+  const filterParams = filterArray.map(tag => ({tags: tag}));
+  try {
+    const posts = await Post.aggregate(aggregates(page, limit, {$and: [{$or: filterParams}, {userId}]}));
+    res.status(200).send(posts);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+}
+
 module.exports = {
   getPosts,
   getPostById,
@@ -136,5 +149,6 @@ module.exports = {
   postPost,
   updatePost,
   deletePost,
-  getPostWithTagFilter
+  getPostWithTagFilter,
+  getPostWithTagFilterByUserId
 };
