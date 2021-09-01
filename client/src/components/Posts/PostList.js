@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Typography, Paper } from '@material-ui/core';
 
-import actions from '../../redux/actions/index';
 import Post from './Post';
 
 
