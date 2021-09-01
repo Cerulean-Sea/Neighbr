@@ -7,6 +7,7 @@ router
   .get('/', Post.getPosts)
   .get('/:postId', Post.getPostById)
   .get('/users/:userId', Post.getPostsByUserId)
+  .get('/community/:community', Post.getPostsByCommunity)
   .post('/create', auth, Post.postPost)
   .patch('/:postId', auth, Post.updatePost)
   .delete('/:postId', auth, Post.deletePost)

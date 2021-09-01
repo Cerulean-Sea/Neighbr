@@ -178,13 +178,6 @@ export default function Login() {
           >
             {isSignUp ? "Sign Up!" : "Sign In"}
           </Button>
-          <Grid container>
-            <Grid item>
-              <Button onClick={()=>{setIsSignUp(!isSignUp)}}>
-                No Account? Sign Up!
-              </Button>
-            </Grid>
-          </Grid>
         </form>
         <Button
           type="input"
@@ -195,6 +188,13 @@ export default function Login() {
           className={classes.submit}>
             Google Login
           </Button>
+          <Grid container>
+            <Grid item>
+              <Button onClick={()=>{setIsSignUp(!isSignUp)}}>
+                No Account? Sign Up!
+              </Button>
+            </Grid>
+          </Grid>
       </div>
     </Container>
   );
