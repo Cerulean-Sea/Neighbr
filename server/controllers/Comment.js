@@ -2,8 +2,9 @@ const Comment = require('../database/Comment');
 const Post = require('../database/Post');
 
 const getComments = async (req, res) => {
+  const { page = 1, limit = 10 } = req.query;
   try {
-    const comments = await Comment.find();
+    const comments = await Comment.find().limit(limit * 1).skip((page - 1) * limit).sort({ created: 'desc' });
     res.status(200).send(comments);
   } catch (error) {
     res.status(400).send(error);
@@ -21,9 +22,10 @@ const getCommentById = async (req, res) => {
 };
 
 const getCommentsByUserId = async (req, res) => {
+  const { page = 1, limit = 10 } = req.query;
   const { userId } = req.params;
   try {
-    const comments = await Comment.find({userId});
+    const comments = await Comment.find({userId}).limit(limit * 1).skip((page - 1) * limit).sort({ created: 'desc' });
     res.status(200).send(comments);
   } catch (error) {
     res.status(400).send(error);
@@ -31,9 +33,10 @@ const getCommentsByUserId = async (req, res) => {
 };
 
 const getCommentsByPostId = async (req, res) => {
+  const { page = 1, limit = 10 } = req.query;
   const { postId } = req.params;
   try {
-    const comments = await Comment.find({postId});
+    const comments = await Comment.find({postId}).limit(limit * 1).skip((page - 1) * limit).sort({ created: 'desc' });
     res.status(200).send(comments);
   } catch (error) {
     res.status(400).send(error);

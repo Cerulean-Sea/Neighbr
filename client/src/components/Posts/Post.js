@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import * as api from '../../api';
+import moment from 'moment';
+import actions from '../../redux/actions/index';
 import {
   Typography,
   Avatar,
@@ -7,78 +11,153 @@ import {
   Card,
   CssBaseline,
   Menu,
-  MenuItem
+  MenuItem,
+  Grid,
+  Dialog,
+  DialogTitle,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
 } from '@material-ui/core';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import moment from 'moment';
+import { MoreVert, Facebook, Twitter, Instagram, Reddit } from '@material-ui/icons';
 
 import useStyles from './stylesPost';
 
 export default ({ post }) => {
+  const dispatch = useDispatch();
   const classes = useStyles();
+  const user = useSelector((state) => state.firebase.user);
   const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const menuOpen = Boolean(anchorEl);
 
-  const options = ['Mark as Read', 'Hide Post', 'Report Post']
+  let options;
+  if (user.uid === post.userId) {
+    options = ['Share', 'Edit Post', 'Hide', 'Delete Post'];
+  } else {
+    options = ['Share', 'Hide', 'Report'];
+  }
 
-  const handleClose = () => {
+  const shareOptions = {
+    Facebook: {
+      url: 'https://www.facebook.com/',
+      icon: () => <Facebook />
+    },
+    Instagram: {
+      url: 'https://www.instagram.com/',
+      icon: () => <Instagram />
+    },
+    Twitter: {
+      url: 'https://twitter.com/share?ref_src=twsrc%5Etfw',
+      icon: () => <Twitter />
+    },
+    Reddit: {
+      url: 'https://www.reddit.com/',
+      icon: () => <Reddit />
+    },
+  };
+
+  const deletePost = async (id) => {
+    try {
+      await api.deletePost(id);
+      actions.posts(dispatch);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
+  const handleDialogClose = () => {
+      setDialogOpen(false);
+  };
+
+  const SharePost = () => {
+    return (
+      <Dialog open={dialogOpen} onClose={handleDialogClose}>
+        <DialogTitle>Share This Post!</DialogTitle>
+        <List>
+          {Object.keys(shareOptions).map((s) => (
+            <ListItem
+              button
+              component="a"
+              href={shareOptions[s].url}
+              onClick={(e) => e.preventDefault()}
+              color="inherit"
+              key={s}
+            >
+                <ListItemIcon>
+                  {shareOptions[s].icon()}
+                </ListItemIcon>
+                <ListItemText primary={s}/>
+            </ListItem>
+          ))}
+        </List>
+      </Dialog>
+    )
+  };
+
   return (
-    <Container className={classes.container} onClick={() => alert('EXPAND POST')}>
+    <Container className={classes.container}>
       <CssBaseline />
       <Card className={classes.card}>
 
-        <div className={classes.header}>
+        <Grid className={classes.header}>
           <Avatar
             className={classes.avatar}
             alt="Neighbor"
             src="/neighbor.png"
-            onClick={() => alert('VIEW MODAL WITH USER INFO')}
           />
-          <div>
+          <Grid>
             <Typography className={classes.typography} variant="h6">
               {post.title}
             </Typography>
             {post.tags.map((tag) => <span key={tag} className={`${classes.tag} ${classes[tag]}`}>{`${tag}!`}</span>)}
-          </div>
+          </Grid>
 
           <IconButton
             aria-label="options"
             aria-controls="short-menu"
             aria-haspopup="true"
-            onClick={(e) => setAnchorEl(e.currentTarget)}
+            onClick={(e) => {
+              setAnchorEl(e.currentTarget);
+            }}
             className={classes.fab}
           >
-            <MoreVertIcon />
+            <MoreVert />
           </IconButton>
           <Menu
             id="short-menu"
             anchorEl={anchorEl}
             keepMounted
-            open={open}
-            onClose={handleClose}
+            open={menuOpen}
+            onClose={handleMenuClose}
           >
             {options.map((o) => (
-              <MenuItem
-                key={o}
-                onClick={() => {
-                  handleClose();
-                  alert(o);
-                }}
-              >
-                {o}
-              </MenuItem>
+              <div key={o}>
+                <MenuItem
+                  onClick={(e) => {
+                    handleMenuClose();
+                    if (o === 'Share') setDialogOpen(true);
+                    if (o === 'Delete Post') deletePost(post._id);
+                  }}
+                >
+                  {o}
+                </MenuItem>
+                {o === 'Share' && <SharePost />}
+              </div>
             ))}
           </Menu>
-        </div>
+        </Grid>
 
         <Typography variant="body1" paragraph={true}>
-          {post.text.slice(0, 250) + ' . . .'}
+          {post.text}
         </Typography>
 
-        <div className={classes.footer}>
+        <Grid className={classes.footer}>
           <Typography variant="body2">
             {`${post.commentId.length} comments`}
           </Typography>
@@ -86,10 +165,9 @@ export default ({ post }) => {
           <Typography variant="body2">
             {moment(post.created).fromNow()}
           </Typography>
-        </div>
+        </Grid>
 
       </Card>
     </Container>
   );
 };
-
