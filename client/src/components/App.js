@@ -14,9 +14,10 @@ import Login from './Login/Login';
 import { useSelector, useDispatch } from 'react-redux';
 import LandingPage from './LandingPage';
 import AccountDropdown from './AccountDropdown/AccountDropdown.js';
-import Profile from '../components/AccountDropdown/Profile';
-import Chat from '../components/Chat/Chat';
-import Settings from '../components/AccountDropdown/Settings';
+import Profile from './AccountDropdown/Profile';
+import Chat from './Chat/Chat';
+import Settings from './AccountDropdown/Settings';
+import PostList from './Posts/PostList';
 
 import mainTheme from './ThemeApp';
 import { ThemeProvider } from '@material-ui/core';
@@ -39,7 +40,10 @@ const App = () => {
         <AccountDropdown />
         <Switch>
           <Route exact path="/">
-            {AUTH ? <div>  This is the homepage component  </div> : <LandingPage />}
+            {AUTH ? <div>
+              <PostList />
+              <PostForm />
+            </div> : <LandingPage />}
           </Route>
           <Route path="/login">
            <Login />
