@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import * as api from '../../api';
+import moment from 'moment';
+import actions from '../../redux/actions/index';
 import {
   Typography,
   Avatar,
@@ -18,11 +21,11 @@ import {
   ListItemIcon,
 } from '@material-ui/core';
 import { MoreVert, Facebook, Twitter, Instagram, Reddit } from '@material-ui/icons';
-import moment from 'moment';
 
 import useStyles from './stylesPost';
 
 export default ({ post }) => {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const user = useSelector((state) => state.firebase.user);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -55,13 +58,22 @@ export default ({ post }) => {
     },
   };
 
+  const deletePost = async (id) => {
+    try {
+      await api.deletePost(id);
+      actions.posts(dispatch);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
   const handleDialogClose = () => {
       setDialogOpen(false);
-    }
+  };
 
   const SharePost = () => {
     return (
@@ -130,6 +142,7 @@ export default ({ post }) => {
                   onClick={(e) => {
                     handleMenuClose();
                     if (o === 'Share') setDialogOpen(true);
+                    if (o === 'Delete Post') deletePost(post._id);
                   }}
                 >
                   {o}
