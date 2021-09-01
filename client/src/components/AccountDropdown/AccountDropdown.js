@@ -14,10 +14,10 @@ const AccountDropdown = () => {
   const useStyles = makeStyles(theme => ({
     accountButton: {
       justifyContent: 'flex-end',
-      color: theme.palette.info.main,
+      color: '#264653'
     },
     appbar: {
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: "#F4A261",
       justifyContent: 'flex-start'
     },
     dropdown: {
