@@ -41,15 +41,12 @@ const App = () => {
            <Login />
           </Route>
           <Route exact path="/profile">
-            {AUTH && <AccountDropdown />}
             {AUTH && <Profile />}
           </Route>
           <Route exact path="/settings">
-            {AUTH && <AccountDropdown />}
             {AUTH && <Settings />}
           </Route>
           <Route exact path="/chat">
-            {AUTH && <AccountDropdown />}
             {AUTH && <Chat />}
           </Route>
         </Switch>

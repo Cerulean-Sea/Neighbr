@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import {MenuItem, makeStyles, Menu, AppBar, Toolbar, Avatar, Box } from '@material-ui/core';
+import {MenuItem, makeStyles, Menu, AppBar, Toolbar, Avatar, Box, Button } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
@@ -54,83 +54,76 @@ const AccountDropdown = () => {
     >
         <Toolbar className={classes.accountButton}>
           <Box display="flex" flexGrow={1}>
-            <Avatar src='./assets/logo.png' />
+            <Avatar src='./assets/logo.png' component={Link} to="/"/>
           </Box>
 
-        <IconButton
-          className={classes.menu}
-          aria-label="account of current user"
-          aria-controls="menu-appbar"
-          aria-haspopup="true"
-          onClick={handleMenu}
-          color="inherit"
-        >
-          <AccountCircle/>
-        </IconButton>
-
-        <Menu
-
-          id="menu-appbar"
-          anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          open={open}
-          onClick={handleClose}
-        >
-
           {!AUTH && (
-            <div>
-              <Link to='/login'
-              className={classes.link}
-              >
-              <MenuItem
-              className={classes.dropdown}
-              >Login</MenuItem>
-              </Link>
-            </div>
+            <Button component={Link} to="/login" variant="contained" color="default">Login</Button>
           )}
 
           {AUTH && (
             <div>
-              <Link to='/profile'
-              className={classes.link}
+              <IconButton
+                className={classes.menu}
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
               >
-              <MenuItem
-              className={classes.dropdown}
-              >{AUTH.user.displayName}</MenuItem>
-              </Link>
+                {AUTH.user.photoURL ? <Avatar src={AUTH.user.photoURL}/> : <AccountCircle/>}
 
-              <Link to='/chat'
-              className={classes.link}
+              </IconButton>
+
+              <Menu
+
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onClick={handleClose}
               >
-              <MenuItem
-              className={classes.dropdown}
-              >Notifications</MenuItem>
-              </Link>
+                <Link to='/profile'
+                className={classes.link}
+                >
+                <MenuItem
+                className={classes.dropdown}
+                >{AUTH.user.displayName}</MenuItem>
+                </Link>
 
-              <Link to='/settings'
-              className={classes.link}
-              >
-              <MenuItem
-              className={classes.dropdown}
-              >Settings</MenuItem>
-              </Link>
-              <MenuItem
-              className={classes.dropdown}
-              onClick={logout}
-              >Logout</MenuItem>
+                <Link to='/chat'
+                className={classes.link}
+                >
+                <MenuItem
+                className={classes.dropdown}
+                >Notifications</MenuItem>
+                </Link>
 
-            </div>
+                <Link to='/settings'
+                className={classes.link}
+                >
+                <MenuItem
+                className={classes.dropdown}
+                >Settings</MenuItem>
+                </Link>
+                <MenuItem
+                className={classes.dropdown}
+                onClick={logout}
+                >Logout</MenuItem>
+
+              </Menu>
+              </div>
+
           )}
 
-        </Menu>
       </Toolbar>
     </AppBar>
     </div>

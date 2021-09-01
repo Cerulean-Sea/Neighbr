@@ -20,6 +20,10 @@ app.use('/api/comments', Comments);
 app.use('/api/posts', Posts);
 app.use('/api/users', Users);
 
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
