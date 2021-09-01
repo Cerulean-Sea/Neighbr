@@ -112,6 +112,7 @@ const aggregates = (page, limit, match = {}) => {
       userInfo: '$userInfo',
     }}
   ]
+}
 
 const getPostWithTagFilter = async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
