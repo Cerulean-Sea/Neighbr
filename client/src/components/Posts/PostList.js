@@ -6,7 +6,6 @@ import { Typography, Paper } from '@material-ui/core';
 import actions from '../../redux/actions/index';
 import Post from './Post';
 
-import * as sampleData from '../../../dist/assets/sample-post-data';
 
 
 export default (props) => {
@@ -26,7 +25,7 @@ export default (props) => {
 
   return (
     <>
-      {posts.map((p) => <Post key={p._id} post={p} />)}
+      {posts.map((p) => <div className="post-list-item" key={p._id}><Post post={p} /></div>)}
     </>
   );
 };

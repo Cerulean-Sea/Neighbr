@@ -16,7 +16,7 @@ const Homepage = (props) => {
       >
         <Grid item xs />
         <Grid item xs={8}>
-          <div classname={classes.create}>
+          <div className={classes.create}>
             <PostForm />
           </div>
         </Grid>
@@ -29,8 +29,8 @@ const Homepage = (props) => {
     return (
       <Grid container className={classes.mainContainer}>
         <Grid item xs />
-        <Grid item xs={8}>
-          <PostList />
+        <Grid container item xs={8}>
+          <PostList className={classes.postList}  />
         </Grid>
         <Grid item xs>
           <Button className={classes.btn} variant="contained" onClick={() => setShowPost(true)}>Create Post</Button>

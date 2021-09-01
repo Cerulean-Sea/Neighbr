@@ -18,6 +18,7 @@ import Profile from './Profile/Profile';
 import Chat from './Chat/Chat';
 import Settings from './AccountDropdown/Settings';
 import PostList from './Posts/PostList';
+import Homepage from './Homepage';
 
 import mainTheme from './ThemeApp';
 import { ThemeProvider } from '@material-ui/core';
@@ -34,10 +35,7 @@ const App = () => {
         <AccountDropdown />
         <Switch>
           <Route exact path="/">
-            {AUTH ? <div>
-              <PostForm />
-              <PostList />
-            </div> : <LandingPage />}
+            {AUTH ? <Homepage /> : <LandingPage />}
           </Route>
           <Route path="/login" component={Login}/>
           {AUTH && [

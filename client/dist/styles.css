@@ -7,6 +7,14 @@
   min-width: 100vw;
 }
 
+.post-list-item > div {
+  min-width: 90%
+}
+
+.post-list-item {
+  min-width: 100%;
+}
+
 @media all and (max-width: 730px) {
   #landing-page-about-txt {
     width: 70vw;
