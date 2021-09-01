@@ -27,7 +27,7 @@ const AUTH = useSelector(state => state.firebase);
       <div className="app">
         <Switch>
           <Route exact path="/">
-            {AUTH ? <div> This is the homepage component </div> : <LandingPage />}
+            {AUTH ? <PostForm /> : <LandingPage />}
           </Route>
           <Route path="/login">
            <Login />

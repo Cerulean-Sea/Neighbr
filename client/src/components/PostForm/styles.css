@@ -1,0 +1,28 @@
+.main {
+    text-align: center
+}
+
+.title {
+    font-family: Verdana, sans-serif;
+    font-weight: normal;
+    /* font-family: 'Roboto', sans-serif; */
+}
+
+#title {
+    width: 400px;
+}
+
+#body {
+    width: 400px;
+    /* height: 100px; */
+}
+
+.photo-upload-h3 {
+    font-family: Verdana, sans-serif;
+    font-weight: normal;    
+}
+
+.thumbnail-preview {
+    font-family: Verdana, sans-serif;
+    font-weight: normal;       
+}

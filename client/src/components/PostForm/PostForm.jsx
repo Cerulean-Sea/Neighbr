@@ -17,6 +17,8 @@ import ThumbnailList from './ThumbnailList.jsx';
 import { createPost } from '../../redux/actions/Posts';
 import firebaseConfig from '../../redux/actions/firebase/config';
 
+import './styles.css';
+
 const PostForm = () => {
 
     const firebaseApp = initializeApp(firebaseConfig);
@@ -123,12 +125,12 @@ const PostForm = () => {
     }
 
     return (
-        <div>
-            <h2>Create New Post</h2>
+        <div className="main">
+            <h2 className="title">Create New Post</h2>
             <form>
                 <TextField id="title" name="title" label="Title" value={form.title} onChange={handleInputChange} placeholder="Type title here"  />
                 <p></p>
-                <TextField id="body" name="body" label="Body" value={form.body} onChange={handleInputChange} placeholder="Type post here"  />
+                <TextField multiline rows={4} id="body" name="body" label="Body" value={form.body} onChange={handleInputChange} placeholder="Type post here"  />
                 <p></p>
                 <FormControl component="fieldset">
                     <FormLabel component="legend">Tags</FormLabel>
@@ -144,10 +146,10 @@ const PostForm = () => {
                 <h4>[ Your Location Goes Here ]</h4>
                 <p></p>
                 <div className="photo-upload">
-                    <h3>Upload Photo</h3>
+                    <h3 className="photo-upload-h3">Upload Photo</h3>
                     <input type="file" name="filepath" value={form.filepath} onChange={handleFileChange}/>
                 </div>
-                <h4>Thumbnail Preview</h4>
+                <h4 className="thumbnail-preview">Thumbnail Preview</h4>
                 <ThumbnailList photos={form.photos} removePhoto={removePhoto} />
                 <p></p>
                 <Button type="submit" onClick={handleFormSubmit} color="primary">Submit Post</Button>
