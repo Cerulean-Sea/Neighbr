@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 
 function Chat() {
 	const AUTH = JSON.parse(localStorage.getItem('profile'));
-	console.log(AUTH)
 	return (
 		<ChatEngine
 			height='100vh'

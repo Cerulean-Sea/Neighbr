@@ -1,80 +1,78 @@
-import React, { useState } from 'react';
-import { TextField, RaisedButton, withStyles, InputBase, FormControl, InputLabel } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { TextField, Button } from '@material-ui/core';
+import useStyles from './SettingsStyle';
+import axios from 'axios';
 
 function Settings() {
   const state = {
-    firstName: '',
-    lastName : '',
-    email : '',
-    zipcode : '',
+    community: zipcode
   }
-
   const AUTH = JSON.parse(localStorage.getItem('profile'))
 
-  const BootstrapInput = withStyles((theme) => ({
-    root: {
-      'label + &': {
-        marginTop: theme.spacing(3),
-      },
-    },
-    input: {
-      borderRadius: 4,
-      position: 'relative',
-      backgroundColor: theme.palette.common.white,
-      border: '1px solid #ced4da',
-      fontSize: 16,
-      width: 'auto',
-      padding: '10px 12px',
-      transition: theme.transitions.create(['border-color', 'box-shadow']),
-      // Use the system font instead of the default Roboto font.
-      fontFamily: [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-      ].join(','),
-      '&:focus': {
-        boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-        borderColor: theme.palette.primary.main,
-      },
-    },
-  }))(InputBase);
+  const [ zipcode, changeZipcode ] = useState(AUTH.community)
+  const [ input, changeInput ] = useState(state);
+
+  useEffect(() => {
+    axios.get(`/api/users/community/${AUTH.user.uid}`)
+      .then(function (response) {
+        changeZipcode(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  })
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    axios.patch(`/api/users/community/${AUTH.user.uid}`, input)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  const handleChange = (e) => {
+    changeInput({
+      community: e.target.value
+    })
+  }
+
+  const classes = useStyles();
 
   return (
-    <div>
+    <div className={classes.root}>
       <h1>Edit Account Information</h1>
       <h2>Account Information</h2>
+      <div>Name</div>
+      <div>{AUTH.user.displayName}</div>
+      <div>Email</div>
+      <div>{AUTH.user.email}</div>
 
-      <form className={classes.root} noValidate autoComplete="off">
+      <h2>Change Location</h2>
+
+      <form className={classes.form}>
+
         <TextField
-        hintText="First Name *:"
-        floatingLabelText={AUTH.user.displayName}
-        // handleChange={handleChange()
+          onChange={handleChange}
+          label="Zipcode"
+          id="outlined-size-normal"
+          defaultValue={zipcode}
+          variant="outlined"
         />
-        <TextField
-        id="outlined-basic"
-        label="Outlined"
-        variant="outlined" />
 
-      <FormControl className={classes.margin}>
-        <InputLabel
-        shrink htmlFor="bootstrap-input"
-        defaultValue={AUTH.user.displayName}
-        >
-          Bootstrap
-        </InputLabel>
-        <BootstrapInput defaultValue="react-bootstrap" id="bootstrap-input" />
-      </FormControl>
-
+        <Button
+          type="input"
+          onClick={handleSave}
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.save}
+          >
+            Save
+        </Button>
       </form>
-
-      {/* </div> */}
     </div>
   )
 }

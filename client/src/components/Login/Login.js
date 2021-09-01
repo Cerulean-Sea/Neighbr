@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import {
   Avatar, Button, CssBaseline, TextField,
   FormControlLabel, Checkbox, Link, Grid,
@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import useStyles from './styleLogin';
 import key from '../Chat/config';
+import { useSelector } from 'react-redux';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ export default function Login() {
   }
   const [ formData, setFormData ] = useState(initialState);
   const [ isSignUp, setIsSignUp ] = useState(false);
+  const AUTH = useSelector(state => state.firebase);
 
   const handleChange = (e) => {
     setFormData({
@@ -181,7 +183,21 @@ export default function Login() {
         </form>
         <Button
           type="input"
-          onClick={() => { dispatch(googleSignIn(history)) }}
+          onClick={() => {
+            dispatch(googleSignIn(history))
+            data = {
+              "username": AUTH.user.email,
+              "first_name": AUTH.user.displayName,
+              "secret": 'password',
+            }
+          axios(config)
+          .then(function (response) {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+          }}
           fullWidth
           variant="contained"
           color="primary"
