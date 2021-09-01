@@ -17,6 +17,13 @@ import ThumbnailList from './ThumbnailList.jsx';
 import { createPost } from '../../redux/actions/Posts';
 import firebaseConfig from '../../redux/actions/firebase/config';
 
+import './styles.css';
+import Box from '@material-ui/core/Box';
+import { spacing } from '@material-ui/system';
+const theme = {
+    spacing: 1
+}
+
 const PostForm = () => {
 
     const firebaseApp = initializeApp(firebaseConfig);
@@ -125,16 +132,18 @@ const PostForm = () => {
     }
 
     return (
-        <div>
-            <h2>Create New Post</h2>
+        <div className="main">
+            <h2 className="title">Create New Post</h2>
             <form>
                 <TextField id="title" name="title" label="Title" value={form.title} onChange={handleInputChange} placeholder="Type title here"  />
                 <p></p>
-                <TextField id="body" name="body" label="Body" value={form.body} onChange={handleInputChange} placeholder="Type post here"  />
+                <TextField multiline rows={4} id="body" name="body" label="Body" value={form.body} onChange={handleInputChange} placeholder="Type post here"  />
                 <p></p>
                 <FormControl component="fieldset">
-                    <FormLabel component="legend">Tags</FormLabel>
-                    <RadioGroup>
+                    <Box p={2} >
+                        <FormLabel component="legend">Choose a tag</FormLabel>
+                    </Box>
+                    <RadioGroup row>
                         <FormControlLabel value="Happenings" control={<Radio />} label="Happenings" onClick={selectTag}  />
                         <FormControlLabel value="Swaps" control={<Radio />} label="Swaps" onClick={selectTag}  />
                         <FormControlLabel value="Safety" control={<Radio />} label="Safety" onClick={selectTag}  />
@@ -143,15 +152,22 @@ const PostForm = () => {
                     </RadioGroup>
                 </FormControl>
                 <p></p>
-                <h4>[ Your Location Goes Here ]</h4>
-                <p></p>
                 <div className="photo-upload">
-                    <h3>Upload Photo</h3>
-                    <input type="file" name="filepath" value={form.filepath} onChange={handleFileChange}/>
+                    {/* <h3 className="photo-upload-h3">Upload Photo</h3> */}
+                    <Box p={2}>
+                        <Typography>Upload Photo</Typography>
+                    </Box>
+                    {/* <input className="photo-upload-h3" type="file" name="filepath" value={form.filepath} onChange={handleFileChange}/> */}
+
+                    <Button variant="contained" component="label">
+                        <input className="photo-upload-h3" type="file" name="filepath" value={form.filepath} onChange={handleFileChange}/>
+                    </Button>
+
                 </div>
-                <h4>Thumbnail Preview</h4>
+                {/* <h4 className="thumbnail-preview">Thumbnail Preview</h4> */}
                 <ThumbnailList photos={form.photos} removePhoto={removePhoto} />
                 <p></p>
+                <h4>[ Your Location Goes Here ]</h4>
                 <Button type="submit" onClick={handleFormSubmit} color="primary">Submit Post</Button>
                 <p></p>
                 <Button color="secondary">Delete Post</Button>
