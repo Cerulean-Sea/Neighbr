@@ -3,22 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import { Button, TextField, RadioGroup, Radio, FormControl, FormLabel, FormControlLabel, Paper, Typography, Card, Box } from '@material-ui/core';
 
 import ThumbnailList from './ThumbnailList.jsx';
 import { createPost } from '../../redux/actions/Posts';
 import firebaseConfig from '../../redux/actions/firebase/config';
 
 import './styles.css';
-import Box from '@material-ui/core/Box';
 import { spacing } from '@material-ui/system';
 const theme = {
     spacing: 1
@@ -58,15 +49,6 @@ const PostForm = () => {
         e.preventDefault();
 
         const { title, body, tag, photos } = form;
-
-        if (!title.length) {
-            alert('Must input a title');
-            return;
-        }
-        if (!body.length) {
-            alert('Need to input a post in body')
-            return;
-        }
 
         dispatch(createPost({
             userId,
@@ -132,12 +114,12 @@ const PostForm = () => {
     }
 
     return (
-        <div className="main">
-            <h2 className="title">Create New Post</h2>
-            <form>
-                <TextField id="title" name="title" label="Title" value={form.title} onChange={handleInputChange} placeholder="Type title here"  />
+        <Card className="main" style={{marginBottom: "50px", padding: "25px"}}>
+            <Typography variant="h5" gutterBottom >Create New Post</Typography>
+            <form onSubmit={handleFormSubmit}>
+                <TextField id="title" name="title" label="Title" value={form.title} onChange={handleInputChange} placeholder="Type title here"  variant="outlined" required/>
                 <p></p>
-                <TextField multiline rows={4} id="body" name="body" label="Body" value={form.body} onChange={handleInputChange} placeholder="Type post here"  />
+                <TextField multiline rows={4} id="body" name="body" label="Body" value={form.body} onChange={handleInputChange} placeholder="Type post here"  variant="outlined" required/>
                 <p></p>
                 <FormControl component="fieldset">
                     <Box p={2} >
@@ -153,26 +135,19 @@ const PostForm = () => {
                 </FormControl>
                 <p></p>
                 <div className="photo-upload">
-                    {/* <h3 className="photo-upload-h3">Upload Photo</h3> */}
                     <Box p={2}>
                         <Typography>Upload Photo</Typography>
                     </Box>
-                    {/* <input className="photo-upload-h3" type="file" name="filepath" value={form.filepath} onChange={handleFileChange}/> */}
-
                     <Button variant="contained" component="label">
                         <input className="photo-upload-h3" type="file" name="filepath" value={form.filepath} onChange={handleFileChange}/>
                     </Button>
-
                 </div>
-                {/* <h4 className="thumbnail-preview">Thumbnail Preview</h4> */}
                 <ThumbnailList photos={form.photos} removePhoto={removePhoto} />
                 <p></p>
                 <h4>[ Your Location Goes Here ]</h4>
-                <Button type="submit" onClick={handleFormSubmit} color="primary">Submit Post</Button>
-                <p></p>
-                <Button color="secondary">Delete Post</Button>
+                <Button type="submit" color="primary" variant="outlined">Submit Post</Button>
             </form>
-        </div>
+        </Card>
     )
 }
 
