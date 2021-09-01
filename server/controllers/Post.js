@@ -3,7 +3,7 @@ const Comment = require('../database/Comment');
 
 const getPosts = async (req, res) => {
   try {
-    const posts = await Post.find().populate(['commentId']);
+    const posts = await Post.find().populate(['commentId']).sort({ created: 'desc' });
     res.status(200).send(posts);
   } catch (error) {
     res.status(400).send(error);

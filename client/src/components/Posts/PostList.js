@@ -13,8 +13,8 @@ export default (props) => {
   }, []);
 
   return (
-    <div>
-      {posts.map((p) => <Post post={p} />)}
-    </div>
+    <>
+      {posts.map((p) => <Post key={p._id} post={p} />)}
+    </>
   );
 };

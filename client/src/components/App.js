@@ -14,9 +14,10 @@ import Login from './Login/Login';
 import { useSelector } from 'react-redux';
 import LandingPage from './LandingPage';
 import AccountDropdown from './AccountDropdown/AccountDropdown.js';
-import Profile from '../components/AccountDropdown/Profile';
-import Chat from '../components/Chat/Chat';
-import Settings from '../components/AccountDropdown/Settings';
+import Profile from './AccountDropdown/Profile';
+import Chat from './Chat/Chat';
+import Settings from './AccountDropdown/Settings';
+import PostList from './Posts/PostList';
 
 const App = () => {
 
@@ -27,7 +28,11 @@ const AUTH = useSelector(state => state.firebase);
       <div className="app">
         <Switch>
           <Route exact path="/">
-            {AUTH ? <div> <AccountDropdown /> This is the homepage component  </div> : <LandingPage />}
+            {AUTH ? <div>
+              <AccountDropdown />
+              <PostList />
+              <PostForm />
+            </div> : <LandingPage />}
           </Route>
           <Route path="/login">
            <Login />

@@ -50,5 +50,5 @@ export default makeStyles((theme) => ({
   },
   "Chit Chat": {
     border: '3px solid #264653',
-  }
+  },
 }));
