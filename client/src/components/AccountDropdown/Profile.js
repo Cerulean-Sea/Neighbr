@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import PostList from '../Posts/PostList';
 
 function Profile() {
 
@@ -8,8 +9,7 @@ function Profile() {
 
   return (
     <div className="app">
-      <h1>Profile</h1>
-      <h2>render profile info??</h2>
+      <PostList/>
     </div>
   )
 }
