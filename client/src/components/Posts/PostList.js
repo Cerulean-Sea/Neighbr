@@ -8,8 +8,7 @@ import * as sampleData from '../../../dist/assets/sample-post-data';
 
 export default (props) => {
   const dispatch = useDispatch();
-  // const posts = useSelector((state) => state.posts);
-  const posts = sampleData;
+  const posts = useSelector((state) => state.posts);
 
   return (
     <div>
