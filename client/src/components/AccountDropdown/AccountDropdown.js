@@ -17,16 +17,19 @@ const AccountDropdown = () => {
       color: '#264653'
     },
     appbar: {
-      backgroundColor: "#F4A261",
+      backgroundColor: "#2A9D8F",
       justifyContent: 'flex-start'
     },
     dropdown: {
-      backgroundColor: "#F4A261",
       color: '#264653',
       textDecoration: 'bold',
     },
     link: {
       textDecoration: 'none'
+    },
+    login: {
+      backgroundColor: '#264653',
+      color: '#fff'
     }
   }));
 
@@ -58,7 +61,7 @@ const AccountDropdown = () => {
           </Box>
 
           {!AUTH && (
-            <Button component={Link} to="/login" variant="contained" color="default">Login</Button>
+            <Button component={Link} to="/login" variant="contained" className={classes.login}>Login</Button>
           )}
 
           {AUTH && (
@@ -83,7 +86,6 @@ const AccountDropdown = () => {
                   vertical: 'top',
                   horizontal: 'right',
                 }}
-                keepMounted
                 transformOrigin={{
                   vertical: 'top',
                   horizontal: 'right',

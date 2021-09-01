@@ -115,7 +115,7 @@ export default ({ post }) => {
             <Typography className={classes.typography} variant="h6">
               {post.title}
             </Typography>
-            {post.tags.map((tag) => <span key={tag} className={`${classes.tag} ${classes[tag]}`}>{`${tag}!`}</span>)}
+            {post.tags.map((tag) => <span key={tag} className={`${classes.tag} ${classes[tag.replace(/\s/g, "")]}`}>{`${tag}!`}</span>)}
           </Grid>
 
           <IconButton
@@ -132,7 +132,6 @@ export default ({ post }) => {
           <Menu
             id="short-menu"
             anchorEl={anchorEl}
-            keepMounted
             open={menuOpen}
             onClose={handleMenuClose}
           >
