@@ -24,47 +24,34 @@ import { ThemeProvider } from '@material-ui/core';
 
 const App = () => {
 
+  const AUTH = useSelector(state => state.firebase);
   const dispatch = useDispatch();
-  const history = useHistory();
-
-  const [AUTH, setAUTH] = useState(JSON.parse(localStorage.getItem('profile')));
-
-  const logout = () => {
-    dispatch({type: 'LOGOUT'});
-    history.push('/');
-    setAUTH(null);
-  };
 
   useEffect(() => {
-    const expirationTime = AUTH?.user?.stsTokenManager?.expirationTime;
-    if (expirationTime < new Date().getTime()) {
-      logout();
+    if (localStorage.getItem('profile') && !AUTH) {
+      dispatch({type: 'AUTH', payload: JSON.parse(localStorage.getItem('profile'))});
     }
-    setAUTH(JSON.parse(localStorage.getItem('profile')));
-  }, []);
-
+  },[]);
 
   return (
       <ThemeProvider theme={mainTheme}>
     <Router>
       <div className="app">
+        <AccountDropdown />
         <Switch>
           <Route exact path="/">
-            {AUTH ? <div> <AccountDropdown /> <Homepage />  </div> : <LandingPage />}
+            {AUTH ? <div>  This is the homepage component  </div> : <LandingPage />}
           </Route>
           <Route path="/login">
            <Login />
           </Route>
           <Route exact path="/profile">
-            {AUTH && <AccountDropdown />}
             {AUTH && <Profile />}
           </Route>
           <Route exact path="/settings">
-            {AUTH && <AccountDropdown />}
             {AUTH && <Settings />}
           </Route>
           <Route exact path="/chat">
-            {AUTH && <AccountDropdown />}
             {AUTH && <Chat />}
           </Route>
         </Switch>

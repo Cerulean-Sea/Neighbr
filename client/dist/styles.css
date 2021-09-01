@@ -2,6 +2,11 @@
   background-color: #F4A261;
 }
 
+#app {
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
 @media all and (max-width: 730px) {
   #landing-page-about-txt {
     width: 70vw;
