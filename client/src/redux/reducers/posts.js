@@ -5,7 +5,7 @@ export default (state = initialState, action) => {
     case 'SET_POSTS':
       return action.payload;
     case 'CREATE_POST':
-      return [...state, action.payload];
+      return [action.payload, ...state];
     case 'DELETE_POST':
       return state.filter((post) => {
         return post._id !== action.payload

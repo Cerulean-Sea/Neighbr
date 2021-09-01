@@ -1,5 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import PostList from '../Posts/PostList';
+import PostForm from '../PostForm/PostForm.jsx';
 
 function Profile() {
 
@@ -8,8 +10,8 @@ function Profile() {
 
   return (
     <div className="app">
-      <h1>Profile</h1>
-      <h2>render profile info??</h2>
+      <PostForm/>
+      <PostList/>
     </div>
   )
 }
