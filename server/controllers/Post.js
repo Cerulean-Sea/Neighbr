@@ -2,8 +2,9 @@ const Post = require('../database/Post');
 const Comment = require('../database/Comment');
 
 const getPosts = async (req, res) => {
+  const { page = 1, limit = 10 } = req.query;
   try {
-    const posts = await Post.find().populate(['commentId']);
+    const posts = await Post.find().limit(limit * 1).skip((page - 1) * limit).populate(['commentId']).sort({ created: 'desc' });
     res.status(200).send(posts);
   } catch (error) {
     res.status(400).send(error);
@@ -22,8 +23,20 @@ const getPostById = async (req, res) => {
 
 const getPostsByUserId = async (req, res) => {
   const { userId } = req.params;
+  const { page = 1, limit = 10 } = req.query;
   try {
-    const posts = await Post.find({userId}).populate(['commentId']);
+    const posts = await Post.find({userId}).limit(limit * 1).skip((page - 1) * limit).populate(['commentId']);
+    res.status(200).send(posts);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
+const getPostsByCommunity = async (req, res) => {
+  const { page = 1, limit = 10 } = req.query;
+  const { community } = req.params;
+  try {
+    const posts = await Post.find({community}).limit(limit * 1).skip((page - 1) * limit).populate(['commentId']);
     res.status(200).send(posts);
   } catch (error) {
     res.status(400).send(error);
@@ -66,6 +79,7 @@ module.exports = {
   getPosts,
   getPostById,
   getPostsByUserId,
+  getPostsByCommunity,
   postPost,
   updatePost,
   deletePost
