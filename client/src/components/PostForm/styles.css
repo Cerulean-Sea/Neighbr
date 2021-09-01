@@ -19,10 +19,22 @@
 
 .photo-upload-h3 {
     font-family: Verdana, sans-serif;
-    font-weight: normal;    
+    font-weight: normal;
+    padding: 10px;    
 }
 
 .thumbnail-preview {
     font-family: Verdana, sans-serif;
-    font-weight: normal;       
+    font-weight: normal;
+    padding: 10px;       
+}
+
+.thumbnail-image {
+    display: inline-block;
+}
+
+.thumbnail-img {
+    width: 100px;
+    height: 100px;
+    padding: 10px;
 }

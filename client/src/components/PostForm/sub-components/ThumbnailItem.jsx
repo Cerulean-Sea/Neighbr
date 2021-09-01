@@ -1,9 +1,11 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 
+// Todo: Clicking delete button refreshes page
+
 var ThumbnailItem = (props) => (
-    <div>
-        <img src={props.item} />
+    <div className="thumbnail-image">
+        <img className="thumbnail-img" src={props.item} />
         <p></p>
         <button value={props.item} onClick={props.removePhoto}>Remove Image</button>
     </div>
