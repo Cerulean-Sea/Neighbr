@@ -163,7 +163,11 @@ export default ({ post }) => {
               </Menu>
             </Grid>
             <Typography variant="body1" paragraph={true}>
-              {post.text.slice(0, 50)}...
+              {/* {post.text.slice(0, 50)} */}
+              {post.text.length >= 49 ?
+                (<AccordionDetails>{post.text.slice(0, 50)}...</AccordionDetails>) :
+                (<AccordionDetails>{post.text}</AccordionDetails>)
+              }
             </Typography>
             {post.location && (
               <div className="map" style={{padding: "10px"}}>
@@ -183,6 +187,12 @@ export default ({ post }) => {
 
           </Card>
         </AccordionSummary>
+        <div>
+          {post.text.length >= 49 ?
+            (<AccordionDetails>{post.text}</AccordionDetails>) :
+            (<span></span>)
+          }
+        </div>
         <AccordionDetails>
             <Comments post={post} />
         </AccordionDetails>
