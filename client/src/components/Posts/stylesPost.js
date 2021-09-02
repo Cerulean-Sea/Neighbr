@@ -12,11 +12,12 @@ export default makeStyles((theme) => ({
   header: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center'
   },
   avatar: {
-    marginRight: '5%',
+    margin: '3%',
     width: '8%',
-    height: '8%',
+    height: '8%'
   },
   fab: {
     marginLeft: 'auto',
