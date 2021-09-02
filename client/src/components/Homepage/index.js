@@ -96,7 +96,6 @@ const Homepage = (props) => {
   }
 
     return (
-<<<<<<< HEAD
       <>
       <AccountDropdown
       showPost={showPost} setShowPost={setShowPost}
@@ -122,49 +121,6 @@ const Homepage = (props) => {
           </Hidden>
         </Grid>
       </>
-=======
-      <Grid
-        container
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Grid item xs={12} />
-        <Grid item xs={12} md={8} style={{padding: '20px'}}>
-          <Button className={classes.btn} variant="contained" onClick={() => setShowPost(false)}>Back</Button>
-        </Grid>
-        <Grid item xs={12} md={8} style={{padding: "20px"}}>
-          <div className={classes.create}>
-            <PostForm />
-          </div>
-        </Grid>
-      </Grid>
-    )
-  } else {
-    return (
-      <Grid container className={classes.mainContainer} alignItems="center" justifyContent="center">
-        <Grid item xs={12} md={4} style={{padding: "20px"}}>
-          <FormControl>
-            <FormLabel component="feed-sort-by">Sort Feed</FormLabel>
-            <FormGroup>
-              {tags.map(tag => (
-                <FormControlLabel
-                  control={<Switch checked={state[tag]} onClick={handleChange} name={tag} className={classes.switch}/>}
-                  label={tag}
-                  key={tag}
-                />
-              ))}
-            </FormGroup>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} md={4} style={{padding: '20px'}}>
-          <Button className={classes.btn} variant="contained" onClick={() => setShowPost(true)}>Create Post</Button>
-        </Grid>
-        <Grid item md={4}/>
-        <Grid container item xs={12} md={6} style={{padding: '20px'}}>
-          <PostList className={classes.postList}  />
-        </Grid>
-      </Grid>
->>>>>>> main
     )
   }
 // }
