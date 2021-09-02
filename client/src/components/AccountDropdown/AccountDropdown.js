@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import {MenuItem, makeStyles, Menu, AppBar, Toolbar, Avatar, Box, Button } from '@material-ui/core';
+import {MenuItem, makeStyles, Menu, AppBar, Toolbar, Avatar, Box, Button, Hidden } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
@@ -11,6 +11,8 @@ const AccountDropdown = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
+  const showPost = useSelector((state) => state.ShowPost)
+  const showFilter = useSelector((state) => state.ShowFilter)
 
   const useStyles = makeStyles(theme => ({
     accountButton: {
@@ -39,7 +41,7 @@ const AccountDropdown = () => {
       }
     },
     menu: {
-      backgroundColor: '#2A9D8F'
+      backgroundColor: '#F4A261'
     }
   }));
 
@@ -88,6 +90,10 @@ const AccountDropdown = () => {
 
           {AUTH && (
             <div>
+              <Hidden xsDown>
+                <Button variant="outlined" style={{margin: "20px"}} onClick={() => dispatch({ type: 'SHOW_POST'})}>{showPost ? "View Feed" : "Create Post"}</Button>
+                <Button variant="outlined" style={{margin: "20px"}} onClick={() => dispatch({ type: 'SHOW_FILTER'})}>{showFilter ? "Hide Filters" : "Show Filters"}</Button>
+              </Hidden>
               <IconButton
                 className={classes.menu}
                 aria-label="account of current user"

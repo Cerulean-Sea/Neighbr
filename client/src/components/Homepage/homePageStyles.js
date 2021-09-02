@@ -2,24 +2,27 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   mainContainer: {
-    marginTop: '20px'
+    marginTop: '20px',
+    overflowX: 'hidden',
+    minWidth: '100vw'
   },
   postBtn: {
     position: 'absolute',
+    marginTop: '10px',
     top: '0%',
-    right: '12%',
+    right: '20%',
     zIndex:2000,
 
     backgroundColor: theme.palette.secondary.main,
-    fontSize: '1vw',
     '&:hover': {
       backgroundColor: theme.palette.primary.main
     }
   },
   filterBtn: {
     position: 'absolute',
+    marginTop: '10px',
     top: '0%',
-    right: '24%',
+    right: '30%',
     zIndex:2000,
 
     backgroundColor: theme.palette.secondary.main,
@@ -40,17 +43,23 @@ const useStyles = makeStyles(theme => ({
   },
   filterFormHide: {
     position: 'absolute',
+    top: '20%',
     left: '-100%',
     zIndex: 2000,
     transition: 'all 1s',
-    backgoundColor: theme.palette.paper,
+    backgoundColor: theme.palette.primary.main,
   },
   filterFormVisible: {
     position: 'absolute',
+    top: '20%',
+    margin: 0,
+    padding:'15px',
+    borderRadius: '0px 5px 5px 0px',
     left: '5%',
     zIndex: 2000,
     transition: 'all 1s',
-    backgoundColor: theme.palette.paper,
+    backgroundColor: theme.background.default,
+    boxShadow: theme.shadows[3]
   },
   switch: {
     '& .MuiSwitch-track': {

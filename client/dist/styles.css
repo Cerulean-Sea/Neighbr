@@ -1,10 +1,14 @@
 /* .MuiList-padding {
   background-color: #F4A261;
 } */
+body {
+  margin: 0;
+}
 
 #app {
   min-height: 100vh;
   min-width: 100vw;
+  overflow-x: hidden;
 }
 
 .post-list-item > div {

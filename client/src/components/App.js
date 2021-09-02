@@ -32,18 +32,19 @@ const App = () => {
     <ThemeProvider theme={mainTheme}>
       <Router>
         <div className="app">
-          <Switch>
-            <Route exact path="/">
-              {AUTH ? <Homepage /> : <><AccountDropdown/><LandingPage /></>}
-            </Route>
-            <Route path="/login" component={Login}/>
-            {AUTH && [
-              <Route key="profile" exact path="/profile" component={Profile}/>,
-              <Route key="settings" exact path="/settings" component={Settings}/>,
-              <Route key="chat" exact path="/chat" component={Chat}/>,
-              <Route key="message" exact path="/message" component={DirectMessaging}/>,
-            ]}
-          </Switch>
+          <AccountDropdown/>
+            <Switch>
+              <Route exact path="/">
+                {AUTH ? <Homepage /> : <><LandingPage /></>}
+              </Route>
+              <Route path="/login" component={Login}/>
+              {AUTH && [
+                <Route key="profile" exact path="/profile" component={Profile}/>,
+                <Route key="settings" exact path="/settings" component={Settings}/>,
+                <Route key="chat" exact path="/chat" component={Chat}/>,
+                <Route key="message" exact path="/message" component={DirectMessaging}/>
+              ]}
+            </Switch>
         </div>
       </Router>
     </ThemeProvider>

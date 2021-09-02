@@ -28,8 +28,8 @@ const Homepage = (props) => {
   const AUTH = useSelector(state => state.firebase);
   const location = useLocation();
   const userId = AUTH?.user?.uid;
-  const [showPost, setShowPost] = useState(false);
-  const [showFilter, setShowFilter] = useState(false);
+  const showPost = useSelector((state) => state.ShowPost)
+  const showFilter = useSelector((state) => state.ShowFilter)
   const [state, setState] = useState({
     Happenings: false,
     Swaps: false,
@@ -65,64 +65,43 @@ const Homepage = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-    const filters = [];
-    for (let tag in state) {
-      if (state[tag]) {
-        filters.push(tag);
-      }
-    }
-    let newPosts;
-    if (location.pathname === '/') {
-      if (filters.length) {
-        newPosts = await getPostWithTagFilter(filters);
-      } else {
-        newPosts = await getPosts();
-      }
-      dispatch({ type: 'SET_POSTS', payload: newPosts.data });
-    } else if (location.pathname === '/profile') {
-      if (filters.length) {
-        dispatch(actions.getPostWithTagFilterByUserId(userId, filters));
-      } else {
-        dispatch(actions.getPostsByUserId(userId));
-      }
-    }
   }, [state]);
 
   const community = AUTH?.community;
-  if (community === '' || !community) {
+  if (community === '') {
     return (
-      <Redirect to="/settings" />
+      <Redirect to="/community" />
     )
   }
 
     return (
       <>
-      <AccountDropdown
-      showPost={showPost} setShowPost={setShowPost}
-      showFilter={showFilter} setShowFilter={setShowFilter}/>
-        <Grid container className={classes.mainContainer}>
+        <Grid container className={classes.mainContainer} justifyContent="center" alignItems="center" direction="column">
+          <Grid item>
+            {showPost && <PostForm />}
+          </Grid>
+          <Grid item>
             <FormControl
               className={showFilter ? classes.filterFormVisible : classes.filterFormHide}>
               <FormLabel component="feed-sort-by">Sort Feed</FormLabel>
               <FormGroup>
                 {tags.map(tag => (
                   <FormControlLabel
-                    control={<Switch checked={state[tag]} onClick={handleChange} name={tag} />}
+                    control={<Switch checked={state[tag]} onClick={handleChange} name={tag} className={classes.switch}/>}
                     label={tag}
                     key={tag}
                   />
                 ))}
               </FormGroup>
             </FormControl>
-          {showPost ? <PostForm /> : <PostList className={classes.postList}/>}
-          <Hidden xsDown>
-            <Button className={classes.postBtn} variant="contained" onClick={() => setShowPost(!showPost)}>{showPost ? "View Feed" : "Create Post"}</Button>
-            <Button className={classes.filterBtn} variant="contained" onClick={() => setShowFilter(!showFilter)}>{showFilter ? "Hide Filters" : "Show Filters"}</Button>
-          </Hidden>
+          </Grid>
+          <Grid item>
+           <PostList filterState={state} className={classes.postList}/>
+           </Grid>
         </Grid>
       </>
     )
   }
-// }
+
 
 export default Homepage;
