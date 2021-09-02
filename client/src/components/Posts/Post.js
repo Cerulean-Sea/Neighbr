@@ -111,7 +111,7 @@ export default ({ post }) => {
   return (
     <Container className={classes.container}>
           <CssBaseline />
-          <Card className={classes.card}>
+          <Card className={classes.card} style={{padding: '3%'}}>
 
             <Grid className={classes.header}>
               <Avatar
@@ -174,7 +174,7 @@ export default ({ post }) => {
               </div>
             )}
 
-            <Accordion>
+            <Accordion className={classes.cardBackground}>
               <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                 <Grid className={classes.footer}>
                   <Typography variant="body2">
