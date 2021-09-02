@@ -10,7 +10,7 @@ import Post from './Post';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: '50%',
   },
 }));
 

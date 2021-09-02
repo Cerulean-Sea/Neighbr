@@ -162,9 +162,8 @@ export default ({ post }) => {
                 ))}
               </Menu>
             </Grid>
-
             <Typography variant="body1" paragraph={true}>
-              {post.text}
+              {post.text.slice(0, 50)}...
             </Typography>
             {post.location && (
               <div className="map" style={{padding: "10px"}}>
@@ -185,7 +184,7 @@ export default ({ post }) => {
           </Card>
         </AccordionSummary>
         <AccordionDetails>
-          <Comments post={post} />
+            <Comments post={post} />
         </AccordionDetails>
       </Accordion>
     </Container>
