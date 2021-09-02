@@ -58,7 +58,7 @@ const PostForm = () => {
             userId,
             username: displayName,
             title,
-            body,
+            text: body,
             tags: [tag],
             photos,
             community,
