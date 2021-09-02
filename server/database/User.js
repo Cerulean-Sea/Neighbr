@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
   name: String,
   email: String,
   userId: String,
-  community: String
+  community: String,
+  picture: String
 });
 
 const User = mongoose.model('User', userSchema);
