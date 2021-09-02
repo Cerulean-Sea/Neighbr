@@ -174,9 +174,6 @@ export default ({ post }) => {
                 {post.text}
               </Typography>
               }
-            {/* <Typography variant="body1" paragraph={true} style={{padding: '1rem'}}>
-              {post.text}
-            </Typography> */}
             {post.location && (
               <div className="map" style={{padding: "10px"}}>
                 <RenderMap options={post.location}/>
