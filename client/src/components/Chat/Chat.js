@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 
 function Chat() {
-	const AUTH = JSON.parse(localStorage.getItem('profile'));
+	const AUTH = useSelector(state => state.firebase);
 	return (
 		<ChatEngine
 			height='100vh'

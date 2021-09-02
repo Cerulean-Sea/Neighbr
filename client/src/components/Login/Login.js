@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import {
   Avatar, Button, CssBaseline, TextField,
   FormControlLabel, Checkbox, Link, Grid,
@@ -8,10 +8,8 @@ import { LockOutlined } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 import { emailSignIn, googleSignIn, emailSignUp } from '../../redux/actions/firebase/firebase'
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 import useStyles from './styleLogin';
-import key from '../Chat/config';
-import { useSelector } from 'react-redux';
+
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -27,7 +25,6 @@ export default function Login() {
   }
   const [ formData, setFormData ] = useState(initialState);
   const [ isSignUp, setIsSignUp ] = useState(false);
-  const AUTH = useSelector(state => state.firebase);
 
   const handleChange = (e) => {
     setFormData({
@@ -39,30 +36,10 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { firstName, lastName, email, password, passwordConfirm, zipcode } = formData;
-    const data = {
-      "username": email,
-      "first_name": firstName,
-      "last_name": lastName,
-      "secret": 'password',
-  }
-    const config = {
-      method: 'post',
-      url: 'https://api.chatengine.io/users/',
-      headers: {
-        'PRIVATE-KEY': key
-      },
-      data : data
-    };
+
     if (isSignUp) {
       if (password === passwordConfirm) {
         dispatch(emailSignUp(`${firstName} ${lastName}`, email, password, zipcode, history));
-        axios(config)
-          .then(function (response) {
-            console.log(JSON.stringify(response.data));
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
       } else {
         console.log('Those passwords didn\’t match. Try again.');
       }
@@ -183,21 +160,7 @@ export default function Login() {
         </form>
         <Button
           type="input"
-          onClick={() => {
-            dispatch(googleSignIn(history))
-            data = {
-              "username": AUTH.user.email,
-              "first_name": AUTH.user.displayName,
-              "secret": 'password',
-            }
-          axios(config)
-          .then(function (response) {
-            console.log(JSON.stringify(response.data));
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-          }}
+          onClick={() => { dispatch(googleSignIn(history)) }}
           fullWidth
           variant="contained"
           color="primary"
