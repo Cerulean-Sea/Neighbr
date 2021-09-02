@@ -90,20 +90,8 @@ const Homepage = (props) => {
                 ))}
               </FormGroup>
             </FormControl>
-<<<<<<< HEAD
             </div>
-          {showPost ? <PostForm /> : <PostList className={classes.postList}/>}
-          <Hidden xsDown>
-            <Button className={classes.postBtn} variant="contained" onClick={() => {
-              setShowPost(!showPost)
-              setShowFilter(false)}}>
-                {showPost ? "View Feed" : "Create Post"}
-            </Button>
-            <Button className={classes.filterBtn} variant="contained" onClick={() => setShowFilter(!showFilter)}>{showFilter ? "Hide Filters" : "Show Filters"}</Button>
-          </Hidden>
-=======
           {showPost ? <PostForm /> : <PostList filterState={state} className={classes.postList}/>}
->>>>>>> main
         </Grid>
       </>
     )

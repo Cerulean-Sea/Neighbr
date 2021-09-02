@@ -132,81 +132,6 @@ const AccountDropdown = () => {
                 <Link to='/chat'
                 className={classes.link}
                 >
-<<<<<<< HEAD
-                  <Link to='/profile'
-                  className={classes.link}
-                  >
-                  <MenuItem
-                  className={classes.dropdown}
-                  >{AUTH.user.displayName}</MenuItem>
-                  </Link>
-
-                  <Link to='/chat'
-                  className={classes.link}
-                  >
-                  <MenuItem
-                  className={classes.dropdown}
-                  >Notifications</MenuItem>
-                  </Link>
-
-                  <Link to='/settings'
-                  className={classes.link}
-                  >
-                  <MenuItem
-                  className={classes.dropdown}
-                  >Settings</MenuItem>
-                  </Link>
-                  <MenuItem
-                  className={classes.dropdown}
-                  onClick={logout}
-                  >Logout</MenuItem>
-
-                </Menu>
-                </div>
-
-            )}
-            </Toolbar>
-          </AppBar>
-        </Grid>
-      </Hidden>
-      <Hidden smUp>
-      <AppBar position="fixed" color="primary"
-      className={mobileClasses.appBar}
-      >
-        <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="open menu">
-            <Avatar src='./assets/logo.png' component={Link} to="/"/>
-          </IconButton>
-          <IconButton
-            color="inherit"
-            aria-label="open friends"
-            component={Link} to='/friends'>
-            <SupervisorAccountIcon />
-          </IconButton>
-          <IconButton
-            color="inherit"
-            aria-label="open chats"
-            component={Link} to='/chat'>
-            <ForumIcon />
-          </IconButton>
-          <IconButton
-            color="inherit"
-            aria-label="open filters"
-            onClick={()=>{setShowFilter(!showFilter)}}>
-            <LocalOfferIcon />
-          </IconButton>
-          <Fab color="secondary" aria-label="add post"
-          className={mobileClasses.fabButton}
-          >
-            <AddIcon onClick={()=>{
-              setShowPost(!showPost)
-              setShowFilter(false)}}/>
-          </Fab>
-        </Toolbar>
-      </AppBar>
-      </Hidden>
-      </>
-=======
                 <MenuItem
                 className={classes.dropdown}
                 >Notifications</MenuItem>
@@ -232,7 +157,6 @@ const AccountDropdown = () => {
       </Toolbar>
     </AppBar>
     </div>
->>>>>>> main
   )
 }
 
