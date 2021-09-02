@@ -21,7 +21,7 @@ const CommentTile = ({ comment }) => {
           secondary={
           <div>
             <Typography component="span" variant="body1" className={classes.inline}>
-              {`: ${comment.text}`}
+              {comment.text}
             </Typography>
           </div>}
         />
