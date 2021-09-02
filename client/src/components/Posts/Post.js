@@ -109,7 +109,7 @@ export default ({ post }) => {
   return (
     <Container className={classes.container}>
       <Accordion>
-        <AccordionSummary>
+        <AccordionSummary className={classes.cardBackground}>
 
           <CssBaseline />
           <Card className={classes.card}>
