@@ -1,8 +1,9 @@
 import * as api from '../../api';
 
-export const posts = async (dispatch) => {
+export const posts = async (dispatch, page, limit) => {
+  const params = { page, limit }
   try {
-    const { data } = await api.getPosts();
+    const { data } = await api.getPosts(params);
     dispatch({ type: 'SET_POSTS', payload: data });
   } catch (err) {
     console.error(err);
