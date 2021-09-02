@@ -6,20 +6,21 @@ const useStyles = makeStyles(theme => ({
   },
   postBtn: {
     position: 'absolute',
+    marginTop: '10px',
     top: '0%',
-    right: '12%',
+    right: '20%',
     zIndex:2000,
 
     backgroundColor: theme.palette.secondary.main,
-    fontSize: '1vw',
     '&:hover': {
       backgroundColor: theme.palette.primary.main
     }
   },
   filterBtn: {
     position: 'absolute',
+    marginTop: '10px',
     top: '0%',
-    right: '24%',
+    right: '30%',
     zIndex:2000,
 
     backgroundColor: theme.palette.secondary.main,

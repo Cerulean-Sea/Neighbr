@@ -12,10 +12,10 @@ API.interceptors.request.use((req) => {
 // Posts
 export const getPosts = (params) => API.get(`/posts`, { params });
 export const getPostById = (postId) => API.get(`/posts/${postId}`);
-export const getPostsByUserId = (userId) => API.get(`/posts/users/${userId}`);
+export const getPostsByUserId = (userId, params) => API.get(`/posts/users/${userId}`, { params });
 export const getPostsByCommunity = (community) => API.get(`/posts/community/${community}`);
-export const getPostWithTagFilter = (filters) => API.get(`/posts/filter/${filters}`);
-export const getPostWithTagFilterByUserId = (userId, filters) => API.get(`/posts/users/${userId}/filter/${filters}`);
+export const getPostWithTagFilter = (filters, params) => API.get(`/posts/filter/${filters}`, { params });
+export const getPostWithTagFilterByUserId = (userId, filters, params) => API.get(`/posts/users/${userId}/filter/${filters}`, { params });
 export const postPost = (post) => API.post(`/posts/create`, post);
 export const updatePost = (postId, post) => API.patch(`/posts/${postId}`, post);
 export const deletePost = (postId) => API.delete(`/posts/${postId}`);

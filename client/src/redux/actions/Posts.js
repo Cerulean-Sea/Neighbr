@@ -10,18 +10,30 @@ export const posts = async (dispatch, page, limit) => {
   }
 };
 
-export const getPostsByUserId = (userId) => async (dispatch) => {
+export const getPostsByUserId = (userId, page, limit) => async (dispatch) => {
+  const params = { page, limit };
   try {
-    const { data } = await api.getPostsByUserId(userId);
+    const { data } = await api.getPostsByUserId(userId, params);
     dispatch({ type: 'SET_POSTS', payload: data });
   } catch (err) {
     console.error(err);
   }
 };
 
-export const getPostWithTagFilterByUserId = (userId, filters) => async (dispatch) => {
+export const getPostWithTagFilter = (filters, page, limit) => async (dispatch) => {
+  const params = { page, limit };
   try {
-    const { data } = await api.getPostWithTagFilterByUserId(userId, filters);
+    const { data } = await api.getPostWithTagFilter(filters, params);
+    dispatch({ type: 'SET_POSTS', payload: data });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getPostWithTagFilterByUserId = (userId, filters, page, limit) => async (dispatch) => {
+  const params = { page, limit };
+  try {
+    const { data } = await api.getPostWithTagFilterByUserId(userId, filters, params);
     dispatch({ type: 'SET_POSTS', payload: data });
   } catch (err) {
     console.error(err);
