@@ -21,7 +21,7 @@ import {
   ListItemIcon,
   AccordionDetails,
   AccordionSummary,
-  Accordion
+  Accordion, Button
 } from '@material-ui/core';
 import { MoreVert, Facebook, Twitter, Instagram, Reddit } from '@material-ui/icons';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -165,9 +165,18 @@ export default ({ post }) => {
               </Menu>
             </Grid>
 
-            <Typography variant="body1" paragraph={true} style={{padding: '1rem'}}>
+            {post.text.length >= 49 ?
+              <Typography variant="body1" paragraph={true} style={{padding: '1rem'}}>
+                {post.text.slice(0, 50)}
+              </Typography>
+              :
+              <Typography variant="body1" paragraph={true} style={{padding: '1rem'}}>
+                {post.text}
+              </Typography>
+              }
+            {/* <Typography variant="body1" paragraph={true} style={{padding: '1rem'}}>
               {post.text}
-            </Typography>
+            </Typography> */}
             {post.location && (
               <div className="map" style={{padding: "10px"}}>
                 <RenderMap options={post.location}/>
