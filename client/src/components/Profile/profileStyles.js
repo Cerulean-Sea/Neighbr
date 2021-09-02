@@ -17,15 +17,18 @@ const useStyles = makeStyles(theme => ({
     marginTop: '3vh'
   },
   list: {
-    backgroundColor: '#2A9D8F'
+    backgroundColor: '#2A9D8F',
+    borderRadius: '25px',
+    boxShadow: '0 0 10px #264653',
   },
   infoContainer: {
     marginTop: '10vh',
-    boxShadow: '0 0 10px #264653'
+    padding: '20px',
+
   },
   listItem: {
     '&:hover': {
-      transform: 'scale(1.04)'
+      transform: 'scale(1.02)'
     }
   }
 }));

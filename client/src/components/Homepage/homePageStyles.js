@@ -6,10 +6,11 @@ const useStyles = makeStyles(theme => ({
   },
   btn: {
     backgroundColor: theme.palette.secondary.main,
-    fontSize: '1vw',
     '&:hover': {
       backgroundColor: theme.palette.primary.main
-    }
+    },
+    margin: '0 auto',
+    display: 'flex'
   },
   create: {
     marginTop: '5vh',
