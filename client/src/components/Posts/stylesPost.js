@@ -38,7 +38,7 @@ export default makeStyles((theme) => ({
     color: '#fff'
   },
   typography: {
-    // flexBasis: '1',
+    padding: '.1rem',
   },
   Happenings: {
     // border: '2.5px solid #2A9D8F',

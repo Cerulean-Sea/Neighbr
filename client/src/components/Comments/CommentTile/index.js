@@ -16,16 +16,14 @@ const CommentTile = ({ comment }) => {
           <Avatar alt="neighbor" src="ADD USER AVATAR" />
         </ListItemAvatar>
         <ListItemText
+          disableTypography
           primary={<Typography className={classes.fonts}>{comment.username}</Typography>}
           secondary={
-          <>
-            <Typography component="span" variant="body2" className={classes.inline} color="textPrimary">
-              {comment.email}
-            </Typography>
-            <Typography variant="body1" className={classes.inline}>
+          <div>
+            <Typography component="span" variant="body1" className={classes.inline}>
               {`: ${comment.text}`}
             </Typography>
-          </>}
+          </div>}
         />
         {postTime}
       </ListItem>
