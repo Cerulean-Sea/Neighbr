@@ -28,8 +28,8 @@ const Homepage = (props) => {
   const AUTH = useSelector(state => state.firebase);
   const location = useLocation();
   const userId = AUTH?.user?.uid;
-  const [showPost, setShowPost] = useState(false);
-  const [showFilter, setShowFilter] = useState(false);
+  const showPost = useSelector((state) => state.ShowPost)
+  const showFilter = useSelector((state) => state.ShowFilter)
   const [state, setState] = useState({
     Happenings: false,
     Swaps: false,
@@ -65,41 +65,17 @@ const Homepage = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-    const filters = [];
-    for (let tag in state) {
-      if (state[tag]) {
-        filters.push(tag);
-      }
-    }
-    let newPosts;
-    if (location.pathname === '/') {
-      if (filters.length) {
-        newPosts = await getPostWithTagFilter(filters);
-      } else {
-        newPosts = await getPosts();
-      }
-      dispatch({ type: 'SET_POSTS', payload: newPosts.data });
-    } else if (location.pathname === '/profile') {
-      if (filters.length) {
-        dispatch(actions.getPostWithTagFilterByUserId(userId, filters));
-      } else {
-        dispatch(actions.getPostsByUserId(userId));
-      }
-    }
   }, [state]);
 
   const community = AUTH?.community;
-  if (community === '' || !community) {
+  if (community === '') {
     return (
-      <Redirect to="/settings" />
+      <Redirect to="/community" />
     )
   }
 
     return (
       <>
-      <AccountDropdown
-      showPost={showPost} setShowPost={setShowPost}
-      showFilter={showFilter} setShowFilter={setShowFilter}/>
         <Grid container className={classes.mainContainer}>
             <div className={showFilter ? classes.filterFormVisible : classes.filterFormHide}>
             <FormControl>
@@ -114,6 +90,7 @@ const Homepage = (props) => {
                 ))}
               </FormGroup>
             </FormControl>
+<<<<<<< HEAD
             </div>
           {showPost ? <PostForm /> : <PostList className={classes.postList}/>}
           <Hidden xsDown>
@@ -124,6 +101,9 @@ const Homepage = (props) => {
             </Button>
             <Button className={classes.filterBtn} variant="contained" onClick={() => setShowFilter(!showFilter)}>{showFilter ? "Hide Filters" : "Show Filters"}</Button>
           </Hidden>
+=======
+          {showPost ? <PostForm /> : <PostList filterState={state} className={classes.postList}/>}
+>>>>>>> main
         </Grid>
       </>
     )
