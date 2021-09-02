@@ -109,7 +109,6 @@ const AccountDropdown = () => {
                   vertical: 'top',
                   horizontal: 'right',
                 }}
-                keepMounted
                 transformOrigin={{
                   vertical: 'top',
                   horizontal: 'right',
@@ -139,13 +138,6 @@ const AccountDropdown = () => {
                 <MenuItem
                 className={classes.dropdown}
                 >Settings</MenuItem>
-                </Link>
-                <Link to='/community'
-                className={classes.link}
-                >
-                <MenuItem
-                className={classes.dropdown}
-                >Change Community</MenuItem>
                 </Link>
                 <MenuItem
                 className={classes.dropdown}

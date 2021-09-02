@@ -8,9 +8,8 @@ import { LockOutlined } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 import { emailSignIn, googleSignIn, emailSignUp } from '../../redux/actions/firebase/firebase'
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 import useStyles from './styleLogin';
-import key from '../Chat/config';
+
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -37,30 +36,10 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { firstName, lastName, email, password, passwordConfirm, zipcode } = formData;
-    const data = {
-      "username": email,
-      "first_name": firstName,
-      "last_name": lastName,
-      "secret": 'password',
-  }
-    const config = {
-      method: 'post',
-      url: 'https://api.chatengine.io/users/',
-      headers: {
-        'PRIVATE-KEY': key
-      },
-      data : data
-    };
+
     if (isSignUp) {
       if (password === passwordConfirm) {
         dispatch(emailSignUp(`${firstName} ${lastName}`, email, password, zipcode, history));
-        axios(config)
-          .then(function (response) {
-            console.log(JSON.stringify(response.data));
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
       } else {
         console.log('Those passwords didn\’t match. Try again.');
       }

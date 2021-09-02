@@ -16,7 +16,7 @@ function Profile() {
   const community = AUTH?.community;
   if (community === '') {
     return (
-      <Redirect to="/community" />
+      <Redirect to="/settings" />
     )
   }
 
