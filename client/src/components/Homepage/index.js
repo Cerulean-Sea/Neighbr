@@ -76,7 +76,11 @@ const Homepage = (props) => {
 
     return (
       <>
-        <Grid container className={classes.mainContainer} justifyContent="center" alignItems="center">
+        <Grid container className={classes.mainContainer} justifyContent="center" alignItems="center" direction="column">
+          <Grid item>
+            {showPost && <PostForm />}
+          </Grid>
+          <Grid item>
             <FormControl
               className={showFilter ? classes.filterFormVisible : classes.filterFormHide}>
               <FormLabel component="feed-sort-by">Sort Feed</FormLabel>
@@ -90,7 +94,10 @@ const Homepage = (props) => {
                 ))}
               </FormGroup>
             </FormControl>
-          {showPost ? <PostForm /> : <PostList filterState={state} className={classes.postList}/>}
+          </Grid>
+          <Grid item>
+           <PostList filterState={state} className={classes.postList}/>
+           </Grid>
         </Grid>
       </>
     )
