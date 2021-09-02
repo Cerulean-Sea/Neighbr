@@ -19,7 +19,6 @@ import Chat from './Chat/Chat';
 import Settings from './Settings/Settings';
 import PostList from './Posts/PostList';
 import Homepage from './Homepage';
-
 import mainTheme from './ThemeApp';
 import { ThemeProvider } from '@material-ui/core';
 
