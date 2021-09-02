@@ -22,7 +22,7 @@ const AccountDropdown = () => {
       justifyContent: 'flex-start'
     },
     dropdown: {
-      backgroundColor: "#2A9D8F",
+      backgroundColor: "#F4A261",
       color: '#264653',
       textDecoration: 'bold',
       '&:hover': {
@@ -40,7 +40,7 @@ const AccountDropdown = () => {
       }
     },
     menu: {
-      backgroundColor: '#2A9D8F'
+      backgroundColor: '#F4A261'
     }
   }));
 

@@ -2,7 +2,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   mainContainer: {
-    marginTop: '20px'
+    marginTop: '20px',
+    overflowX: 'hidden',
+    minWidth: '100vw'
   },
   btn: {
     backgroundColor: theme.palette.secondary.main,
