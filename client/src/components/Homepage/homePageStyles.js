@@ -41,6 +41,7 @@ const useStyles = makeStyles(theme => ({
   },
   filterFormHide: {
     position: 'absolute',
+    top: '20%',
     left: '-100%',
     zIndex: 2000,
     transition: 'all 1s',
@@ -48,6 +49,7 @@ const useStyles = makeStyles(theme => ({
   },
   filterFormVisible: {
     position: 'absolute',
+    top: '20%',
     margin: 0,
     padding:'15px',
     borderRadius: '0px 5px 5px 0px',
