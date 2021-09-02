@@ -5,8 +5,6 @@ import { Typography, Paper } from '@material-ui/core';
 
 import Post from './Post';
 
-
-
 export default (props) => {
   const posts = useSelector((state) => state.posts);
 

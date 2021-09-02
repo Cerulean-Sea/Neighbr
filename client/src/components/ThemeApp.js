@@ -3,11 +3,11 @@ import { createTheme } from '@material-ui/core';
 // These colors from Mediterranian Sunset Palette.
 // Can add more if we need.
 const clientColors = {
-  blue: '#457F96',
-  teal: '#32BCAC',
+  blue: '#264653',
+  teal: '#2A9D8F',
   yellow: '#E9C46A',
   orange: '#F4A261',
-  red: '#E2522E',
+  red: '#E76F51',
 }
 
 const mainTheme = createTheme({
@@ -43,11 +43,14 @@ const mainTheme = createTheme({
         html : {
           // playing around with background image overrides.
           // Revisit during stretch for animated ideas. Think Roku screensaver.
-          backgroundImage: 'url("./assets/landing-page.jpg")',
-          backgroundAttachment: 'fixed',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
+
+          //Commented out here due to background overflow issues on homepage Views
+
+          // backgroundImage: 'url("./assets/landing-page.jpg")',
+          // backgroundAttachment: 'fixed',
+          // backgroundPosition: 'center',
+          // backgroundRepeat: 'no-repeat',
+          // backgroundSize: 'cover',
         }
       }
     },

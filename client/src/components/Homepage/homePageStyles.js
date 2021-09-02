@@ -4,7 +4,24 @@ const useStyles = makeStyles(theme => ({
   mainContainer: {
     marginTop: '20px'
   },
-  btn: {
+  postBtn: {
+    position: 'absolute',
+    top: '0%',
+    right: '12%',
+    zIndex:2000,
+
+    backgroundColor: theme.palette.secondary.main,
+    fontSize: '1vw',
+    '&:hover': {
+      backgroundColor: theme.palette.primary.main
+    }
+  },
+  filterBtn: {
+    position: 'absolute',
+    top: '0%',
+    right: '24%',
+    zIndex:2000,
+
     backgroundColor: theme.palette.secondary.main,
     fontSize: '1vw',
     '&:hover': {
@@ -20,6 +37,13 @@ const useStyles = makeStyles(theme => ({
       minWidth: '90%'
     }
   },
+  filterForm: {
+    position: 'absolute',
+    left: '-100%',
+    zIndex: 2000,
+    transition: 'all 1s',
+    backgoundColor: theme.palette.paper,
+  }
 
 }))
 

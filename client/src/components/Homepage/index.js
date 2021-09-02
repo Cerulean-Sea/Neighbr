@@ -11,9 +11,11 @@ import {
   FormLabel,
   FormControlLabel,
   FormGroup,
-  Switch
+  Switch,
+  Hidden
 } from '@material-ui/core';
 import PostForm from '../PostForm/PostForm.jsx';
+import AccountDropdown from '../AccountDropdown/AccountDropdown'
 import { getPostWithTagFilter, getPosts } from '../../api';
 import actions from '../../redux/actions/index';
 
@@ -25,7 +27,8 @@ const Homepage = (props) => {
   const location = useLocation();
   const userId = AUTH?.user?.uid;
   const [showPost, setShowPost] = useState(false);
-  const [state, setState] = React.useState({
+  const [showFilter, setShowFilter] = useState(false);
+  const [state, setState] = useState({
     Happenings: false,
     Swaps: false,
     Safety: false,
@@ -70,50 +73,31 @@ const Homepage = (props) => {
     )
   }
 
-  if (showPost) {
     return (
-      <Grid
-        container
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Grid item xs />
-        <Grid item xs={8}>
-          <div className={classes.create}>
-            <PostForm />
-          </div>
+      <>
+      <AccountDropdown showPost={showPost} setShowPost={setShowPost}/>
+        <Grid container className={classes.mainContainer}>
+            <FormControl className={classes.filterForm}>
+              <FormLabel component="feed-sort-by">Sort Feed</FormLabel>
+              <FormGroup>
+                {tags.map(tag => (
+                  <FormControlLabel
+                    control={<Switch checked={state[tag]} onClick={handleChange} name={tag} />}
+                    label={tag}
+                    key={tag}
+                  />
+                ))}
+              </FormGroup>
+            </FormControl>
+          {showPost ? <PostForm /> : <PostList className={classes.postList}/>}
+          <Hidden xsDown>
+            <Button className={classes.postBtn} variant="contained" onClick={() => setShowPost(!showPost)}>{showPost ? "View Feed" : "Create Post"}</Button>
+            <Button className={classes.filterBtn} variant="contained" onClick={() => setShowFilter(!showFilter)}>{showFilter ? "Hide Filters" : "Show Filters"}</Button>
+          </Hidden>
         </Grid>
-        <Grid item xs>
-          <Button className={classes.btn} variant="contained" onClick={() => setShowPost(false)}>Back</Button>
-        </Grid>
-      </Grid>
-    )
-  } else {
-    return (
-      <Grid container className={classes.mainContainer}>
-        <Grid item xs >
-          <FormControl>
-            <FormLabel component="feed-sort-by">Sort Feed</FormLabel>
-            <FormGroup>
-              {tags.map(tag => (
-                <FormControlLabel
-                  control={<Switch checked={state[tag]} onClick={handleChange} name={tag} />}
-                  label={tag}
-                  key={tag}
-                />
-              ))}
-            </FormGroup>
-          </FormControl>
-        </Grid>
-        <Grid container item xs={8}>
-          <PostList className={classes.postList}  />
-        </Grid>
-        <Grid item xs>
-          <Button className={classes.btn} variant="contained" onClick={() => setShowPost(true)}>Create Post</Button>
-        </Grid>
-      </Grid>
+      </>
     )
   }
-}
+// }
 
 export default Homepage;
