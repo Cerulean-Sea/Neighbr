@@ -34,7 +34,7 @@ export default ({ post }) => {
   const menuOpen = Boolean(anchorEl);
 
   let options;
-  if (user.uid === post.userId) {
+  if (user.uid === post.userInfo.userId) {
     options = ['Share', 'Edit Post', 'Hide', 'Delete Post'];
   } else {
     options = ['Share', 'Hide', 'Report'];

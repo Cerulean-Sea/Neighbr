@@ -97,23 +97,20 @@ const Homepage = (props) => {
 
     return (
       <>
-      <AccountDropdown
-      showPost={showPost} setShowPost={setShowPost}
-      showFilter={showFilter} setShowFilter={setShowFilter}/>
         <Grid container className={classes.mainContainer}>
-            <FormControl
-              className={showFilter ? classes.filterFormVisible : classes.filterFormHide}>
-              <FormLabel component="feed-sort-by">Sort Feed</FormLabel>
-              <FormGroup>
-                {tags.map(tag => (
-                  <FormControlLabel
-                    control={<Switch checked={state[tag]} onClick={handleChange} name={tag} />}
-                    label={tag}
-                    key={tag}
-                  />
-                ))}
-              </FormGroup>
-            </FormControl>
+          <FormControl
+            className={showFilter ? classes.filterFormVisible : classes.filterFormHide}>
+            <FormLabel component="feed-sort-by">Sort Feed</FormLabel>
+            <FormGroup>
+              {tags.map(tag => (
+                <FormControlLabel
+                  control={<Switch checked={state[tag]} onClick={handleChange} name={tag} />}
+                  label={tag}
+                  key={tag}
+                />
+              ))}
+            </FormGroup>
+          </FormControl>
           {showPost ? <PostForm /> : <PostList className={classes.postList}/>}
           <Hidden xsDown>
             <Button className={classes.postBtn} variant="contained" onClick={() => setShowPost(!showPost)}>{showPost ? "View Feed" : "Create Post"}</Button>
@@ -123,6 +120,6 @@ const Homepage = (props) => {
       </>
     )
   }
-// }
+
 
 export default Homepage;
