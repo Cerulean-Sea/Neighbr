@@ -28,8 +28,8 @@ const Homepage = (props) => {
   const AUTH = useSelector(state => state.firebase);
   const location = useLocation();
   const userId = AUTH?.user?.uid;
-  const [showPost, setShowPost] = useState(false);
-  const [showFilter, setShowFilter] = useState(false);
+  const showPost = useSelector((state) => state.ShowPost)
+  const showFilter = useSelector((state) => state.ShowFilter)
   const [state, setState] = useState({
     Happenings: false,
     Swaps: false,
@@ -91,10 +91,6 @@ const Homepage = (props) => {
               </FormGroup>
             </FormControl>
           {showPost ? <PostForm /> : <PostList filterState={state} className={classes.postList}/>}
-          <Hidden xsDown>
-            <Button className={classes.postBtn} variant="contained" onClick={() => setShowPost(!showPost)}>{showPost ? "View Feed" : "Create Post"}</Button>
-            <Button className={classes.filterBtn} variant="contained" onClick={() => setShowFilter(!showFilter)}>{showFilter ? "Hide Filters" : "Show Filters"}</Button>
-          </Hidden>
         </Grid>
       </>
     )
