@@ -77,21 +77,21 @@ const Homepage = (props) => {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item xs />
-        <Grid item xs={8} style={{padding: "10px"}}>
+        <Grid item xs={12} />
+        <Grid item xs={12} md={8} style={{padding: '20px'}}>
+          <Button className={classes.btn} variant="contained" onClick={() => setShowPost(false)}>Back</Button>
+        </Grid>
+        <Grid item xs={12} md={8} style={{padding: "10px"}}>
           <div className={classes.create}>
             <PostForm />
           </div>
-        </Grid>
-        <Grid item xs>
-          <Button className={classes.btn} variant="contained" onClick={() => setShowPost(false)}>Back</Button>
         </Grid>
       </Grid>
     )
   } else {
     return (
-      <Grid container className={classes.mainContainer}>
-        <Grid item xs style={{padding: "25px"}}>
+      <Grid container className={classes.mainContainer} alignItems="center" justifyContent="center">
+        <Grid item xs={12} md={4} style={{padding: "20px"}}>
           <FormControl>
             <FormLabel component="feed-sort-by">Sort Feed</FormLabel>
             <FormGroup>
@@ -105,11 +105,12 @@ const Homepage = (props) => {
             </FormGroup>
           </FormControl>
         </Grid>
-        <Grid container item xs={8}>
-          <PostList className={classes.postList}  />
-        </Grid>
-        <Grid item xs>
+        <Grid item xs={12} md={4} style={{padding: '20px'}}>
           <Button className={classes.btn} variant="contained" onClick={() => setShowPost(true)}>Create Post</Button>
+        </Grid>
+        <Grid item md={4}/>
+        <Grid container item xs={12} md={6} style={{padding: '20px'}}>
+          <PostList className={classes.postList}  />
         </Grid>
       </Grid>
     )
