@@ -1,10 +1,11 @@
-import { posts, getPostsByUserId, getPostWithTagFilter, getPostWithTagFilterByUserId } from './Posts';
+import { posts, getPostsByUserId, getPostWithTagFilter, getPostWithTagFilterByUserId, updatePost } from './Posts';
 
 const actions = {
   posts,
   getPostsByUserId,
+  getPostWithTagFilter,
   getPostWithTagFilterByUserId,
-  getPostWithTagFilter
+  updatePost
 }
 
 export default actions;

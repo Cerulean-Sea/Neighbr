@@ -4,6 +4,9 @@ import { TextField } from '@material-ui/core';
 
 import useStyles from './styles';
 import { postComment } from '../../../redux/actions/comments';
+import { updatePost } from '../../../redux/actions/Posts';
+import * as api from '../../../api';
+import actions from '../../../redux/actions/index';
 
 const CommentForm = ({ post }) => {
   const classes = useStyles();
@@ -30,15 +33,21 @@ const CommentForm = ({ post }) => {
       }));
   };
 
+  const commentObj = {
+    userId,
+    username: displayName,
+    text,
+    postId: post._id
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postComment({
-      userId,
-      username: displayName,
-      text,
-      postId: post._id
-  }));
-    setForm(initialState)
+    dispatch(() => {
+      dispatch(postComment(commentObj));
+      post.commentId.push(commentObj)
+      updatePost(post._id, post)
+    });
+    setForm(initialState);
   }
 
   return (
