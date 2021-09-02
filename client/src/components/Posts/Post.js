@@ -140,6 +140,7 @@ export default ({ post }) => {
             {options.map((o) => (
               <div key={o}>
                 <MenuItem
+                  className={classes.menuItem}
                   onClick={(e) => {
                     handleMenuClose();
                     if (o === 'Share') setDialogOpen(true);

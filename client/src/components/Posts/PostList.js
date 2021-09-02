@@ -3,17 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Typography, Paper } from '@material-ui/core';
 
-<<<<<<< HEAD
 import * as api from '../../api/index';
 import actions from '../../redux/actions/index';
-=======
->>>>>>> main
 import Post from './Post';
 
 
 
 export default (props) => {
-<<<<<<< HEAD
   const dispatch = useDispatch();
   const state = useSelector((state) => {
     return {
@@ -34,7 +30,6 @@ export default (props) => {
     if (observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        console.log('visible');
         actions.posts(dispatch, 1, pageLimit);
         pageLimit += 10;
       }
@@ -52,26 +47,6 @@ export default (props) => {
       setLoading(false);
     }
   }, []);
-=======
-  const posts = useSelector((state) => state.posts);
->>>>>>> main
-
-  // if (location.pathname === '/' && localStorage.profile) {
-  //   window.addEventListener('scroll', (e) => {
-  //     console.log('bottom');
-  //     // const scrollY = window.scrollY;
-  //     // const innerHeight = window.innerHeight;
-  //     // const docHeight = document.documentElement.scrollHeight;
-
-  //     // if (scrollY + innerHeight >= docHeight && localStorage.profile) {
-  //     //   actions.posts(dispatch, 1, pageLimit);
-  //     //   pageLimit += 10;
-  //     // }
-  //     // e.stopImmediatePropagation();
-
-
-  //   });
-  // };
 
   return (
     <>

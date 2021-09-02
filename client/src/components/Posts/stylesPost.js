@@ -60,4 +60,11 @@ export default makeStyles((theme) => ({
     // border: '2.5px solid #264653',
     backgroundColor: '#264653'
   },
+  menuItem: {
+    color: '#264653',
+    textDecoration: 'bold',
+    '&:hover': {
+      backgroundColor: '#F4A261'
+    }
+  }
 }));
