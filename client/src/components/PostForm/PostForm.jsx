@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
-import { Button, TextField, RadioGroup, Radio, FormControl, FormLabel, FormControlLabel, Paper, Typography, Card, Box, Tooltip } from '@material-ui/core';
+import { Button, TextField, RadioGroup, Radio, FormControl, FormLabel, FormControlLabel, Paper, Typography, Card, Box, Tooltip, CircularProgress } from '@material-ui/core';
 import PinDropIcon from '@material-ui/icons/PinDrop';
 
 import ThumbnailList from './ThumbnailList.jsx';
@@ -23,6 +23,7 @@ const PostForm = () => {
     const storage = getStorage(firebaseApp);
 
     const AUTH = useSelector((state) => state.firebase);
+    const [isLoading, setIsLoading] = useState(false);
     const userId = AUTH?.user.uid;
     const displayName = AUTH?.user.displayName;
     const community = AUTH?.community;
@@ -108,7 +109,9 @@ const PostForm = () => {
     }
 
     const getLocation = async () => {
+        setIsLoading(true);
         const {latitude, longitude} = await getCurrentLocation();
+        setIsLoading(false);
         setForm(prevState => ({
             ...prevState,
             location: {latitude, longitude}
@@ -152,6 +155,7 @@ const PostForm = () => {
                     </Button>
                 </Tooltip>
                 <p></p>
+                {isLoading && <CircularProgress color="inherit" />}
                 <Typography variant="body1">{form.location.latitude && (`Latitude: ${form.location.latitude}, Longitude: ${form.location.longitude}`)}</Typography>
                 <p></p>
                 <div className="photo-upload">
