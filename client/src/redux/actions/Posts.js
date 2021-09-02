@@ -19,6 +19,15 @@ export const getPostsByUserId = (userId) => async (dispatch) => {
   }
 };
 
+export const getPostWithTagFilterByUserId = (userId, filters) => async (dispatch) => {
+  try {
+    const { data } = await api.getPostWithTagFilterByUserId(userId, filters);
+    dispatch({ type: 'SET_POSTS', payload: data });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const createPost = (post) => async (dispatch) => {
   try {
     const { data } = await api.postPost(post);

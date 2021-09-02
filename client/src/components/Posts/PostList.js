@@ -3,13 +3,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Typography, Paper } from '@material-ui/core';
 
+<<<<<<< HEAD
 import * as api from '../../api/index';
 import actions from '../../redux/actions/index';
+=======
+>>>>>>> main
 import Post from './Post';
 
 
 
 export default (props) => {
+<<<<<<< HEAD
   const dispatch = useDispatch();
   const state = useSelector((state) => {
     return {
@@ -48,6 +52,9 @@ export default (props) => {
       setLoading(false);
     }
   }, []);
+=======
+  const posts = useSelector((state) => state.posts);
+>>>>>>> main
 
   // if (location.pathname === '/' && localStorage.profile) {
   //   window.addEventListener('scroll', (e) => {

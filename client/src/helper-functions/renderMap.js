@@ -11,11 +11,11 @@ import React from 'react';
   //   zoom: zoom amount between 0 (that's pretty much the whole world) and 21 (individual buildings) as a string, optional
   // }
 
-const renderMap = (options) => {
-  const width = options.width || '450';
-  const height = options.height || '250';
-  const lat = options.lat;
-  const lng = options.lng;
+const RenderMap = ({options}) => {
+  const width = options.width || '350';
+  const height = options.height || '150';
+  const lat = options.latitude;
+  const lng = options.longitude;
   const zoom = options.zoom || '12';
   const src = `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${lat},${lng}&zoom=${zoom}`
 
@@ -28,4 +28,4 @@ const renderMap = (options) => {
   )
 }
 
-export default renderMap;
+export default RenderMap;

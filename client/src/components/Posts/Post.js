@@ -23,6 +23,7 @@ import {
 import { MoreVert, Facebook, Twitter, Instagram, Reddit } from '@material-ui/icons';
 
 import useStyles from './stylesPost';
+import RenderMap from '../../helper-functions/renderMap';
 
 export default ({ post }) => {
   const dispatch = useDispatch();
@@ -108,9 +109,11 @@ export default ({ post }) => {
         <Grid className={classes.header}>
           <Avatar
             className={classes.avatar}
+            alt="Neighbor"
+            src={post?.userInfo?.picture || 'https://firebasestorage.googleapis.com/v0/b/neighbr-55334.appspot.com/o/no-photo.png?alt=media&token=b0bd075e-2bd2-48c8-9cff-c448930ab8ba'}
           />
           <Grid>
-            <Typography variant="body1">{post.username}</Typography>
+            <Typography variant="body1">{post?.userInfo?.name}</Typography>
             <Typography className={classes.typography} variant="h6">
               {post.title}
             </Typography>
@@ -154,6 +157,11 @@ export default ({ post }) => {
         <Typography variant="body1" paragraph={true}>
           {post.text}
         </Typography>
+        {post.location && (
+          <div className="map" style={{padding: "10px"}}>
+            <RenderMap options={post.location}/>
+          </div>
+        )}
 
         <Grid className={classes.footer}>
           <Typography variant="body2">

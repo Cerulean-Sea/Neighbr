@@ -22,15 +22,25 @@ const AccountDropdown = () => {
       justifyContent: 'flex-start'
     },
     dropdown: {
+      backgroundColor: "#2A9D8F",
       color: '#264653',
       textDecoration: 'bold',
+      '&:hover': {
+        backgroundColor: '#F4A261'
+      }
     },
     link: {
-      textDecoration: 'none'
+      textDecoration: 'none',
     },
-    login: {
+    btn: {
       backgroundColor: '#264653',
-      color: '#fff'
+      color: 'white',
+      '&:hover': {
+        backgroundColor: '#2A9D8F'
+      }
+    },
+    menu: {
+      backgroundColor: '#2A9D8F'
     }
   }));
 
@@ -74,7 +84,7 @@ const AccountDropdown = () => {
           </Box>
 
           {!AUTH && (
-            <Button component={Link} to="/login" variant="contained" className={classes.login}>Login</Button>
+            <Button component={Link} className={classes.btn} to="/login" variant="contained" color="default">Login</Button>
           )}
 
           {AUTH && (
@@ -128,6 +138,13 @@ const AccountDropdown = () => {
                 <MenuItem
                 className={classes.dropdown}
                 >Settings</MenuItem>
+                </Link>
+                <Link to='/community'
+                className={classes.link}
+                >
+                <MenuItem
+                className={classes.dropdown}
+                >Change Community</MenuItem>
                 </Link>
                 <MenuItem
                 className={classes.dropdown}
