@@ -61,25 +61,29 @@ export default (props) => {
       {posts.map((p, i) => {
         if (posts.length === i + 1) {
           return (
-            <Accordion className={classes.root}>
-              <AccordionSummary>
-                <div className="post-list-item" key={p._id} ref={lastPostRef}><Post post={p} /></div>
-              </AccordionSummary>
-              <AccordionDetails>
-                <div key={p._id} ref={lastPostRef}><Comments post={p} /></div>
-              </AccordionDetails>
-            </Accordion>
+            <div className="post-list-item" key={p._id} ref={lastPostRef}>
+              <Accordion className={classes.root}>
+                <AccordionSummary>
+                  <Post post={p} />
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Comments post={p} />
+                </AccordionDetails>
+              </Accordion>
+            </div>
           )
         } else {
           return (
-            <Accordion className={classes.root}>
-              <AccordionSummary>
-                <div className="post-list-item" key={p._id}><Post post={p} /></div>
-              </AccordionSummary>
-              <AccordionDetails>
-              <div key={p._id} ref={lastPostRef}><Comments post={p} /></div>
-              </AccordionDetails>
-            </Accordion>
+            <div className="post-list-item" key={p._id}>
+              <Accordion className={classes.root}>
+                <AccordionSummary>
+                  <Post post={p} />
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Comments post={p} />
+                </AccordionDetails>
+              </Accordion>
+            </div>
           )
         }
       })}
