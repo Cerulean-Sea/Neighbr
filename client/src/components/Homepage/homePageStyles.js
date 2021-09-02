@@ -21,6 +21,11 @@ const useStyles = makeStyles(theme => ({
       minWidth: '90%'
     }
   },
+  switch: {
+    '& .MuiSwitch-track': {
+        backgroundColor:'#E76F51'
+    }
+  }
 
 }))
 
