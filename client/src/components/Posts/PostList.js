@@ -2,12 +2,19 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, Link } from 'react-router-dom';
 import { Typography, Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 import * as api from '../../api/index';
 import actions from '../../redux/actions/index';
 import Post from './Post';
 import DirectMessaging from '../Chat/DirectMessaging';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+  },
+}));
 
 export default (props) => {
   const filterState = props.filterState;
@@ -68,13 +75,23 @@ export default (props) => {
     setLoading(false);
   }, [filterState]);
 
+  const classes = useStyles();
+
   return (
     <>
       {posts.map((p, i) => {
         if (posts.length === i + 1) {
-          return <div className="post-list-item" key={p._id} ref={lastPostRef}><Post post={p} /></div>
+          return (
+            <div className="post-list-item" key={p._id} ref={lastPostRef}>
+              <Post post={p} />
+            </div>
+          )
         } else {
-          return <div className="post-list-item" key={p._id}><Post post={p} /></div>
+          return (
+            <div className="post-list-item" key={p._id}>
+              <Post post={p} />
+            </div>
+          )
         }
       })}
 
