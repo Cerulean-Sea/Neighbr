@@ -28,13 +28,14 @@ import RenderMap from '../../helper-functions/renderMap';
 export default ({ post }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const user = useSelector((state) => state.firebase.user);
+  const AUTH = useSelector((state) => state.firebase);
+  const user = AUTH?.user;
   const [anchorEl, setAnchorEl] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const menuOpen = Boolean(anchorEl);
 
   let options;
-  if (user.uid === post.userId) {
+  if (user?.uid === post?.userInfo?.userId) {
     options = ['Share', 'Edit Post', 'Hide', 'Delete Post'];
   } else {
     options = ['Share', 'Hide', 'Report'];
