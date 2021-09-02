@@ -19,7 +19,7 @@ import Chat from './Chat/Chat';
 import Settings from './Settings/Settings';
 import PostList from './Posts/PostList';
 import Homepage from './Homepage';
-
+import DirectMessaging from './Chat/DirectMessaging';
 import mainTheme from './ThemeApp';
 import { ThemeProvider } from '@material-ui/core';
 
@@ -41,6 +41,7 @@ const App = () => {
               <Route key="profile" exact path="/profile" component={Profile}/>,
               <Route key="settings" exact path="/settings" component={Settings}/>,
               <Route key="chat" exact path="/chat" component={Chat}/>,
+              <Route key="message" exact path="/message" component={DirectMessaging}/>,
             ]}
           </Switch>
         </div>
