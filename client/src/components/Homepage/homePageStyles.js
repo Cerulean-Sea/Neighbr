@@ -37,9 +37,16 @@ const useStyles = makeStyles(theme => ({
       minWidth: '90%'
     }
   },
-  filterForm: {
+  filterFormHide: {
     position: 'absolute',
     left: '-100%',
+    zIndex: 2000,
+    transition: 'all 1s',
+    backgoundColor: theme.palette.paper,
+  },
+  filterFormVisible: {
+    position: 'absolute',
+    left: '5%',
     zIndex: 2000,
     transition: 'all 1s',
     backgoundColor: theme.palette.paper,

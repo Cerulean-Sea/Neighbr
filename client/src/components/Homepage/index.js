@@ -77,7 +77,8 @@ const Homepage = (props) => {
       <>
       <AccountDropdown showPost={showPost} setShowPost={setShowPost}/>
         <Grid container className={classes.mainContainer}>
-            <FormControl className={classes.filterForm}>
+            <FormControl
+              className={showFilter ? classes.filterFormVisible : classes.filterFormHide}>
               <FormLabel component="feed-sort-by">Sort Feed</FormLabel>
               <FormGroup>
                 {tags.map(tag => (
