@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { List, Container } from '@material-ui/core';
 
@@ -10,6 +10,10 @@ const Comments = ({ post }) => {
   const classes = useStyles();
 
   const sortedComments = post.commentId.slice().sort((a, b) => b.updated - a.updated).reverse();
+
+  useEffect(() => {
+
+  }, [post.commentId]);
 
   return (
     !post.commentId.length? <Container><CommentForm post={post} /></Container> : (
