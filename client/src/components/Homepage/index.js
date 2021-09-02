@@ -89,9 +89,9 @@ const Homepage = (props) => {
   }, [state]);
 
   const community = AUTH?.community;
-  if (community === '') {
+  if (community === '' || !community) {
     return (
-      <Redirect to="/community" />
+      <Redirect to="/settings" />
     )
   }
 
