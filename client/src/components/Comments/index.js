@@ -6,19 +6,18 @@ import CommentTile from './CommentTile/';
 import CommentForm from './CommentForm/';
 import useStyles from './styles';
 
-const Comments = () => {
-  const comments = useSelector((state) => state.comments);
+const Comments = ({ post }) => {
   const classes = useStyles();
 
   return (
-    !comments.length? <CircularProgress /> : (
+    !post.commentId.length? <CommentForm post={post} /> : (
       <List className={classes.root}>
-        {comments.map((comment) => (
+        {post.commentId.map((comment) => (
           <React.Fragment key={comment._id}>
             <CommentTile comment={comment} />
           </React.Fragment>
         ))}
-        <CommentForm />
+        <CommentForm post={post} />
       </List>
     )
   );
