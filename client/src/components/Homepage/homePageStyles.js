@@ -2,9 +2,11 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   mainContainer: {
-    marginTop: '20px',
+    paddingTop: '20px',
     overflowX: 'hidden',
-    minWidth: '100vw'
+    minWidth: '100vw',
+    backgroundColor: '#2a9d8f4f',
+    minHeight: '94.4vh'
   },
   postBtn: {
     position: 'absolute',

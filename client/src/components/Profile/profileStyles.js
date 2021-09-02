@@ -30,6 +30,9 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       transform: 'scale(1.02)'
     }
+  },
+  infoGrid: {
+    backgroundColor: '#2a9d8f4f'
   }
 }));
 
