@@ -22,7 +22,6 @@ const googleSignIn = async (req, res) => {
   const { displayName, email, uid, photoURL } = req.body;
   try {
     const user = await User.find({email});
-    console.log(user);
     if (!user.length) {
       const newUser = await User.create({ name: displayName, email, userId: uid, picture: photoURL });
       return res.status(201).send({message: 'New user created.'});
