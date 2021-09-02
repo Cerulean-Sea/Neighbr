@@ -81,7 +81,7 @@ const Homepage = (props) => {
         <Grid item xs={12} md={8} style={{padding: '20px'}}>
           <Button className={classes.btn} variant="contained" onClick={() => setShowPost(false)}>Back</Button>
         </Grid>
-        <Grid item xs={12} md={8} style={{padding: "10px"}}>
+        <Grid item xs={12} md={8} style={{padding: "20px"}}>
           <div className={classes.create}>
             <PostForm />
           </div>
