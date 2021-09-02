@@ -206,7 +206,8 @@ const AccountDropdown = ({showPost, setShowPost, showFilter, setShowFilter}) => 
           className={mobileClasses.fabButton}
           >
             <AddIcon onClick={()=>{
-              setShowPost(!showPost)}}/>
+              setShowPost(!showPost)
+              setShowFilter(false)}}/>
           </Fab>
         </Toolbar>
       </AppBar>
