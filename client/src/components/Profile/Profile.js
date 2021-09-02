@@ -24,6 +24,7 @@ function Profile() {
   const user = AUTH.user;
 
   return (
+    <>
     <Grid
       container
       justifyContent="center"
@@ -67,8 +68,9 @@ function Profile() {
           </ListItem>
         </List>
       </Grid>
-      <Homepage/>
     </Grid>
+    <Homepage/>
+    </>
   )
 }
 
