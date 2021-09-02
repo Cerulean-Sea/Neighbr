@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, Grid, Typography, ImageListItemBar, ThemeProvider, createTheme, Card, Avatar } from '@material-ui/core';
 import useStyles from './SettingsStyle';
 import axios from 'axios';
+import Community from '../Community/Community';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 function Settings() {
   const state = {
@@ -11,6 +13,33 @@ function Settings() {
 
   const [ zipcode, changeZipcode ] = useState(AUTH.community)
   const [ input, changeInput ] = useState(state);
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#457F96',
+      },
+      secondary: {
+        main: '#32BCAC',
+      }
+    },
+    typography: {
+      h3: {
+        fontSize: 36,
+        marginTop: 30,
+      },
+      h4: {
+        fontSize: 24,
+        marginTop: 20,
+      },
+      h5: {
+        fontSize: 16
+      }
+    },
+    textField: {
+      margin: 15
+    },
+  })
 
   useEffect(() => {
     axios.get(`/api/users/community/${AUTH.user.uid}`)
@@ -43,36 +72,76 @@ function Settings() {
 
   return (
     <div className={classes.root}>
-      <h1>Edit Account Information</h1>
-      <h2>Account Information</h2>
-      <div>Name</div>
-      <div>{AUTH.user.displayName}</div>
-      <div>Email</div>
-      <div>{AUTH.user.email}</div>
+    <Card className={classes.card}
+    variant="outlined">
+    <ThemeProvider theme={theme}>
+        <Typography
+          variant="h3"
+        >Personal Info
+        </Typography>
 
-      <h2>Change Location</h2>
+        <Typography
+          variant="h5"
+          className={classes.pos}
+        >Info about you and your settings across Neighbr services
+        </Typography>
 
-      <form className={classes.form}>
+        <div>
+        {AUTH.user.photoURL ? <Avatar src={AUTH.user.photoURL} className={classes.large}/> : <AccountCircle className={classes.large}/>}
+        </div>
+
+        <Typography
+         variant="h4"
+         className={classes.pos}
+        >Basic Info
+        </Typography>
 
         <TextField
+            className={classes.pos}
+            onChange={handleChange}
+            disabled={true}
+            label="Name"
+            id="name"
+            defaultValue={AUTH.user.displayName}
+            variant="outlined"
+          />
+
+        <TextField
+          className={classes.pos}
           onChange={handleChange}
-          label="Zipcode"
-          id="outlined-size-normal"
-          defaultValue={zipcode}
+          disabled={true}
+          label="Email"
+          id="email"
+          defaultValue={AUTH.user.email}
           variant="outlined"
         />
 
-        <Button
-          type="input"
-          onClick={handleSave}
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.save}
-          >
-            Save
-        </Button>
-      </form>
+        <Typography
+         className={classes.pos}
+         variant="h4"
+        >Change Location
+        </Typography>
+
+          <TextField
+            onChange={handleChange}
+            label="Zipcode"
+            id="outlined-size-normal"
+            defaultValue={zipcode}
+            variant="outlined"
+          />
+
+          <Button
+            type="input"
+            onClick={handleSave}
+            variant="contained"
+            color="primary"
+            className={classes.save}
+            >
+              Save
+          </Button>
+          {/* <Community /> */}
+    </ThemeProvider>
+    </Card>
     </div>
   )
 }
