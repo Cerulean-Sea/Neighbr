@@ -18,6 +18,8 @@ import PostForm from '../PostForm/PostForm.jsx';
 import AccountDropdown from '../AccountDropdown/AccountDropdown'
 import { getPostWithTagFilter, getPosts } from '../../api';
 import actions from '../../redux/actions/index';
+import axios from 'axios';
+import key from '../Chat/config'
 
 const Homepage = (props) => {
   const classes = useStyles();
@@ -43,6 +45,26 @@ const Homepage = (props) => {
   };
 
   useEffect(async () => {
+    const data = await {
+      "username": AUTH.user.email,
+      "first_name": AUTH.user.displayName,
+      "secret": 'password',
+  }
+    const config = await {
+      method: 'post',
+      url: 'https://api.chatengine.io/users/',
+      headers: {
+        'PRIVATE-KEY': key
+      },
+      data : data
+    };
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     const filters = [];
     for (let tag in state) {
       if (state[tag]) {
@@ -74,6 +96,7 @@ const Homepage = (props) => {
   }
 
     return (
+<<<<<<< HEAD
       <>
       <AccountDropdown
       showPost={showPost} setShowPost={setShowPost}
@@ -99,6 +122,49 @@ const Homepage = (props) => {
           </Hidden>
         </Grid>
       </>
+=======
+      <Grid
+        container
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item xs={12} />
+        <Grid item xs={12} md={8} style={{padding: '20px'}}>
+          <Button className={classes.btn} variant="contained" onClick={() => setShowPost(false)}>Back</Button>
+        </Grid>
+        <Grid item xs={12} md={8} style={{padding: "20px"}}>
+          <div className={classes.create}>
+            <PostForm />
+          </div>
+        </Grid>
+      </Grid>
+    )
+  } else {
+    return (
+      <Grid container className={classes.mainContainer} alignItems="center" justifyContent="center">
+        <Grid item xs={12} md={4} style={{padding: "20px"}}>
+          <FormControl>
+            <FormLabel component="feed-sort-by">Sort Feed</FormLabel>
+            <FormGroup>
+              {tags.map(tag => (
+                <FormControlLabel
+                  control={<Switch checked={state[tag]} onClick={handleChange} name={tag} className={classes.switch}/>}
+                  label={tag}
+                  key={tag}
+                />
+              ))}
+            </FormGroup>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} md={4} style={{padding: '20px'}}>
+          <Button className={classes.btn} variant="contained" onClick={() => setShowPost(true)}>Create Post</Button>
+        </Grid>
+        <Grid item md={4}/>
+        <Grid container item xs={12} md={6} style={{padding: '20px'}}>
+          <PostList className={classes.postList}  />
+        </Grid>
+      </Grid>
+>>>>>>> main
     )
   }
 // }

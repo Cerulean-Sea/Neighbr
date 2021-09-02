@@ -23,10 +23,11 @@ const useStyles = makeStyles(theme => ({
     zIndex:2000,
 
     backgroundColor: theme.palette.secondary.main,
-    fontSize: '1vw',
     '&:hover': {
       backgroundColor: theme.palette.primary.main
-    }
+    },
+    margin: '0 auto',
+    display: 'flex'
   },
   create: {
     marginTop: '5vh',
@@ -50,6 +51,11 @@ const useStyles = makeStyles(theme => ({
     zIndex: 2000,
     transition: 'all 1s',
     backgoundColor: theme.palette.paper,
+  },
+  switch: {
+    '& .MuiSwitch-track': {
+        backgroundColor:'#E76F51'
+    }
   }
 
 }))

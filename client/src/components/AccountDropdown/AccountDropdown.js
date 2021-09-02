@@ -22,16 +22,28 @@ const AccountDropdown = ({showPost, setShowPost, showFilter, setShowFilter}) => 
       color: '#264653'
     },
     appbar: {
-      backgroundColor: "#F4A261",
+      backgroundColor: "#2A9D8F",
       justifyContent: 'flex-start'
     },
     dropdown: {
-      backgroundColor: "#F4A261",
       color: '#264653',
       textDecoration: 'bold',
+      '&:hover': {
+        backgroundColor: '#F4A261'
+      }
     },
     link: {
-      textDecoration: 'none'
+      textDecoration: 'none',
+    },
+    btn: {
+      backgroundColor: '#264653',
+      color: 'white',
+      '&:hover': {
+        backgroundColor: '#2A9D8F'
+      }
+    },
+    menu: {
+      backgroundColor: '#2A9D8F'
     }
   }));
   const useMobileStyles = makeStyles((theme) => ({
