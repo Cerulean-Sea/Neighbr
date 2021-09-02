@@ -23,6 +23,7 @@ import {
 import { MoreVert, Facebook, Twitter, Instagram, Reddit } from '@material-ui/icons';
 
 import useStyles from './stylesPost';
+import RenderMap from '../../helper-functions/renderMap';
 
 export default ({ post }) => {
   const dispatch = useDispatch();
@@ -116,7 +117,7 @@ export default ({ post }) => {
             <Typography className={classes.typography} variant="h6">
               {post.title}
             </Typography>
-            {post.tags.map((tag) => <span key={tag} className={`${classes.tag} ${classes[tag]}`}>{`${tag}!`}</span>)}
+            {post.tags.map((tag) => <span key={tag} className={`${classes.tag} ${classes[tag.replace(/\s/g, "")]}`}>{`${tag}!`}</span>)}
           </Grid>
 
           <IconButton
@@ -133,13 +134,13 @@ export default ({ post }) => {
           <Menu
             id="short-menu"
             anchorEl={anchorEl}
-            keepMounted
             open={menuOpen}
             onClose={handleMenuClose}
           >
             {options.map((o) => (
               <div key={o}>
                 <MenuItem
+                  className={classes.menuItem}
                   onClick={(e) => {
                     handleMenuClose();
                     if (o === 'Share') setDialogOpen(true);
@@ -157,6 +158,11 @@ export default ({ post }) => {
         <Typography variant="body1" paragraph={true}>
           {post.text}
         </Typography>
+        {post.location && (
+          <div className="map" style={{padding: "10px"}}>
+            <RenderMap options={post.location}/>
+          </div>
+        )}
 
         <Grid className={classes.footer}>
           <Typography variant="body2">

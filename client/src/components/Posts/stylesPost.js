@@ -12,11 +12,12 @@ export default makeStyles((theme) => ({
   header: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center'
   },
   avatar: {
-    marginRight: '5%',
+    margin: '3%',
     width: '8%',
-    height: '8%',
+    height: '8%'
   },
   fab: {
     marginLeft: 'auto',
@@ -32,23 +33,38 @@ export default makeStyles((theme) => ({
     padding: '0.2rem',
     justifySelf: 'center',
     alignSelf: 'center',
+    fontSize: '85%',
+    fontWeight: '600',
+    color: '#fff'
   },
   typography: {
     // flexBasis: '1',
   },
   Happenings: {
-    border: '3px solid #2A9D8F',
+    // border: '2.5px solid #2A9D8F',
+    backgroundColor: '#2A9D8F'
   },
   Swaps: {
-    border: '3px solid #E9C46A',
+    // border: '2.5px solid #E9C46A',
+    backgroundColor: '#E3B644',
   },
   Safety: {
-    border: '3px solid #E76F51',
+    // border: '2.5px solid #E76F51',
+    backgroundColor: '#E76F51'
   },
   Favors: {
-    border: '3px solid #F4A261',
+    // border: '2.5px solid #F4A261',
+    backgroundColor: '#F18C3A'
   },
-  "Chit Chat": {
-    border: '3px solid #264653',
+  ChitChat: {
+    // border: '2.5px solid #264653',
+    backgroundColor: '#264653'
   },
+  menuItem: {
+    color: '#264653',
+    textDecoration: 'bold',
+    '&:hover': {
+      backgroundColor: '#F4A261'
+    }
+  }
 }));
