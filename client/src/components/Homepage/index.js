@@ -78,7 +78,7 @@ const Homepage = (props) => {
         alignItems="center"
       >
         <Grid item xs />
-        <Grid item xs={8}>
+        <Grid item xs={8} style={{padding: "10px"}}>
           <div className={classes.create}>
             <PostForm />
           </div>
@@ -91,7 +91,7 @@ const Homepage = (props) => {
   } else {
     return (
       <Grid container className={classes.mainContainer}>
-        <Grid item xs >
+        <Grid item xs style={{padding: "25px"}}>
           <FormControl>
             <FormLabel component="feed-sort-by">Sort Feed</FormLabel>
             <FormGroup>
