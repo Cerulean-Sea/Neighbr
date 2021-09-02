@@ -10,6 +10,15 @@ export const posts = async (dispatch, page, limit) => {
   }
 };
 
+export const getPostsByUserId = (userId) => async (dispatch) => {
+  try {
+    const { data } = await api.getPostsByUserId(userId);
+    dispatch({ type: 'SET_POSTS', payload: data });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const createPost = (post) => async (dispatch) => {
   try {
     const { data } = await api.postPost(post);

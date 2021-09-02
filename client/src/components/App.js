@@ -14,10 +14,11 @@ import Login from './Login/Login';
 import { useSelector, useDispatch } from 'react-redux';
 import LandingPage from './LandingPage';
 import AccountDropdown from './AccountDropdown/AccountDropdown.js';
-import Profile from './AccountDropdown/Profile';
+import Profile from './Profile/Profile';
 import Chat from './Chat/Chat';
 import Settings from './AccountDropdown/Settings';
 import PostList from './Posts/PostList';
+import Homepage from './Homepage';
 
 import mainTheme from './ThemeApp';
 import { ThemeProvider } from '@material-ui/core';
@@ -34,23 +35,14 @@ const App = () => {
         <AccountDropdown />
         <Switch>
           <Route exact path="/">
-            {AUTH ? <div>
-              <PostForm />
-              <PostList />
-            </div> : <LandingPage />}
+            {AUTH ? <Homepage /> : <LandingPage />}
           </Route>
-          <Route path="/login">
-           <Login />
-          </Route>
-          <Route exact path="/profile">
-            {AUTH && <Profile />}
-          </Route>
-          <Route exact path="/settings">
-            {AUTH && <Settings />}
-          </Route>
-          <Route exact path="/chat">
-            {AUTH && <Chat />}
-          </Route>
+          <Route path="/login" component={Login}/>
+          {AUTH && [
+            <Route key="profile" exact path="/profile" component={Profile}/>,
+            <Route key="settings" exact path="/settings" component={Settings}/>,
+            <Route key="chat" exact path="/chat" component={Chat}/>,
+          ]}
         </Switch>
       </div>
     </Router>
