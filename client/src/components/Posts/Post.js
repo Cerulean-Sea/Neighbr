@@ -19,11 +19,15 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
+  AccordionDetails,
+  AccordionSummary,
+  Accordion
 } from '@material-ui/core';
 import { MoreVert, Facebook, Twitter, Instagram, Reddit } from '@material-ui/icons';
 
 import useStyles from './stylesPost';
 import RenderMap from '../../helper-functions/renderMap';
+import Comments from '../Comments/';
 
 export default ({ post }) => {
   const dispatch = useDispatch();
@@ -104,78 +108,86 @@ export default ({ post }) => {
 
   return (
     <Container className={classes.container}>
-      <CssBaseline />
-      <Card className={classes.card}>
+      <Accordion>
+        <AccordionSummary>
 
-        <Grid className={classes.header}>
-          <Avatar
-            className={classes.avatar}
-            alt="Neighbor"
-            src={post?.userInfo?.picture || 'https://firebasestorage.googleapis.com/v0/b/neighbr-55334.appspot.com/o/no-photo.png?alt=media&token=b0bd075e-2bd2-48c8-9cff-c448930ab8ba'}
-          />
-          <Grid>
-            <Typography variant="body1">{post?.userInfo?.name}</Typography>
-            <Typography className={classes.typography} variant="h6">
-              {post.title}
+          <CssBaseline />
+          <Card className={classes.card}>
+
+            <Grid className={classes.header}>
+              <Avatar
+                className={classes.avatar}
+                alt="Neighbor"
+                src={post?.userInfo?.picture || 'https://firebasestorage.googleapis.com/v0/b/neighbr-55334.appspot.com/o/no-photo.png?alt=media&token=b0bd075e-2bd2-48c8-9cff-c448930ab8ba'}
+              />
+              <Grid>
+                <Typography variant="body1">{post?.userInfo?.name}</Typography>
+                <Typography className={classes.typography} variant="h6">
+                  {post.title}
+                </Typography>
+                {post.tags.map((tag) => <span key={tag} className={`${classes.tag} ${classes[tag.replace(/\s/g, "")]}`}>{`${tag}!`}</span>)}
+              </Grid>
+
+              <IconButton
+                aria-label="options"
+                aria-controls="short-menu"
+                aria-haspopup="true"
+                onClick={(e) => {
+                  setAnchorEl(e.currentTarget);
+                }}
+                className={classes.fab}
+              >
+                <MoreVert />
+              </IconButton>
+              <Menu
+                id="short-menu"
+                anchorEl={anchorEl}
+                open={menuOpen}
+                onClose={handleMenuClose}
+              >
+                {options.map((o) => (
+                  <div key={o}>
+                    <MenuItem
+                      className={classes.menuItem}
+                      onClick={(e) => {
+                        handleMenuClose();
+                        if (o === 'Share') setDialogOpen(true);
+                        if (o === 'Delete Post') deletePost(post._id);
+                      }}
+                    >
+                      {o}
+                    </MenuItem>
+                    {o === 'Share' && <SharePost />}
+                  </div>
+                ))}
+              </Menu>
+            </Grid>
+
+            <Typography variant="body1" paragraph={true}>
+              {post.text}
             </Typography>
-            {post.tags.map((tag) => <span key={tag} className={`${classes.tag} ${classes[tag.replace(/\s/g, "")]}`}>{`${tag}!`}</span>)}
-          </Grid>
-
-          <IconButton
-            aria-label="options"
-            aria-controls="short-menu"
-            aria-haspopup="true"
-            onClick={(e) => {
-              setAnchorEl(e.currentTarget);
-            }}
-            className={classes.fab}
-          >
-            <MoreVert />
-          </IconButton>
-          <Menu
-            id="short-menu"
-            anchorEl={anchorEl}
-            open={menuOpen}
-            onClose={handleMenuClose}
-          >
-            {options.map((o) => (
-              <div key={o}>
-                <MenuItem
-                  className={classes.menuItem}
-                  onClick={(e) => {
-                    handleMenuClose();
-                    if (o === 'Share') setDialogOpen(true);
-                    if (o === 'Delete Post') deletePost(post._id);
-                  }}
-                >
-                  {o}
-                </MenuItem>
-                {o === 'Share' && <SharePost />}
+            {post.location && (
+              <div className="map" style={{padding: "10px"}}>
+                <RenderMap options={post.location}/>
               </div>
-            ))}
-          </Menu>
-        </Grid>
+            )}
 
-        <Typography variant="body1" paragraph={true}>
-          {post.text}
-        </Typography>
-        {post.location && (
-          <div className="map" style={{padding: "10px"}}>
-            <RenderMap options={post.location}/>
-          </div>
-        )}
+            <Grid className={classes.footer}>
+              <Typography variant="body2">
+                {`${post.commentId.length} comments`}
+              </Typography>
 
-        <Grid className={classes.footer}>
-          <Typography variant="body2">
-            {`${post.commentId.length} comments`}
-          </Typography>
+              <Typography variant="body2">
+                {moment(post.created).fromNow()}
+              </Typography>
+            </Grid>
 
-          <Typography variant="body2">
-            {moment(post.created).fromNow()}
-          </Typography>
-        </Grid>
-
-      </Card>
+          </Card>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Comments post={post} />
+        </AccordionDetails>
+      </Accordion>
     </Container>
   );
 };

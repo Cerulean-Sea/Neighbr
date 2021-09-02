@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { Typography, Paper, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
+import { Typography, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import * as api from '../../api/index';
 import actions from '../../redux/actions/index';
 import Post from './Post';
-import Comments from '../Comments/';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,27 +81,13 @@ export default (props) => {
         if (posts.length === i + 1) {
           return (
             <div className="post-list-item" key={p._id} ref={lastPostRef}>
-              <Accordion className={classes.root}>
-                <AccordionSummary>
-                  <Post post={p} />
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Comments post={p} />
-                </AccordionDetails>
-              </Accordion>
+              <Post post={p} />
             </div>
           )
         } else {
           return (
             <div className="post-list-item" key={p._id}>
-              <Accordion className={classes.root}>
-                <AccordionSummary>
-                  <Post post={p} />
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Comments post={p} />
-                </AccordionDetails>
-              </Accordion>
+              <Post post={p} />
             </div>
           )
         }
