@@ -7,8 +7,6 @@ import * as api from '../../api/index';
 import actions from '../../redux/actions/index';
 import Post from './Post';
 
-
-
 export default (props) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => {

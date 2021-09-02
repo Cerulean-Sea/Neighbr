@@ -4,7 +4,24 @@ const useStyles = makeStyles(theme => ({
   mainContainer: {
     marginTop: '20px'
   },
-  btn: {
+  postBtn: {
+    position: 'absolute',
+    top: '0%',
+    right: '12%',
+    zIndex:2000,
+
+    backgroundColor: theme.palette.secondary.main,
+    fontSize: '1vw',
+    '&:hover': {
+      backgroundColor: theme.palette.primary.main
+    }
+  },
+  filterBtn: {
+    position: 'absolute',
+    top: '0%',
+    right: '24%',
+    zIndex:2000,
+
     backgroundColor: theme.palette.secondary.main,
     '&:hover': {
       backgroundColor: theme.palette.primary.main
@@ -20,6 +37,20 @@ const useStyles = makeStyles(theme => ({
     '& div': {
       minWidth: '90%'
     }
+  },
+  filterFormHide: {
+    position: 'absolute',
+    left: '-100%',
+    zIndex: 2000,
+    transition: 'all 1s',
+    backgoundColor: theme.palette.paper,
+  },
+  filterFormVisible: {
+    position: 'absolute',
+    left: '5%',
+    zIndex: 2000,
+    transition: 'all 1s',
+    backgoundColor: theme.palette.paper,
   },
   switch: {
     '& .MuiSwitch-track': {
