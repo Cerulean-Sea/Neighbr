@@ -80,24 +80,28 @@ const Homepage = (props) => {
           <Grid item>
             {showPost && <PostForm />}
           </Grid>
-          <Grid item>
-            <FormControl
-              className={showFilter ? classes.filterFormVisible : classes.filterFormHide}>
-              <FormLabel component="feed-sort-by">Sort Feed</FormLabel>
-              <FormGroup>
-                {tags.map(tag => (
-                  <FormControlLabel
-                    control={<Switch checked={state[tag]} onClick={handleChange} name={tag} className={classes.switch}/>}
-                    label={tag}
-                    key={tag}
-                  />
-                ))}
-              </FormGroup>
-            </FormControl>
-          </Grid>
-          <Grid item>
-           <PostList filterState={state} className={classes.postList}/>
-           </Grid>
+          {!showPost && (
+            <>
+            <Grid item>
+              <FormControl
+                className={showFilter ? classes.filterFormVisible : classes.filterFormHide}>
+                <FormLabel component="feed-sort-by">Sort Feed</FormLabel>
+                <FormGroup>
+                  {tags.map(tag => (
+                    <FormControlLabel
+                      control={<Switch checked={state[tag]} onClick={handleChange} name={tag} className={classes.switch}/>}
+                      label={tag}
+                      key={tag}
+                    />
+                  ))}
+                </FormGroup>
+              </FormControl>
+            </Grid>
+            <Grid item>
+            <PostList filterState={state} className={classes.postList}/>
+            </Grid>
+            </>
+          )}
         </Grid>
       </>
     )
