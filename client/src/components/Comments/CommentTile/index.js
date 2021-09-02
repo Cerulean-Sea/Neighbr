@@ -19,11 +19,10 @@ const CommentTile = ({ comment }) => {
           disableTypography
           primary={<Typography className={classes.fonts}>{comment.username}</Typography>}
           secondary={
-          <div>
-            <Typography component="span" variant="body1" className={classes.inline}>
+            <Typography variant="body1" className={classes.inline}>
               {comment.text}
             </Typography>
-          </div>}
+          }
         />
         {postTime}
       </ListItem>
