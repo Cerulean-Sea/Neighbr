@@ -33,10 +33,9 @@ const App = () => {
     <ThemeProvider theme={mainTheme}>
       <Router>
         <div className="app">
-          <AccountDropdown />
           <Switch>
             <Route exact path="/">
-              {AUTH ? <Homepage /> : <LandingPage />}
+              {AUTH ? <Homepage /> : <><AccountDropdown/><LandingPage /></>}
             </Route>
             <Route path="/login" component={Login}/>
             {AUTH && [
