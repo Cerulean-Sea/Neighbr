@@ -24,6 +24,8 @@ import {
   Accordion
 } from '@material-ui/core';
 import { MoreVert, Facebook, Twitter, Instagram, Reddit } from '@material-ui/icons';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 
 import useStyles from './stylesPost';
 import RenderMap from '../../helper-functions/renderMap';
@@ -108,11 +110,8 @@ export default ({ post }) => {
 
   return (
     <Container className={classes.container}>
-      <Accordion>
-        <AccordionSummary className={classes.cardBackground}>
-
           <CssBaseline />
-          <Card className={classes.card}>
+          <Card className={classes.card} style={{padding: '3%'}}>
 
             <Grid className={classes.header}>
               <Avatar
@@ -121,9 +120,12 @@ export default ({ post }) => {
                 src={post?.userInfo?.picture || 'https://firebasestorage.googleapis.com/v0/b/neighbr-55334.appspot.com/o/no-photo.png?alt=media&token=b0bd075e-2bd2-48c8-9cff-c448930ab8ba'}
               />
               <Grid>
-                <Typography variant="body1">{post?.userInfo?.name}</Typography>
+                <Typography className={classes.typography} variant="body1">{post?.userInfo?.name}</Typography>
                 <Typography className={classes.typography} variant="h6">
                   {post.title}
+                </Typography>
+                <Typography variant="body2" className={classes.typography}>
+                  {moment(post.created).fromNow()}
                 </Typography>
                 {post.tags.map((tag) => <span key={tag} className={`${classes.tag} ${classes[tag.replace(/\s/g, "")]}`}>{`${tag}!`}</span>)}
               </Grid>
@@ -163,7 +165,7 @@ export default ({ post }) => {
               </Menu>
             </Grid>
 
-            <Typography variant="body1" paragraph={true}>
+            <Typography variant="body1" paragraph={true} style={{padding: '1rem'}}>
               {post.text}
             </Typography>
             {post.location && (
@@ -172,22 +174,19 @@ export default ({ post }) => {
               </div>
             )}
 
-            <Grid className={classes.footer}>
-              <Typography variant="body2">
-                {`${post.commentId.length} comments`}
-              </Typography>
-
-              <Typography variant="body2">
-                {moment(post.created).fromNow()}
-              </Typography>
-            </Grid>
-
+            <Accordion className={classes.cardBackground}>
+              <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
+                <Grid className={classes.footer}>
+                  <Typography variant="body2">
+                    {`${post.commentId.length} comments`}
+                  </Typography>
+                </Grid>
+              </AccordionSummary>
+                <AccordionDetails>
+                  <Comments post={post} />
+                </AccordionDetails>
+            </Accordion>
           </Card>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Comments post={post} />
-        </AccordionDetails>
-      </Accordion>
     </Container>
   );
 };

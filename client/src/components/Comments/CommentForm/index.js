@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TextField } from '@material-ui/core';
+import { TextField, Grid } from '@material-ui/core';
 
 import useStyles from './styles';
 import { postComment } from '../../../redux/actions/comments';
@@ -51,11 +51,13 @@ const CommentForm = ({ post }) => {
   }
 
   return (
-    <>
-      <form className={classes.root} onSubmit={handleSubmit}>
-        <TextField id="text" name="text" value={form.text} onChange={handleInputChange} placeholder="Write a comment..."  variant="outlined" required/>
-      </form>
-    </>
+    <Grid container justifyContent="center" alignItems="center">
+      <Grid item sm={12} md={12} lg={12}>
+        <form onSubmit={handleSubmit}>
+          <TextField name="text" value={form.text} onChange={handleInputChange} placeholder="Write a comment..."  variant="outlined" required fullWidth/>
+        </form>
+      </Grid>
+    </Grid>
   );
 
 };
