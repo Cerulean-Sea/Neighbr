@@ -27,7 +27,7 @@ const CommentTile = ({ comment }) => {
             </Typography>
           </>}
         />
-        <ListItemText alignItems="right">{postTime}</ListItemText>
+        {postTime}
       </ListItem>
       <Divider />
     </div>
