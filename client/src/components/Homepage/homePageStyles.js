@@ -43,14 +43,18 @@ const useStyles = makeStyles(theme => ({
     left: '-100%',
     zIndex: 2000,
     transition: 'all 1s',
-    backgoundColor: theme.palette.paper,
+    backgoundColor: theme.palette.primary.main,
   },
   filterFormVisible: {
     position: 'absolute',
+    margin: 0,
+    padding:'15px',
+    borderRadius: '0px 5px 5px 0px',
     left: '5%',
     zIndex: 2000,
     transition: 'all 1s',
-    backgoundColor: theme.palette.paper,
+    backgroundColor: theme.background.default,
+    boxShadow: theme.shadows[3]
   },
   switch: {
     '& .MuiSwitch-track': {
