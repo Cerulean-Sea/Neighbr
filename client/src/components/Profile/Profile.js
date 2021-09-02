@@ -67,6 +67,7 @@ function Profile() {
           </ListItem>
         </List>
       </Grid>
+      <Homepage/>
     </Grid>
   )
 }
