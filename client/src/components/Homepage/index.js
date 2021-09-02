@@ -76,7 +76,7 @@ const Homepage = (props) => {
 
     return (
       <>
-        <Grid container className={classes.mainContainer}>
+        <Grid container className={classes.mainContainer} justifyContent="center" alignItems="center">
             <FormControl
               className={showFilter ? classes.filterFormVisible : classes.filterFormHide}>
               <FormLabel component="feed-sort-by">Sort Feed</FormLabel>
