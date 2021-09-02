@@ -44,7 +44,6 @@ const CommentForm = ({ post }) => {
       text,
       postId: post._id
   }));
-
     setForm(initialState)
   }
 
