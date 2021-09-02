@@ -41,7 +41,7 @@ const AccountDropdown = () => {
       }
     },
     menu: {
-      backgroundColor: '#2A9D8F'
+      backgroundColor: '#F4A261'
     }
   }));
 
