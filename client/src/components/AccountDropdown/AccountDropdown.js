@@ -22,7 +22,6 @@ const AccountDropdown = () => {
       justifyContent: 'flex-start'
     },
     dropdown: {
-      backgroundColor: "#F4A261",
       color: '#264653',
       textDecoration: 'bold',
       '&:hover': {
