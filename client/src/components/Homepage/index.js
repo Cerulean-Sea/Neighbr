@@ -76,15 +76,9 @@ const Homepage = (props) => {
 
     return (
       <>
-<<<<<<< HEAD
-        <Grid container className={classes.mainContainer}>
-            <div className={showFilter ? classes.filterFormVisible : classes.filterFormHide}>
-            <FormControl>
-=======
         <Grid container className={classes.mainContainer} justifyContent="center" alignItems="center">
             <FormControl
               className={showFilter ? classes.filterFormVisible : classes.filterFormHide}>
->>>>>>> main
               <FormLabel component="feed-sort-by">Sort Feed</FormLabel>
               <FormGroup>
                 {tags.map(tag => (
@@ -96,7 +90,6 @@ const Homepage = (props) => {
                 ))}
               </FormGroup>
             </FormControl>
-            </div>
           {showPost ? <PostForm /> : <PostList filterState={state} className={classes.postList}/>}
         </Grid>
       </>
