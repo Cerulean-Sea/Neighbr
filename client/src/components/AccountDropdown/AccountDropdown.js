@@ -7,6 +7,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const AccountDropdown = () => {
 
+  const mobileLayout = window.innerWidth > 600 ? false : true;
   const AUTH = useSelector(state => state.firebase);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -41,7 +42,7 @@ const AccountDropdown = () => {
       }
     },
     menu: {
-      backgroundColor: '#F4A261'
+      backgroundColor: '#2A9D8F'
     }
   }));
 
@@ -136,7 +137,6 @@ const AccountDropdown = () => {
                 className={classes.dropdown}
                 >Notifications</MenuItem>
                 </Link>
-
                 <Link to='/settings'
                 className={classes.link}
                 >
@@ -151,9 +151,7 @@ const AccountDropdown = () => {
 
               </Menu>
               </div>
-
           )}
-
       </Toolbar>
     </AppBar>
     </div>
