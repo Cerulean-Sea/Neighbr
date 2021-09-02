@@ -87,7 +87,7 @@ const Homepage = (props) => {
               <FormGroup>
                 {tags.map(tag => (
                   <FormControlLabel
-                    control={<Switch checked={state[tag]} onClick={handleChange} name={tag} />}
+                    control={<Switch checked={state[tag]} onClick={handleChange} name={tag} className={classes.switch}/>}
                     label={tag}
                     key={tag}
                   />
