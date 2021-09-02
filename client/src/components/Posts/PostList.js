@@ -8,6 +8,7 @@ import actions from '../../redux/actions/index';
 import Post from './Post';
 
 export default (props) => {
+  const filterState = props.filterState;
   const dispatch = useDispatch();
   const state = useSelector((state) => {
     return {
@@ -28,23 +29,42 @@ export default (props) => {
     if (observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        actions.posts(dispatch, 1, pageLimit);
+        getPosts(pageLimit);
         pageLimit += 10;
       }
     });
     if (node) observer.current.observe(node);
-  }, [loading])
+  }, [loading]);
 
-  useEffect(() => {
-    setLoading(true);
-    if (location.pathname === '/') {
-      actions.posts(dispatch);
-      setLoading(false);
-    } else if (location.pathname === '/profile') {
-      dispatch(actions.getPostsByUserId(userId));
-      setLoading(false);
+  const getPosts = async (pageLimit) => {
+    const filters = [];
+    for (let tag in filterState) {
+      if (filterState[tag]) {
+        filters.push(tag);
+      }
     }
-  }, []);
+    if (location.pathname === '/') {
+      if (filters.length) {
+        console.log('getting post with tags', pageLimit);
+        await dispatch(actions.getPostWithTagFilter(filters, 1, pageLimit));
+      } else {
+        await actions.posts(dispatch, 1, pageLimit);
+      }
+    } else if (location.pathname === '/profile') {
+      if (filters.length) {
+        await dispatch(actions.getPostWithTagFilterByUserId(userId, filters, 1, pageLimit));
+      } else {
+        await dispatch(actions.getPostsByUserId(userId, 1, pageLimit));
+      }
+    }
+  }
+
+  useEffect(async () => {
+    setLoading(true);
+    await getPosts(pageLimit);
+    pageLimit += 10;
+    setLoading(false);
+  }, [filterState]);
 
   return (
     <>
