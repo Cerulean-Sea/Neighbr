@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, Redirect, Link } from 'react-router-dom';
+import { useLocation, Redirect } from 'react-router-dom';
 import PostList from '../Posts/PostList';
 import useStyles from './homePageStyles';
 import {
@@ -12,8 +12,7 @@ import {
   FormControlLabel,
   FormGroup,
   Switch,
-  Hidden,
-  Fab
+  Hidden
 } from '@material-ui/core';
 import PostForm from '../PostForm/PostForm.jsx';
 import AccountDropdown from '../AccountDropdown/AccountDropdown'
@@ -21,7 +20,6 @@ import { getPostWithTagFilter, getPosts } from '../../api';
 import actions from '../../redux/actions/index';
 import axios from 'axios';
 import key from '../Chat/config'
-import MessageIcon from '@material-ui/icons/Message';
 
 const Homepage = (props) => {
   const classes = useStyles();
@@ -100,11 +98,6 @@ const Homepage = (props) => {
           <Grid item>
            <PostList filterState={state} className={classes.postList}/>
            </Grid>
-           <Link to='/chat'>
-           <Fab color="primary" aria-label="add">
-             <MessageIcon />
-           </Fab>
-           </Link>
         </Grid>
       </>
     )

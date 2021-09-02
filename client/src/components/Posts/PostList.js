@@ -75,7 +75,6 @@ export default (props) => {
           return <div className="post-list-item" key={p._id}><Post post={p} /></div>
         }
       })}
-
     </>
   );
 };
