@@ -75,7 +75,9 @@ const Homepage = (props) => {
 
     return (
       <>
-      <AccountDropdown showPost={showPost} setShowPost={setShowPost}/>
+      <AccountDropdown
+      showPost={showPost} setShowPost={setShowPost}
+      showFilter={showFilter} setShowFilter={setShowFilter}/>
         <Grid container className={classes.mainContainer}>
             <FormControl
               className={showFilter ? classes.filterFormVisible : classes.filterFormHide}>

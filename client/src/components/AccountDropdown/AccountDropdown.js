@@ -6,10 +6,10 @@ import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import ForumIcon from '@material-ui/icons/Forum';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import BottomAppBar from './BottomAppBar'
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
-const AccountDropdown = ({showPost, setShowPost}) => {
+const AccountDropdown = ({showPost, setShowPost, showFilter, setShowFilter}) => {
 
   const AUTH = useSelector(state => state.firebase);
   const dispatch = useDispatch();
@@ -178,12 +178,18 @@ const AccountDropdown = ({showPost, setShowPost}) => {
             component={Link} to='/friends'>
             <SupervisorAccountIcon />
           </IconButton>
-            <IconButton
-              color="inherit"
-              aria-label="open chats"
-              component={Link} to='/chat'>
-              <ForumIcon />
-            </IconButton>
+          <IconButton
+            color="inherit"
+            aria-label="open chats"
+            component={Link} to='/chat'>
+            <ForumIcon />
+          </IconButton>
+          <IconButton
+            color="inherit"
+            aria-label="open filters"
+            onClick={()=>{setShowFilter(!showFilter)}}>
+            <LocalOfferIcon />
+          </IconButton>
           <Fab color="secondary" aria-label="add post"
           className={mobileClasses.fabButton}
           >
