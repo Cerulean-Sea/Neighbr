@@ -38,6 +38,7 @@ export default ({ post }) => {
   const user = AUTH?.user;
   const [anchorEl, setAnchorEl] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [readMore, setReadMore] = useState(false);
   const menuOpen = Boolean(anchorEl);
 
   let options;
@@ -108,6 +109,10 @@ export default ({ post }) => {
     )
   };
 
+  const onReadMore = () => {
+    setReadMore(!readMore);
+  }
+
   return (
     <Container className={classes.container}>
           <CssBaseline />
@@ -165,12 +170,12 @@ export default ({ post }) => {
               </Menu>
             </Grid>
 
-            {post.text.length >= 49 ?
-              <Typography variant="body1" paragraph={true} style={{padding: '1rem'}}>
-                {post.text.slice(0, 50)}
+            {post.text.length >= 49 && readMore === false ?
+              <Typography variant="body1" paragraph={true} style={{padding: '1rem'}} onClick={onReadMore}>
+                {post.text.slice(0, 50)}<button>+</button>
               </Typography>
               :
-              <Typography variant="body1" paragraph={true} style={{padding: '1rem'}}>
+              <Typography variant="body1" paragraph={true} style={{padding: '1rem'}} onClick={onReadMore}>
                 {post.text}
               </Typography>
               }
@@ -180,7 +185,7 @@ export default ({ post }) => {
               </div>
             )}
 
-            <Accordion className={classes.cardBackground}>
+            <Accordion>
               <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                 <Grid className={classes.footer}>
                   <Typography variant="body2">
