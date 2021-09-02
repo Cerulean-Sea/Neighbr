@@ -16,6 +16,8 @@ import {
 import PostForm from '../PostForm/PostForm.jsx';
 import { getPostWithTagFilter, getPosts } from '../../api';
 import actions from '../../redux/actions/index';
+import axios from 'axios';
+import key from '../Chat/config'
 
 const Homepage = (props) => {
   const classes = useStyles();
@@ -40,6 +42,26 @@ const Homepage = (props) => {
   };
 
   useEffect(async () => {
+    const data = await {
+      "username": AUTH.user.email,
+      "first_name": AUTH.user.displayName,
+      "secret": 'password',
+  }
+    const config = await {
+      method: 'post',
+      url: 'https://api.chatengine.io/users/',
+      headers: {
+        'PRIVATE-KEY': key
+      },
+      data : data
+    };
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     const filters = [];
     for (let tag in state) {
       if (state[tag]) {
