@@ -119,7 +119,7 @@ export default ({ post }) => {
   return (
     <>
       <Hidden xsDown>
-        <Container className={classes.container}>
+        <Grid className={classes.container} container alignItems="center" justifyContent="center">
           <CssBaseline />
             <Card className={classes.card} style={{padding: '3%'}}>
               <Grid className={classes.header}>
@@ -186,8 +186,9 @@ export default ({ post }) => {
                     </AccordionDetails>
                 </Accordion>
           </Card>
-        </Container>
+        </Grid>
       </Hidden>
+
       <Hidden smUp>
         <Container style={{marginBottom: '2%'}}>
           <CssBaseline/>

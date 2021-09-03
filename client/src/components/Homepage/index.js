@@ -78,10 +78,14 @@ const Homepage = (props) => {
 
     return (
       <>
+      {showPost && (
         <Grid container className={classes.mainContainer} justifyContent="center" alignItems="center" direction="column">
           <Grid item>
             {showPost && <PostForm />}
           </Grid>
+        </Grid>
+      )}
+        <Grid container className={`${classes.mainContainer} main-container`} alignItems="center" direction="column">
           {!showPost && (
             <>
             <Grid item>
@@ -99,9 +103,10 @@ const Homepage = (props) => {
                 </FormGroup>
               </FormControl>
             </Grid>
-            <Grid item>
+            <Grid item className="post-container" xs={12} sm={12} md={12} lg={12} xl={12}>
               <PostList filterState={state} className={classes.postList}/>
             </Grid>
+            <Grid item></Grid>
             </>
           )}
         </Grid>
