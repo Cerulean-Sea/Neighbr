@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, ListItem, Divider, ListItemText, ListItemAvatar, Avatar, Typography } from '@material-ui/core';
+import { List, ListItem, Divider, ListItemText, ListItemAvatar, Avatar, Typography, Hidden, Grid } from '@material-ui/core';
 import moment from 'moment';
 
 import useStyles from './styles';
@@ -11,6 +11,7 @@ const CommentTile = ({ comment }) => {
 
   return (
     <div>
+      <Hidden xsDown>
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <Avatar alt="neighbor" src="ADD USER AVATAR" />
@@ -19,14 +20,35 @@ const CommentTile = ({ comment }) => {
           disableTypography
           primary={<Typography className={classes.fonts}>{comment.username}</Typography>}
           secondary={
-            <Typography variant="body1" className={classes.inline}>
-              {comment.text.match(new RegExp('.{1,' + 20 + '}', 'g')).join('\n')}
-            </Typography>
+            <Typography style={{ wordWrap: 'break-word' }}>{comment.text}</Typography>
           }
         />
         {postTime}
       </ListItem>
       <Divider />
+      </Hidden>
+
+      <Hidden smUp>
+        <Grid container>
+          <Grid item xs={12}>
+            <ListItem alignItems="flex-start">
+              <ListItemAvatar>
+                <Avatar alt="neighbor" src="ADD USER AVATAR" />
+              </ListItemAvatar>
+              <ListItemText
+                disableTypography
+                primary={comment.username}
+                secondary={
+                  <>
+                    <Typography style={{ wordWrap: 'break-word' }}>{comment.text}</Typography>
+                  </>
+                }
+              />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+          </Grid>
+        </Grid>
+      </Hidden>
     </div>
   );
 };

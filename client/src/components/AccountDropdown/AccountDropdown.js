@@ -11,6 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
 import ChatIcon from '@material-ui/icons/ForumOutlined';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 const AccountDropdown = () => {
 
@@ -19,6 +20,8 @@ const AccountDropdown = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
+  const showPost = useSelector((state) => state.ShowPost)
+  const showFilter = useSelector((state) => state.ShowFilter)
 
   const useStyles = makeStyles(theme => ({
     accountButton: {
@@ -114,6 +117,10 @@ const AccountDropdown = () => {
 
           {AUTH && (
             <div>
+              <Hidden xsDown>
+                <Button variant="outlined" style={{margin: "20px"}} onClick={() => dispatch({ type: 'SHOW_POST'})}>{showPost ? "View Feed" : "Create Post"}</Button>
+                <Button variant="outlined" style={{margin: "20px"}} onClick={() => dispatch({ type: 'SHOW_FILTER'})}>{showFilter ? "Hide Filters" : "Show Filters"}</Button>
+              </Hidden>
               <IconButton
                 className={classes.menu}
                 aria-label="account of current user"
@@ -163,13 +170,6 @@ const AccountDropdown = () => {
                 className={classes.dropdown}
                 >Settings</MenuItem>
                 </Link>
-                <Link to='/community'
-                className={classes.link}
-                >
-                <MenuItem
-                className={classes.dropdown}
-                >Change Community</MenuItem>
-                </Link>
                 <MenuItem
                 className={classes.dropdown}
                 onClick={logout}
@@ -186,21 +186,20 @@ const AccountDropdown = () => {
       <CssBaseline />
       <AppBar position="fixed" color="primary" className={mobileClasses.appBar}>
         <Toolbar>
-            <Box display="flex" flexGrow={1}>
-              <Avatar src='./assets/logo.png' component={Link} to="/"/>
-            </Box>
+              <div style={{flexGrow:1}}>
+                <IconButton>
+                  <Avatar src='./assets/logo.png' component={Link} to="/"/>
+                </IconButton>
+              </div>
           {!AUTH && (
             <Button component={Link} className={classes.btn} to="/login" variant="contained" color="default">Login</Button>
           )}
         {AUTH && <>
-          <Fab
-            color="secondary"
-            aria-label="add"
-            className={mobileClasses.fabButton}
-            onClick={() => dispatch({ type: 'SHOW_POST'})}>
-            <AddIcon />
-          </Fab>
               <div style={{flexGrow:1}}>
+              <IconButton
+                color="inherit"
+                edge="start"
+                component={Link} to='/profile'>
                 {AUTH.user.photoURL ?
                   <Avatar
                     src={AUTH.user.photoURL}
@@ -210,7 +209,16 @@ const AccountDropdown = () => {
                     onClick={handleMenu}
                     color="inherit"/> :
                   <AccountCircle/>}
+                  </IconButton>
                 </div>
+              <div style={{flexGrow:1}}>
+                <IconButton
+                  color="inherit"
+                  edge="start"
+                  onClick={() => dispatch({ type: 'SHOW_POST'})}>
+                  <AddCircleIcon />
+                </IconButton>
+              </div>
           <div style={{flexGrow:1}}>
           <IconButton
             color="inherit"
@@ -227,7 +235,6 @@ const AccountDropdown = () => {
             <ChatIcon />
           </IconButton>
           </div>
-          <div style={{flexGrow:1}}/>
         </>}
         </Toolbar>
       </AppBar>
