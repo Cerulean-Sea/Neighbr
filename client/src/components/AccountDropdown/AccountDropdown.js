@@ -148,12 +148,9 @@ const AccountDropdown = () => {
                 className={classes.dropdown}
                 onClick={logout}
                 >Logout</MenuItem>
-
               </Menu>
               </div>
-
           )}
-
       </Toolbar>
     </AppBar>
     </div>

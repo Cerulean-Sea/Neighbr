@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Typography, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import * as api from '../../api/index';
 import actions from '../../redux/actions/index';
 import Post from './Post';
-import DirectMessaging from '../Chat/DirectMessaging';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -95,9 +93,6 @@ export default (props) => {
         }
       })}
 
-      <MailOutlineIcon
-      //  component={Link} to="/message"
-       />
     </>
   );
 };
