@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Homepage from '../Homepage';
 import useStyles from './profileStyles';
-import { Grid, List, ListItem, ListItemIcon, ListItemText, ListSubheader } from '@material-ui/core';
+import { Grid, List, ListItem, ListItemIcon, ListItemText, ListSubheader, Typography } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import ForumIcon from '@material-ui/icons/Forum';
@@ -38,7 +38,6 @@ function Profile() {
         justifyContent="center"
         alignItems="center"
       >
-        <span className={classes.profileImgTxt}>Profile Photo:</span>
         <img src={user.photoURL} className={classes.profileImg}/>
       </Grid>
       <Grid item xs={12} md={6} className={classes.infoContainer}>
