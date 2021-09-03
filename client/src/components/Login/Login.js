@@ -148,7 +148,6 @@ export default function Login() {
           </>
           }
           <Button
-            type="button"
             onClick={handleSubmit}
             fullWidth
             variant="contained"
@@ -159,7 +158,6 @@ export default function Login() {
           </Button>
         </div>
         <Button
-          type="button"
           onClick={() => { dispatch(googleSignIn(history)) }}
           fullWidth
           variant="contained"
