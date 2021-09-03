@@ -44,8 +44,10 @@ const getPostsByCommunity = async (req, res) => {
 };
 
 const postPost = async (req, res) => {
+  const { title, text, tags, photos, community, location } = req.body;
+  const { name, user_id } = req.currentUser;
   try {
-    const post = await Post.create(req.body);
+    const post = await Post.create({title, text, tags, photos, community, location, username: name, userId: user_id});
     res.status(201).send(post);
   } catch (error) {
     res.status(400).send(error);

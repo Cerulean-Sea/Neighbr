@@ -44,9 +44,10 @@ const getCommentsByPostId = async (req, res) => {
 };
 
 const postComment = async (req, res) => {
-  const { postId } = req.body;
+  const { name, user_id } = req.currentUser;
+  const { postId, text } = req.body;
   try {
-    const comment = await Comment.create(req.body);
+    const comment = await Comment.create({username: name, userId: user_id, text, postId});
     const updatePost = await Post.updateOne(
       {_id: postId},
       {
