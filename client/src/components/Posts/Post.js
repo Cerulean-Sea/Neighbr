@@ -192,6 +192,23 @@ export default ({ post }) => {
         <Container style={{marginBottom: '2%'}}>
           <CssBaseline/>
           <Card style={{padding: '3%', width: '85vw'}}>
+          <IconButton aria-label="options" aria-controls="short-menu" aria-haspopup="true" onClick={(e) => {setAnchorEl(e.currentTarget);}} className={classes.fab}>
+            <MoreVert />
+          </IconButton>
+          <Menu id="short-menu" anchorEl={anchorEl} open={menuOpen} onClose={handleMenuClose}>
+            {options.map((o) => (
+              <div key={o}>
+                <MenuItem className={classes.menuItem} onClick={(e) => {
+                  handleMenuClose();
+                  if (o === 'Share') setDialogOpen(true);
+                  if (o === 'Delete Post') deletePost(post._id);
+                  }}>
+                  {o}
+                </MenuItem>
+                {o === 'Share' && <SharePost />}
+              </div>
+            ))}
+            </Menu>
             <Grid container justifyContent="center" alignItems="center" direction="column">
               <Grid item xs={10}>
                 <Avatar alt="Neighbor" src={post?.userInfo?.picture || 'https://firebasestorage.googleapis.com/v0/b/neighbr-55334.appspot.com/o/no-photo.png?alt=media&token=b0bd075e-2bd2-48c8-9cff-c448930ab8ba'}/>
