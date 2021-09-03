@@ -185,10 +185,9 @@ const AccountDropdown = () => {
       <CssBaseline />
       <AppBar position="fixed" color="primary" className={mobileClasses.appBar}>
         <Toolbar>
-          {!AUTH &&
             <Box display="flex" flexGrow={1}>
               <Avatar src='./assets/logo.png' component={Link} to="/"/>
-            </Box>}
+            </Box>
           {!AUTH && (
             <Button component={Link} className={classes.btn} to="/login" variant="contained" color="default">Login</Button>
           )}
@@ -200,14 +199,6 @@ const AccountDropdown = () => {
             onClick={() => dispatch({ type: 'SHOW_POST'})}>
             <AddIcon />
           </Fab>
-          {/* <IconButton
-                className={classes.menu}
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              > */}
               <div style={{flexGrow:1}}>
                 {AUTH.user.photoURL ?
                   <Avatar
@@ -219,14 +210,15 @@ const AccountDropdown = () => {
                     color="inherit"/> :
                   <AccountCircle/>}
                 </div>
-              {/* </IconButton> */}
-          <div className={mobileClasses.grow}>
+          <div style={{flexGrow:1}}>
           <IconButton
             color="inherit"
             edge="start"
             onClick={() => dispatch({ type: 'SHOW_FILTER'})}>
             <TagIcon />
           </IconButton>
+          </div>
+          <div style={{flexGrow:1}}>
           <IconButton
             color="inherit"
             edge="start"
@@ -234,6 +226,7 @@ const AccountDropdown = () => {
             <ChatIcon />
           </IconButton>
           </div>
+          <div style={{flexGrow:1}}/>
         </>}
         </Toolbar>
       </AppBar>
