@@ -1,0 +1,18 @@
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+.ce-settings {
+  background-color:#EEEEEE !important;
+}
+
+.ce-active-chat-card {
+  background-color:#EEEEEE !important;
+}
+
+.ce-chat-title-container {
+  color: #000000 !important;
+}
+
+
