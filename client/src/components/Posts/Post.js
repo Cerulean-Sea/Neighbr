@@ -27,6 +27,7 @@ import {
 } from '@material-ui/core';
 import { MoreVert, Facebook, Twitter, Instagram, Reddit } from '@material-ui/icons';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
 
 import useStyles from './stylesPost';
@@ -117,7 +118,7 @@ export default ({ post }) => {
 
   return (
     <>
-      {/* <Hidden xsDown>
+      <Hidden xsDown>
         <Container className={classes.container}>
           <CssBaseline />
             <Card className={classes.card} style={{padding: '3%'}}>
@@ -155,7 +156,7 @@ export default ({ post }) => {
                 </Grid>
                 {post.text.length >= 49 && readMore === false ?
                   <Typography variant="body1" paragraph={true} style={{padding: '1rem'}} onClick={onReadMore}>
-                    {post.text.slice(0, 50)}<button>+</button>
+                    {post.text.slice(0, 50)}  <MoreHorizIcon />
                   </Typography>
                   :
                   <Typography variant="body1" paragraph={true} style={{padding: '1rem'}} onClick={onReadMore}>
@@ -164,9 +165,11 @@ export default ({ post }) => {
                   }
                     {post.location && (
                       <Hidden xsDown>
+                        <Grid container justifyContent="center" align="center">
                         <div className="map" style={{padding: "10px"}}>
                           <RenderMap options={post.location}/>
                         </div>
+                        </Grid>
                       </Hidden>
                     )}
 
@@ -184,7 +187,7 @@ export default ({ post }) => {
                 </Accordion>
           </Card>
         </Container>
-      </Hidden> */}
+      </Hidden>
       <Hidden smUp>
         <Container style={{marginBottom: '2%'}}>
           <CssBaseline/>
@@ -206,7 +209,7 @@ export default ({ post }) => {
               <Grid item xs={10}>
                 {post.text.length >= 49 && readMore === false ?
                   <Typography variant="body1" paragraph={true} style={{padding: '1rem'}} onClick={onReadMore}>
-                    {post.text.slice(0, 50)}  <button>+</button>
+                    {post.text.slice(0, 50)}  <MoreHorizIcon />
                   </Typography>
                   :
                   <Typography variant="body1" paragraph={true} style={{padding: '1rem'}} onClick={onReadMore}>

@@ -20,6 +20,8 @@ const AccountDropdown = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
+  const showPost = useSelector((state) => state.ShowPost)
+  const showFilter = useSelector((state) => state.ShowFilter)
 
   const useStyles = makeStyles(theme => ({
     accountButton: {
@@ -115,6 +117,10 @@ const AccountDropdown = () => {
 
           {AUTH && (
             <div>
+              <Hidden xsDown>
+                <Button variant="outlined" style={{margin: "20px"}} onClick={() => dispatch({ type: 'SHOW_POST'})}>{showPost ? "View Feed" : "Create Post"}</Button>
+                <Button variant="outlined" style={{margin: "20px"}} onClick={() => dispatch({ type: 'SHOW_FILTER'})}>{showFilter ? "Hide Filters" : "Show Filters"}</Button>
+              </Hidden>
               <IconButton
                 className={classes.menu}
                 aria-label="account of current user"
@@ -163,13 +169,6 @@ const AccountDropdown = () => {
                 <MenuItem
                 className={classes.dropdown}
                 >Settings</MenuItem>
-                </Link>
-                <Link to='/community'
-                className={classes.link}
-                >
-                <MenuItem
-                className={classes.dropdown}
-                >Change Community</MenuItem>
                 </Link>
                 <MenuItem
                 className={classes.dropdown}
