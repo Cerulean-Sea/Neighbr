@@ -21,7 +21,7 @@ import {
   ListItemIcon,
   AccordionDetails,
   AccordionSummary,
-  Accordion
+  Accordion, Button
 } from '@material-ui/core';
 import { MoreVert, Facebook, Twitter, Instagram, Reddit } from '@material-ui/icons';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -38,6 +38,7 @@ export default ({ post }) => {
   const user = AUTH?.user;
   const [anchorEl, setAnchorEl] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [readMore, setReadMore] = useState(false);
   const menuOpen = Boolean(anchorEl);
 
   let options;
@@ -108,6 +109,10 @@ export default ({ post }) => {
     )
   };
 
+  const onReadMore = () => {
+    setReadMore(!readMore);
+  }
+
   return (
     <Container className={classes.container}>
           <CssBaseline />
@@ -165,16 +170,22 @@ export default ({ post }) => {
               </Menu>
             </Grid>
 
-            <Typography variant="body1" paragraph={true} style={{padding: '1rem'}}>
-              {post.text}
-            </Typography>
+            {post.text.length >= 49 && readMore === false ?
+              <Typography variant="body1" paragraph={true} style={{padding: '1rem'}} onClick={onReadMore}>
+                {post.text.slice(0, 50)}<button>+</button>
+              </Typography>
+              :
+              <Typography variant="body1" paragraph={true} style={{padding: '1rem'}} onClick={onReadMore}>
+                {post.text}
+              </Typography>
+              }
             {post.location && (
               <div className="map" style={{padding: "10px"}}>
                 <RenderMap options={post.location}/>
               </div>
             )}
 
-            <Accordion className={classes.cardBackground}>
+            <Accordion>
               <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                 <Grid className={classes.footer}>
                   <Typography variant="body2">

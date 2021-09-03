@@ -8,6 +8,7 @@ export default makeStyles((theme) => ({
   },
   card: {
     padding: theme.spacing(1),
+    width: '55vw',
   },
   header: {
     display: 'flex',
@@ -66,5 +67,5 @@ export default makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: '#F4A261'
     }
-  }
+  },
 }));
