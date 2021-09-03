@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 function Chat() {
 	const AUTH = useSelector(state => state.firebase);
+
 	return (
 		<ChatEngine
 			height='100vh'

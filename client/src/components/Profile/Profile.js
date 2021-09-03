@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Homepage from '../Homepage';
 import useStyles from './profileStyles';
 import { Grid, List, ListItem, ListItemIcon, ListItemText, ListSubheader } from '@material-ui/core';
@@ -29,7 +29,6 @@ function Profile() {
       container
       justifyContent="center"
       alignItems="center"
-      className={classes.infoGrid}
     >
       <Grid
         xs={12} md={6}
