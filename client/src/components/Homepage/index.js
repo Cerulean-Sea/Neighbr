@@ -105,11 +105,13 @@ const Homepage = (props) => {
             </>
           )}
         </Grid>
-        <Link to="/chat">
-          <Fab color="primary" aria-label="add" className={classes.fab}>
-            <MessageIcon />
-          </Fab>
-        </Link>
+        <Hidden xsDown>
+          <Link to="/chat">
+            <Fab color="primary" aria-label="add" className={classes.fab}>
+              <MessageIcon />
+            </Fab>
+          </Link>
+        </Hidden>
       </>
     )
   }
