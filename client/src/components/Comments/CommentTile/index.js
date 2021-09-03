@@ -20,7 +20,7 @@ const CommentTile = ({ comment }) => {
           primary={<Typography className={classes.fonts}>{comment.username}</Typography>}
           secondary={
             <Typography variant="body1" className={classes.inline}>
-              {comment.text}
+              {comment.text.match(new RegExp('.{1,' + 20 + '}', 'g')).join('\n')}
             </Typography>
           }
         />
