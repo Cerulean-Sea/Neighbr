@@ -12,6 +12,7 @@ import AddIcon from '@material-ui/icons/Add';
 import ChatIcon from '@material-ui/icons/ForumOutlined';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const AccountDropdown = () => {
 
@@ -233,6 +234,15 @@ const AccountDropdown = () => {
             edge="start"
             component={Link} to='/chat'>
             <ChatIcon />
+          </IconButton>
+          </div>
+          <div style={{flexGrow:1}}>
+          <IconButton
+            color="inherit"
+            edge="start"
+            onClick={logout}
+            >
+            <ExitToAppIcon/>
           </IconButton>
           </div>
         </>}
