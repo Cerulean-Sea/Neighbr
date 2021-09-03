@@ -33,6 +33,9 @@ const useStyles = makeStyles(theme => ({
   },
   infoGrid: {
     backgroundColor: '#2a9d8f4f'
+  },
+  container: {
+    backgroundColor: '#2a9d8f4f'
   }
 }));
 
