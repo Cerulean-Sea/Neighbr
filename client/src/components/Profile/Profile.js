@@ -29,6 +29,7 @@ function Profile() {
       container
       justifyContent="center"
       alignItems="center"
+      className={classes.container}
     >
       <Grid
         xs={12} md={6}
