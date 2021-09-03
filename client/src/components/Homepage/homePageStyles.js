@@ -67,6 +67,14 @@ const useStyles = makeStyles(theme => ({
     '& .MuiSwitch-track': {
         backgroundColor:'#E76F51'
     }
+  },
+  fab: {
+    margin: 0,
+    top: 'auto',
+    right: 20,
+    bottom: 20,
+    left: 'auto',
+    position: 'fixed',
   }
 
 }))
