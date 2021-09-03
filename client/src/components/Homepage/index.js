@@ -97,7 +97,7 @@ const Homepage = (props) => {
                 </FormGroup>
               </FormControl>
             </Grid>
-            <Grid item>
+            <Grid item md={8}>
             <PostList filterState={state} className={classes.postList}/>
             </Grid>
             </>

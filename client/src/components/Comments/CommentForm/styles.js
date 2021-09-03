@@ -6,6 +6,7 @@ export default makeStyles((theme) => ({
       margin: theme.spacing(5),
       width: "100%",
       justify: "center",
+      flexGrow: 1
     },
   },
 }));
