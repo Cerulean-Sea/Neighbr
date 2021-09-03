@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import {MenuItem, makeStyles, Menu, AppBar, Toolbar, Avatar, Box, Button, Hidden } from '@material-ui/core';
+import {
+  MenuItem, makeStyles, Menu, AppBar,
+  Toolbar, Avatar, Box, Button, Hidden,
+  CssBaseline, Fab } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
+import TagIcon from '@material-ui/icons/LocalOffer';
+import MenuIcon from '@material-ui/icons/Menu';
+import AddIcon from '@material-ui/icons/Add';
+import ChatIcon from '@material-ui/icons/ForumOutlined';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const AccountDropdown = () => {
+
 
   const AUTH = useSelector(state => state.firebase);
   const dispatch = useDispatch();
@@ -41,11 +49,29 @@ const AccountDropdown = () => {
       }
     },
     menu: {
-      backgroundColor: '#F4A261'
+      backgroundColor: '#2A9D8F'
     }
+  }));
+  const useMobileStyles = makeStyles((theme) => ({
+    appBar: {
+      top: 'auto',
+      bottom: 0,
+    },
+    grow: {
+      flexGrow: 3,
+    },
+    fabButton: {
+      position: 'absolute',
+      zIndex: 2000,
+      top: -30,
+      left: '80%',
+      right: 0,
+      margin: '0 auto',
+    },
   }));
 
   const classes = useStyles();
+  const mobileClasses = useMobileStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -75,10 +101,10 @@ const AccountDropdown = () => {
   }, [location]);
 
   return (
-    <div>
-    <AppBar position="static"
-    className={classes.appbar}
-    >
+    <>
+      {/* APP BAR TOP ABOVE 600PX WIDTH */}
+    <Hidden xsDown>
+    <AppBar position="static" className={classes.appbar}>
         <Toolbar className={classes.accountButton}>
           <Box display="flex" flexGrow={1}>
             <Avatar src='./assets/logo.png' component={Link} to="/"/>
@@ -136,7 +162,6 @@ const AccountDropdown = () => {
                 className={classes.dropdown}
                 >Notifications</MenuItem>
                 </Link>
-
                 <Link to='/settings'
                 className={classes.link}
                 >
@@ -151,12 +176,62 @@ const AccountDropdown = () => {
 
               </Menu>
               </div>
-
           )}
-
       </Toolbar>
     </AppBar>
-    </div>
+    </Hidden>
+    {/* MOBILE APP BAR LAYOUT BELOW */}
+    <Hidden smUp>
+      <CssBaseline />
+      <AppBar position="fixed" color="primary" className={mobileClasses.appBar}>
+        <Toolbar>
+            <Box display="flex" flexGrow={1}>
+              <Avatar src='./assets/logo.png' component={Link} to="/"/>
+            </Box>
+          {!AUTH && (
+            <Button component={Link} className={classes.btn} to="/login" variant="contained" color="default">Login</Button>
+          )}
+        {AUTH && <>
+          <Fab
+            color="secondary"
+            aria-label="add"
+            className={mobileClasses.fabButton}
+            onClick={() => dispatch({ type: 'SHOW_POST'})}>
+            <AddIcon />
+          </Fab>
+              <div style={{flexGrow:1}}>
+                {AUTH.user.photoURL ?
+                  <Avatar
+                    src={AUTH.user.photoURL}
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleMenu}
+                    color="inherit"/> :
+                  <AccountCircle/>}
+                </div>
+          <div style={{flexGrow:1}}>
+          <IconButton
+            color="inherit"
+            edge="start"
+            onClick={() => dispatch({ type: 'SHOW_FILTER'})}>
+            <TagIcon />
+          </IconButton>
+          </div>
+          <div style={{flexGrow:1}}>
+          <IconButton
+            color="inherit"
+            edge="start"
+            component={Link} to='/chat'>
+            <ChatIcon />
+          </IconButton>
+          </div>
+          <div style={{flexGrow:1}}/>
+        </>}
+        </Toolbar>
+      </AppBar>
+    </Hidden>
+    </>
   )
 }
 
