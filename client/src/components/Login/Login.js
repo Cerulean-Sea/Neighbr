@@ -58,7 +58,7 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} onSubmit={handleSubmit}>
+        <div className={classes.form}>
           {isSignUp &&
           <Grid container spacing={2}>
             <TextField
@@ -157,7 +157,7 @@ export default function Login() {
           >
             {isSignUp ? "Sign Up!" : "Sign In"}
           </Button>
-        </form>
+        </div>
         <Button
           type="input"
           onClick={() => { dispatch(googleSignIn(history)) }}
