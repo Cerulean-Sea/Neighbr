@@ -36,6 +36,7 @@ const CommentTile = ({ comment }) => {
                 <Avatar alt="neighbor" src="ADD USER AVATAR" />
               </ListItemAvatar>
               <ListItemText
+                disableTypography
                 primary={comment.username}
                 secondary={
                   <>
